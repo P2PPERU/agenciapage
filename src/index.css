@@ -2,38 +2,484 @@
 @tailwind components;
 @tailwind utilities;
 
+/* =============================================
+   ESTILOS BASE
+   ============================================= */
+
 body {
   margin: 0;
   background-color: #0a0a0a;
   overflow-x: hidden;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-/* Animación para el botón de WhatsApp */
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-}
-
-.animate-pulse {
-  animation: pulse 2s infinite;
-}
-
-/* Scroll suave */
 html {
   scroll-behavior: smooth;
 }
 
-/* Mejoras para móviles */
+/* =============================================
+   ANIMACIONES PRINCIPALES
+   ============================================= */
+
+/* Animación de pulso mejorada */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Shimmer effect para loading */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 215, 0, 0.3),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Gradiente animado para fondos */
+@keyframes gradient-shift {
+  0% { 
+    background-position: 0% 50%; 
+  }
+  50% { 
+    background-position: 100% 50%; 
+  }
+  100% { 
+    background-position: 0% 50%; 
+  }
+}
+
+.animated-gradient-bg {
+  background: linear-gradient(-45deg, #1a1a1a, #2d2d2d, #1a1a1a, #0a0a0a);
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+/* =============================================
+   ANIMACIONES WHATSAPP
+   ============================================= */
+
+/* Vibración para botón WhatsApp */
+@keyframes vibrate {
+  0%, 100% { 
+    transform: rotate(0deg); 
+  }
+  10%, 30%, 50%, 70%, 90% { 
+    transform: rotate(-5deg); 
+  }
+  20%, 40%, 60%, 80% { 
+    transform: rotate(5deg); 
+  }
+}
+
+.vibrate {
+  animation: vibrate 1s ease-in-out;
+}
+
+/* Anillo pulsante */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.pulse-ring {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* =============================================
+   EFECTOS HOVER Y TRANSICIONES
+   ============================================= */
+
+/* Efecto de brillo en hover */
+.glow-on-hover {
+  transition: all 0.3s ease;
+}
+
+.glow-on-hover:hover {
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+/* Efecto de elevación en cards */
+.card-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* =============================================
+   ANIMACIONES ADICIONALES
+   ============================================= */
+
+/* Bounce */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-bounce {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+/* Slide in */
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.5s ease-out;
+}
+
+/* Fade in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* Float */
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px); 
+  }
+  50% { 
+    transform: translateY(-20px); 
+  }
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* =============================================
+   SCROLLBAR PERSONALIZADO
+   ============================================= */
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #FFD700, #FFA500);
+  border-radius: 10px;
+  border: 2px solid #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #FFA500, #FFD700);
+}
+
+/* Scrollbar para Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #FFD700 #0a0a0a;
+}
+
+/* =============================================
+   UTILIDADES PERSONALIZADAS
+   ============================================= */
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Neon text */
+.neon-gold {
+  text-shadow: 
+    0 0 10px #FFD700,
+    0 0 20px #FFD700,
+    0 0 30px #FFD700,
+    0 0 40px #FFA500;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* =============================================
+   RESPONSIVE DESIGN
+   ============================================= */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 100%;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
-  .text-5xl {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Ajuste de tamaños de texto para móvil */
+  .text-7xl {
     font-size: 2.5rem;
   }
   
+  .text-6xl {
+    font-size: 2.25rem;
+  }
+  
+  .text-5xl {
+    font-size: 2rem;
+  }
+  
+  .text-4xl {
+    font-size: 1.75rem;
+  }
+  
+  .text-3xl {
+    font-size: 1.5rem;
+  }
+  
+  /* Ocultar elementos en móvil */
+  .hide-mobile {
+    display: none;
+  }
+  
+  /* Ajustar padding en móvil */
+  .py-20 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  
+  .py-16 {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+}
+
+/* Mobile pequeño */
+@media (max-width: 480px) {
   .text-7xl {
-    font-size: 3rem;
+    font-size: 2rem;
+  }
+  
+  .text-5xl {
+    font-size: 1.75rem;
+  }
+  
+  .text-4xl {
+    font-size: 1.5rem;
+  }
+  
+  /* Botones full width en móvil pequeño */
+  .btn-responsive {
+    width: 100%;
+  }
+}
+
+/* =============================================
+   UTILIDADES DE ESTADO
+   ============================================= */
+
+/* Loading state */
+.loading {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Disabled state */
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Focus states mejorados */
+button:focus,
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid #FFD700;
+  outline-offset: 2px;
+}
+
+/* =============================================
+   COMPONENTES ESPECÍFICOS
+   ============================================= */
+
+/* Cards */
+.card {
+  background: rgba(31, 41, 55, 0.5);
+  border: 1px solid rgba(75, 85, 99, 0.3);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  border-color: #FFD700;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 9999px;
+}
+
+.badge-gold {
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  color: #000;
+}
+
+.badge-success {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10B981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+/* =============================================
+   ANIMACIONES DE ENTRADA
+   ============================================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.8s ease;
+}
+
+.reveal-left.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.8s ease;
+}
+
+.reveal-right.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* =============================================
+   UTILIDADES DE LAYOUT
+   ============================================= */
+
+/* Contenedor máximo */
+.container-max {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Grid responsive */
+.grid-responsive {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* =============================================
+   MODO OSCURO (por si lo necesitas después)
+   ============================================= */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #1a1a1a;
+    --text-primary: #ffffff;
+    --text-secondary: #9ca3af;
+  }
+}
+
+/* =============================================
+   PRINT STYLES
+   ============================================= */
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    background: white;
+    color: black;
   }
 }
