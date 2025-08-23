@@ -1,4 +1,61 @@
+// src/data/salas.js
 export const salas = [
+  {
+    id: 'coinpoker',
+    name: 'COIN POKER',
+    rakeback: '33% + CHP MINING',
+    bonus: 'Hasta 2000 USDT bono bienvenida + Rake Mining diario',
+    features: [
+      'Pagos en crypto instantáneos',
+      'Token CHP con valor real en exchange',
+      'Rake mining rewards diarios',
+      'Sin KYC hasta $10,000',
+      'Torneos crypto exclusivos',
+      'Staking de CHP para beneficios extra'
+    ],
+    whatsappMessage: 'Hola, quiero información sobre COIN POKER y el sistema de CHP tokens',
+    color: 'from-indigo-500 to-indigo-700',
+    activePlayers: '1.5K+',
+    paymentTime: 'Instant',
+    minDeposit: '$10 USDT',
+    maxDeposit: 'Sin límite',
+    featured: true,
+    rating: 4.6,
+    level: ['medio', 'avanzado'], // 👈 agregado
+    pros: [
+      'Totalmente crypto-friendly',
+      'Transparencia blockchain',
+      'Rake mining único'
+    ],
+    cons: ['Menos tráfico que grandes salas'],
+    paymentMethods: ['Bitcoin', 'Ethereum', 'USDT', 'CHP Token']
+  },
+  {
+    id: 'ggpoker',
+    name: 'GG POKER',
+    rakeback: 'HASTA 60% FISH BUFFET',
+    bonus: '$600 Match Bonus + $100 en tickets + Smart HUD gratis',
+    features: [
+      'La red más grande del mundo',
+      'Smart HUD integrado gratis',
+      'All-in Insurance disponible',
+      'Spin & Gold con jackpots millonarios',
+      'Bounty tournaments diarios',
+      'Staking integrado en plataforma'
+    ],
+    whatsappMessage: 'Hola, quiero registrarme en GG POKER con el máximo Fish Buffet',
+    color: 'from-red-600 to-gray-900',
+    activePlayers: '10K+',
+    paymentTime: '24-72hrs',
+    minDeposit: '$10',
+    maxDeposit: 'Sin límite',
+    featured: true,
+    rating: 4.9,
+    level: ['medio', 'avanzado'], // 👈 agregado
+    pros: ['Mayor tráfico mundial', 'Software más innovador', 'Grandes series y garantizados'],
+    cons: ['Sistema Fish Buffet requiere volumen', 'Prohibido HUD externo'],
+    paymentMethods: ['Visa/Mastercard', 'Skrill', 'Neteller', 'Bitcoin', 'MuchBetter']
+  },
   {
     id: 'xpoker',
     name: 'X-POKER',
@@ -20,14 +77,9 @@ export const salas = [
     maxDeposit: '$10,000',
     featured: true,
     rating: 4.8,
-    pros: [
-      'Pagos más rápidos del mercado',
-      'Excelente tráfico 24/7',
-      'Software estable'
-    ],
-    cons: [
-      'Rake ligeramente alto en micros'
-    ],
+    level: ['basico', 'medio'], // 👈 agregado
+    pros: ['Pagos más rápidos del mercado', 'Excelente tráfico 24/7', 'Software estable'],
+    cons: ['Rake ligeramente alto en micros'],
     paymentMethods: ['Transferencia', 'Crypto', 'Skrill', 'Neteller']
   },
   {
@@ -51,14 +103,9 @@ export const salas = [
     maxDeposit: '$20,000',
     featured: true,
     rating: 4.9,
-    pros: [
-      'Mejor software móvil',
-      'Múltiples formatos de juego',
-      'Comunidad muy activa'
-    ],
-    cons: [
-      'Requiere invitación a clubes'
-    ],
+    level: ['basico', 'medio'], // 👈 agregado
+    pros: ['Mejor software móvil', 'Múltiples formatos de juego', 'Comunidad muy activa'],
+    cons: ['Requiere invitación a clubes'],
     paymentMethods: ['Transferencia', 'USDT', 'Bitcoin', 'Paypal']
   },
   {
@@ -82,14 +129,9 @@ export const salas = [
     maxDeposit: 'Sin límite',
     featured: true,
     rating: 5.0,
-    pros: [
-      'Máximo rakeback del mercado',
-      'Retiros instantáneos',
-      'Juegos muy soft'
-    ],
-    cons: [
-      'Depósito mínimo más alto'
-    ],
+    level: ['avanzado'], // 👈 agregado
+    pros: ['Máximo rakeback del mercado', 'Retiros instantáneos', 'Juegos muy soft'],
+    cons: ['Depósito mínimo más alto'],
     paymentMethods: ['Crypto', 'Transferencia', 'E-wallets']
   },
   {
@@ -113,14 +155,9 @@ export const salas = [
     maxDeposit: '$50,000',
     featured: false,
     rating: 4.7,
-    pros: [
-      'Prestigio de marca WPT',
-      'Mejores torneos',
-      'Satélites a eventos en vivo'
-    ],
-    cons: [
-      'Menos tráfico en cash games'
-    ],
+    level: ['medio', 'avanzado'], // 👈 agregado
+    pros: ['Prestigio de marca WPT', 'Mejores torneos', 'Satélites a eventos en vivo'],
+    cons: ['Menos tráfico en cash games'],
     paymentMethods: ['Transferencia', 'Visa/Mastercard', 'Crypto']
   },
   {
@@ -144,14 +181,9 @@ export const salas = [
     maxDeposit: '$5,000',
     featured: false,
     rating: 4.5,
-    pros: [
-      'Depósito mínimo muy bajo',
-      'Jackpots atractivos',
-      'Bueno para principiantes'
-    ],
-    cons: [
-      'Rakeback más bajo'
-    ],
+    level: ['basico'], // 👈 agregado
+    pros: ['Depósito mínimo muy bajo', 'Jackpots atractivos', 'Bueno para principiantes'],
+    cons: ['Rakeback más bajo'],
     paymentMethods: ['Transferencia', 'Paysafecard', 'Bitcoin']
   },
   {
@@ -175,46 +207,10 @@ export const salas = [
     maxDeposit: '$15,000',
     featured: false,
     rating: 4.6,
-    pros: [
-      'Clubes exclusivos',
-      'Variedad de formatos',
-      'Buen rakeback'
-    ],
-    cons: [
-      'App solo móvil'
-    ],
+    level: ['medio'], // 👈 agregado
+    pros: ['Clubes exclusivos', 'Variedad de formatos', 'Buen rakeback'],
+    cons: ['App solo móvil'],
     paymentMethods: ['USDT', 'Transferencia', 'Skrill']
-  },
-  {
-    id: 'ggpoker',
-    name: 'GG POKER',
-    rakeback: 'FISH BUFFET',
-    bonus: 'Hasta $600 de bono + $100 en tickets',
-    features: [
-      'La red más grande del mundo',
-      'Smart HUD integrado',
-      'All-in Insurance disponible',
-      'Spin & Gold jackpots',
-      'Bounty tournaments diarios',
-      'Staking integrado en la plataforma'
-    ],
-    whatsappMessage: 'Hola, información sobre GG POKER y el sistema Fish Buffet',
-    color: 'from-gray-600 to-gray-800',
-    activePlayers: '8.2K+',
-    paymentTime: '1-3 días',
-    minDeposit: '$10',
-    maxDeposit: 'Sin límite',
-    featured: false,
-    rating: 4.8,
-    pros: [
-      'Mayor tráfico mundial',
-      'Software innovador',
-      'Grandes garantizados'
-    ],
-    cons: [
-      'Sistema de RB complejo'
-    ],
-    paymentMethods: ['Todos los métodos']
   },
   {
     id: 'natural8',
@@ -237,125 +233,40 @@ export const salas = [
     maxDeposit: '$30,000',
     featured: false,
     rating: 4.7,
-    pros: [
-      '$8 gratis sin depósito',
-      'Excelentes promociones',
-      'Tráfico asiático soft'
-    ],
-    cons: [
-      'Horario pico asiático'
-    ],
+    level: ['medio', 'avanzado'], // 👈 agregado
+    pros: ['$8 gratis sin depósito', 'Excelentes promociones', 'Tráfico asiático soft'],
+    cons: ['Horario pico asiático'],
     paymentMethods: ['Crypto', 'E-wallets', 'Transferencia']
   }
 ]
 
-// Promociones y ofertas especiales
+// Resto igual
 export const specialOffers = [
-  {
-    id: 'doble-rakeback',
-    title: 'DOBLE RAKEBACK',
-    subtitle: 'Primera semana con el doble de rakeback',
-    validUntil: '2024-02-01',
-    rooms: ['xpoker', 'suprema'],
-    type: 'new-players'
-  },
-  {
-    id: 'torneo-especial',
-    title: 'TORNEO $50K GTD',
-    subtitle: 'Entrada gratis para nuevos jugadores',
-    validUntil: '2024-01-31',
-    rooms: ['pppoker', 'wpt'],
-    type: 'tournament'
-  },
-  {
-    id: 'reload-bonus',
-    title: 'RELOAD 100%',
-    subtitle: 'En tu segundo depósito hasta $500',
-    validUntil: '2024-02-15',
-    rooms: ['all'],
-    type: 'reload'
-  }
+  { id: 'doble-rakeback', title: 'DOBLE RAKEBACK', subtitle: 'Primera semana con el doble de rakeback', validUntil: '2024-02-01', rooms: ['xpoker', 'suprema'], type: 'new-players' },
+  { id: 'torneo-especial', title: 'TORNEO $50K GTD', subtitle: 'Entrada gratis para nuevos jugadores', validUntil: '2024-01-31', rooms: ['pppoker', 'wpt'], type: 'tournament' },
+  { id: 'reload-bonus', title: 'RELOAD 100%', subtitle: 'En tu segundo depósito hasta $500', validUntil: '2024-02-15', rooms: ['all'], type: 'reload' }
 ]
 
-// Métodos de pago disponibles
 export const paymentMethods = {
-  transferencia: {
-    name: 'Transferencia Bancaria',
-    icon: '🏦',
-    processingTime: '24-48 horas',
-    minDeposit: '$20',
-    maxDeposit: 'Sin límite',
-    fees: 'Sin comisiones'
-  },
-  crypto: {
-    name: 'Criptomonedas',
-    icon: '₿',
-    processingTime: 'Instantáneo',
-    minDeposit: '$10',
-    maxDeposit: 'Sin límite',
-    fees: 'Sin comisiones',
-    currencies: ['Bitcoin', 'USDT', 'Ethereum']
-  },
-  skrill: {
-    name: 'Skrill',
-    icon: '💳',
-    processingTime: 'Instantáneo',
-    minDeposit: '$10',
-    maxDeposit: '$10,000',
-    fees: '2%'
-  },
-  neteller: {
-    name: 'Neteller',
-    icon: '💳',
-    processingTime: 'Instantáneo',
-    minDeposit: '$10',
-    maxDeposit: '$10,000',
-    fees: '2%'
-  }
+  transferencia: { name: 'Transferencia Bancaria', icon: '🏦', processingTime: '24-48 horas', minDeposit: '$20', maxDeposit: 'Sin límite', fees: 'Sin comisiones' },
+  crypto: { name: 'Criptomonedas', icon: '₿', processingTime: 'Instantáneo', minDeposit: '$10', maxDeposit: 'Sin límite', fees: 'Sin comisiones', currencies: ['Bitcoin', 'USDT', 'Ethereum'] },
+  skrill: { name: 'Skrill', icon: '💳', processingTime: 'Instantáneo', minDeposit: '$10', maxDeposit: '$10,000', fees: '2%' },
+  neteller: { name: 'Neteller', icon: '💳', processingTime: 'Instantáneo', minDeposit: '$10', maxDeposit: '$10,000', fees: '2%' }
 }
 
-// Información de contacto
 export const contactInfo = {
   whatsapp: '51955311839',
-  telegram: '@pokeragency',
-  email: 'info@pokeragency.com',
-  instagram: '@pokeragency_oficial',
+  telegram: '@pokerprotrack',
+  email: 'info@pokerprotrack.com',
+  instagram: '@pokerprotrack',
   supportHours: '24/7',
   languages: ['Español', 'Portugués', 'Inglés']
 }
 
-// Preguntas frecuentes
 export const faqs = [
-  {
-    question: '¿Cómo funciona el rakeback?',
-    answer: 'El rakeback es un porcentaje del rake (comisión) que pagas al jugar, que te devolvemos semanalmente. Por ejemplo, si generas $1000 de rake y tienes 40% de rakeback, recibes $400 extra cada semana.'
-  },
-  {
-    question: '¿Cuándo recibo mis pagos?',
-    answer: 'Los pagos de rakeback se realizan todos los lunes sin excepción. Los retiros de tu bankroll están disponibles 24/7 y se procesan en máximo 24 horas.'
-  },
-  {
-    question: '¿Es seguro jugar en estas salas?',
-    answer: 'Absolutamente. Trabajamos solo con las mejores salas del mercado, con años de trayectoria y miles de jugadores activos. Tu dinero está 100% seguro y garantizado.'
-  },
-  {
-    question: '¿Necesito experiencia previa?',
-    answer: 'No es necesario. Tenemos salas para todos los niveles, desde principiantes hasta profesionales. Además, te brindamos soporte y guías para mejorar tu juego.'
-  },
-  {
-    question: '¿Qué métodos de pago aceptan?',
-    answer: 'Aceptamos transferencias bancarias, criptomonedas (Bitcoin, USDT), Skrill, Neteller, y más. Cada sala tiene sus métodos específicos.'
-  },
-  {
-    question: '¿Puedo jugar desde mi celular?',
-    answer: 'Sí, todas nuestras salas tienen aplicaciones móviles optimizadas para iOS y Android con la misma funcionalidad que la versión de escritorio.'
-  },
-  {
-    question: '¿Hay algún costo por el servicio?',
-    answer: 'No, nuestro servicio es completamente gratuito. Ganamos una comisión de las salas, pero esto no afecta tu rakeback ni tus ganancias.'
-  },
-  {
-    question: '¿Puedo jugar en varias salas?',
-    answer: 'Por supuesto, puedes registrarte en todas las salas que desees y aprovechar los diferentes bonos y promociones de cada una.'
-  }
+  { question: '¿Cómo funciona el comparador?', answer: 'Analizamos y comparamos el rakeback, bonos, promociones y condiciones de todas las salas. Te mostramos cuál es la más rentable según tu nivel y volumen de juego.' },
+  { question: '¿Es gratis usar Poker Pro Track?', answer: 'Sí, nuestro servicio de comparación es 100% gratuito. Te ayudamos a encontrar la mejor sala sin ningún costo.' },
+  { question: '¿Cómo sé cuál sala me conviene?', answer: 'Depende de tu nivel, volumen de juego y preferencias. Usa nuestro comparador y filtros para encontrar la sala perfecta para ti.' },
+  { question: '¿Todas las salas son seguras?', answer: 'Sí, solo listamos salas verificadas con años de trayectoria y miles de jugadores activos. Tu dinero está seguro.' },
+  { question: '¿Puedo jugar en varias salas?', answer: 'Por supuesto, puedes registrarte en todas las salas que desees y aprovechar los diferentes bonos y promociones de cada una.' }
 ]

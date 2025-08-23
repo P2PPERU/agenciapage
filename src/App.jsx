@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaBars, FaTimes, FaHome, FaNewspaper, FaCalculator, FaTrophy, FaPhone, FaDice, FaCoins } from 'react-icons/fa'
 
@@ -13,10 +13,12 @@ import FloatingAd from './components/ui/FloatingAd'
 import RotatingBanner from './components/ui/RotatingBanner'
 import Footer from './components/layout/Footer'
 
-// Componente de Navegación
+// Componente de Navegación Mejorado
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const navigate = useNavigate()
+  const location = useLocation()
   
   useEffect(() => {
     const handleScroll = () => {
@@ -26,23 +28,71 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
   
+  // Manejar navegación con hash
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '')
+      setTimeout(() => {
+        const element = document.getElementById(id)
+        if (element) {
+          const offset = 100 // Offset para el header fijo
+          const elementPosition = element.getBoundingClientRect().top
+          const offsetPosition = elementPosition + window.pageYOffset - offset
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          })
+        }
+      }, 100)
+    }
+  }, [location])
+  
   const navItems = [
     { path: '/', label: 'Inicio', icon: FaHome },
-    { path: '/noticias', label: 'Noticias', icon: FaNewspaper },
-    { path: '/#calculator', label: 'Calculadora', icon: FaCalculator, isHash: true },
     { path: '/#salas', label: 'Salas', icon: FaTrophy, isHash: true },
+    { path: '/#calculator', label: 'Calculadora', icon: FaCalculator, isHash: true },
+    { path: '/noticias', label: 'Noticias', icon: FaNewspaper },
     { path: '/#contacto', label: 'Contacto', icon: FaPhone, isHash: true }
   ]
   
   const handleNavClick = (item) => {
-    if (item.isHash) {
-      // Si es un hash link, hacer scroll
-      const element = document.querySelector(item.path.replace('/', ''))
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
-      }
-    }
     setIsMobileMenuOpen(false)
+    
+    if (item.isHash) {
+      const [path, hash] = item.path.split('#')
+      
+      // Si estamos en otra página, navegar primero a home
+      if (location.pathname !== '/') {
+        navigate('/')
+        setTimeout(() => {
+          const element = document.getElementById(hash)
+          if (element) {
+            const offset = 100
+            const elementPosition = element.getBoundingClientRect().top
+            const offsetPosition = elementPosition + window.pageYOffset - offset
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            })
+          }
+        }, 300)
+      } else {
+        // Si ya estamos en home, solo hacer scroll
+        const element = document.getElementById(hash)
+        if (element) {
+          const offset = 100
+          const elementPosition = element.getBoundingClientRect().top
+          const offsetPosition = elementPosition + window.pageYOffset - offset
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          })
+        }
+      }
+    } else {
+      navigate(item.path)
+    }
   }
   
   return (
@@ -80,29 +130,16 @@ const Navigation = () => {
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-6">
               {navItems.map(item => (
-                item.isHash ? (
-                  <a
-                    key={item.path}
-                    href={item.path}
-                    onClick={(e) => {
-                      e.preventDefault()
-                      handleNavClick(item)
-                    }}
-                    className="text-gray-300 hover:text-poker-gold transition-colors flex items-center gap-2 font-medium"
-                  >
-                    <item.icon className="text-sm" />
-                    {item.label}
-                  </a>
-                ) : (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    className="text-gray-300 hover:text-poker-gold transition-colors flex items-center gap-2 font-medium"
-                  >
-                    <item.icon className="text-sm" />
-                    {item.label}
-                  </Link>
-                )
+                <button
+                  key={item.path}
+                  onClick={() => handleNavClick(item)}
+                  className={`text-gray-300 hover:text-poker-gold transition-colors flex items-center gap-2 font-medium ${
+                    location.pathname === item.path.split('#')[0] ? 'text-poker-gold' : ''
+                  }`}
+                >
+                  <item.icon className="text-sm" />
+                  {item.label}
+                </button>
               ))}
               
               {/* CTA Button Desktop */}
@@ -172,35 +209,16 @@ const Navigation = () => {
             >
               <div className="flex flex-col items-center space-y-6 p-8 pt-20">
                 {navItems.map(item => (
-                  item.isHash ? (
-                    <motion.a
-                      key={item.path}
-                      href={item.path}
-                      onClick={(e) => {
-                        e.preventDefault()
-                        handleNavClick(item)
-                      }}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="text-2xl text-white hover:text-poker-gold transition-colors flex items-center gap-3"
-                    >
-                      <item.icon />
-                      {item.label}
-                    </motion.a>
-                  ) : (
-                    <motion.div key={item.path}>
-                      <Link
-                        to={item.path}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="text-2xl text-white hover:text-poker-gold transition-colors flex items-center gap-3"
-                      >
-                        <item.icon />
-                        {item.label}
-                      </Link>
-                    </motion.div>
-                  )
+                  <motion.button
+                    key={item.path}
+                    onClick={() => handleNavClick(item)}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="text-2xl text-white hover:text-poker-gold transition-colors flex items-center gap-3"
+                  >
+                    <item.icon />
+                    {item.label}
+                  </motion.button>
                 ))}
                 
                 {/* CTA Mobile */}
