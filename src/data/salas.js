@@ -1,43 +1,172 @@
 // src/data/salas.js
 export const salas = [
   {
-    id: 'coinpoker',
-    name: 'COIN POKER',
-    rakeback: '33% + CHP MINING',
-    bonus: 'Hasta 2000 USDT bono bienvenida + Rake Mining diario',
+    id: 'pppoker',
+    name: 'PPPOKER',
+    rakeback: '40% BASE - HASTA 65% VIP',
+    bonus: 'BONO DEPÓSITO S/10 INMEDIATO',
     features: [
-      'Pagos en crypto instantáneos',
-      'Token CHP con valor real en exchange',
-      'Rake mining rewards diarios',
-      'Sin KYC hasta $10,000',
-      'Torneos crypto exclusivos',
-      'Staking de CHP para beneficios extra'
+      '⭐ MEJOR RAKEBACK DEL MERCADO (HASTA 65%)',
+      'Mesas de Omaha activas 24/7',
+      'Torneos para TODOS los stakes',
+      'La app más estable del mercado',
+      'Múltiples clubes disponibles',
+      'Cobros con YAPE y PLIN'
     ],
-    whatsappMessage: 'Hola, quiero información sobre COIN POKER y el sistema de CHP tokens',
-    color: 'from-indigo-500 to-indigo-700',
-    activePlayers: '1.5K+',
-    paymentTime: 'Instant',
-    minDeposit: '$10 USDT',
+    whatsappMessage: 'Hola, quiero jugar en PPPOKER con hasta 65% de rakeback',
+    color: 'from-green-500 to-green-700',
+    activePlayers: '3.2K+',
+    paymentTime: '24hrs',
+    minDeposit: 'S/10',
     maxDeposit: 'Sin límite',
     featured: true,
-    rating: 4.6,
-    level: ['medio', 'avanzado'], // 👈 agregado
+    rating: 5.0,
+    level: ['basico', 'medio', 'avanzado'],
+    highlight: '⭐ HASTA 65% RAKEBACK',
+    special: 'MEJOR RB',
+    gameType: 'Omaha/Texas',
     pros: [
-      'Totalmente crypto-friendly',
-      'Transparencia blockchain',
-      'Rake mining único'
+      'Rakeback más alto del mercado',
+      'Depósito mínimo más bajo',
+      'Omaha siempre activo'
     ],
-    cons: ['Menos tráfico que grandes salas'],
-    paymentMethods: ['Bitcoin', 'Ethereum', 'USDT', 'CHP Token']
+    cons: ['Requiere invitación a clubes'],
+    paymentMethods: ['YAPE', 'PLIN', 'Transferencia', 'Bitcoin', 'USDT']
+  },
+  {
+    id: 'xpoker',
+    name: 'X-POKER',
+    rakeback: '40% - 60% GARANTIZADO',
+    bonus: '🎰 BAD BEAT JACKPOT GIGANTE',
+    features: [
+      '💰 Bad Beat Jackpot actual: S/523,421',
+      'Mesas de Texas SIEMPRE activas',
+      'Cobros en 24 horas garantizados',
+      'Soporte VIP en español 24/7',
+      'Rake bajo en mesas micro',
+      'Pagos con YAPE y PLIN instantáneos'
+    ],
+    whatsappMessage: 'Hola, quiero jugar en X-POKER con el Bad Beat Jackpot',
+    color: 'from-cyan-500 to-cyan-700',
+    activePlayers: '4.5K+',
+    paymentTime: '24hrs',
+    minDeposit: 'S/20',
+    maxDeposit: 'Sin límite',
+    featured: true,
+    rating: 4.8,
+    level: ['basico', 'medio', 'avanzado'],
+    highlight: '🎰 JACKPOT: S/523,421',
+    special: 'JACKPOT GIGANTE',
+    gameType: 'Texas Hold\'em',
+    pros: [
+      'Bad Beat Jackpot millonario',
+      'Mesas Texas muy activas',
+      'Pagos rapidísimos'
+    ],
+    cons: ['Torneos con menos tráfico'],
+    paymentMethods: ['YAPE', 'PLIN', 'Transferencia', 'Crypto']
+  },
+  {
+    id: 'suprema',
+    name: 'SUPREMA POKER',
+    rakeback: '40% - 60% SEMANAL',
+    bonus: '🔥 PARAÍSO DEL OMAHA',
+    features: [
+      'Mesas de Omaha SIEMPRE activas',
+      'Torneos cada hora con overlays',
+      'Las mesas más soft del mercado',
+      'Cashout instantáneo sin límites',
+      'Liga mensual con S/20K en premios',
+      'Depósitos con YAPE/PLIN al instante'
+    ],
+    whatsappMessage: 'Hola, quiero jugar Omaha en SUPREMA POKER',
+    color: 'from-orange-700 to-orange-900',
+    activePlayers: '2.8K+',
+    paymentTime: 'Instantáneo',
+    minDeposit: 'S/50',
+    maxDeposit: 'Sin límite',
+    featured: true,
+    rating: 4.9,
+    level: ['medio', 'avanzado'],
+    highlight: '🔥 OMAHA PARADISE',
+    special: 'OMAHA 24/7',
+    gameType: 'Omaha',
+    pros: [
+      'Mejor tráfico de Omaha',
+      'Torneos cada hora',
+      'Retiros instantáneos'
+    ],
+    cons: ['Depósito mínimo más alto'],
+    paymentMethods: ['YAPE', 'PLIN', 'Transferencia', 'Bitcoin']
+  },
+  {
+    id: 'wpt',
+    name: 'WPT POKER',
+    rakeback: 'BONO 100% + TICKETS',
+    bonus: '💰 FREEROLL $10,000 DIARIO',
+    features: [
+      '🎁 100% BONO en tu primer depósito',
+      '🎫 Tickets de torneos GRATIS incluidos',
+      '💰 FREEROLL de $10,000 TODOS LOS DÍAS',
+      'Plataforma mundialmente reconocida',
+      'Las mejores mesas de Texas Hold\'em',
+      'Clasificatorios para eventos en vivo'
+    ],
+    whatsappMessage: 'Hola, quiero el bono 100% de WPT y el freeroll de $10K diario',
+    color: 'from-blue-600 via-white to-red-600',
+    activePlayers: '5.1K+',
+    paymentTime: '24-48hrs',
+    minDeposit: 'S/100',
+    maxDeposit: 'Sin límite',
+    featured: true,
+    rating: 4.7,
+    level: ['medio', 'avanzado'],
+    highlight: '💰 FREEROLL $10K DIARIO',
+    special: 'FREEROLL $10K',
+    gameType: 'Texas Hold\'em',
+    pros: [
+      'Freeroll $10K diario GRATIS',
+      'Bono 100% primer depósito',
+      'Marca mundial reconocida'
+    ],
+    cons: ['No ofrece rakeback tradicional'],
+    paymentMethods: ['YAPE', 'PLIN', 'Transferencia', 'Visa/Mastercard']
+  },
+  {
+    id: 'clubgg',
+    name: 'CLUBGG',
+    rakeback: '35% FIJO',
+    bonus: 'Mesas y torneos 24/7',
+    features: [
+      'Mesas de Texas disponibles 24/7',
+      'Torneos cada hora',
+      'Clubes privados exclusivos',
+      'Sistema anti-bots avanzado',
+      'Estadísticas en tiempo real',
+      'Depósitos desde S/30'
+    ],
+    whatsappMessage: 'Hola, quiero unirme a CLUBGG con 35% rakeback',
+    color: 'from-gray-600 to-gray-800',
+    activePlayers: '1.8K+',
+    paymentTime: '24hrs',
+    minDeposit: 'S/30',
+    maxDeposit: 'S/10,000',
+    featured: false,
+    rating: 4.5,
+    level: ['basico', 'medio'],
+    gameType: 'Texas Hold\'em',
+    pros: ['Clubes exclusivos', 'Anti-bots efectivo', 'Buen para principiantes'],
+    cons: ['Rakeback más bajo'],
+    paymentMethods: ['YAPE', 'PLIN', 'Transferencia']
   },
   {
     id: 'ggpoker',
     name: 'GG POKER',
     rakeback: 'HASTA 60% FISH BUFFET',
-    bonus: '$600 Match Bonus + $100 en tickets + Smart HUD gratis',
+    bonus: '$600 Match Bonus + Smart HUD gratis',
     features: [
       'La red más grande del mundo',
-      'Smart HUD integrado gratis',
+      'Smart HUD integrado GRATIS',
       'All-in Insurance disponible',
       'Spin & Gold con jackpots millonarios',
       'Bounty tournaments diarios',
@@ -45,228 +174,243 @@ export const salas = [
     ],
     whatsappMessage: 'Hola, quiero registrarme en GG POKER con el máximo Fish Buffet',
     color: 'from-red-600 to-gray-900',
-    activePlayers: '10K+',
+    activePlayers: '15K+',
     paymentTime: '24-72hrs',
     minDeposit: '$10',
     maxDeposit: 'Sin límite',
-    featured: true,
+    featured: false,
     rating: 4.9,
-    level: ['medio', 'avanzado'], // 👈 agregado
-    pros: ['Mayor tráfico mundial', 'Software más innovador', 'Grandes series y garantizados'],
-    cons: ['Sistema Fish Buffet requiere volumen', 'Prohibido HUD externo'],
-    paymentMethods: ['Visa/Mastercard', 'Skrill', 'Neteller', 'Bitcoin', 'MuchBetter']
+    level: ['avanzado'],
+    pros: ['Mayor tráfico mundial', 'Software innovador', 'Grandes garantizados'],
+    cons: ['Requiere más volumen para buen RB'],
+    paymentMethods: ['Crypto', 'Skrill', 'Neteller', 'MuchBetter']
   },
   {
-    id: 'xpoker',
-    name: 'X-POKER',
-    rakeback: '40% SEMANAL',
-    bonus: 'Bono 100% primer depósito hasta $500',
+    id: 'coinpoker',
+    name: 'COIN POKER',
+    rakeback: '33% + CHP MINING',
+    bonus: 'Hasta 2000 USDT bono',
     features: [
-      'Cobros en 24 horas garantizados',
-      'Soporte VIP en español 24/7',
-      'Torneos diarios con $10K GTD',
-      'Mesas desde 0.5/1 hasta high stakes',
-      'Fast-fold poker disponible',
-      'App móvil iOS y Android'
+      'Pagos en crypto instantáneos',
+      'Token CHP con valor real',
+      'Rake mining rewards diarios',
+      'Sin KYC hasta $10,000',
+      'Torneos crypto exclusivos',
+      'Totalmente anónimo'
     ],
-    whatsappMessage: 'Hola, quiero jugar en X-POKER con 40% de rakeback semanal',
-    color: 'from-blue-500 to-blue-700',
-    activePlayers: '3.2K+',
-    paymentTime: '24hrs',
-    minDeposit: '$20',
-    maxDeposit: '$10,000',
-    featured: true,
-    rating: 4.8,
-    level: ['basico', 'medio'], // 👈 agregado
-    pros: ['Pagos más rápidos del mercado', 'Excelente tráfico 24/7', 'Software estable'],
-    cons: ['Rake ligeramente alto en micros'],
-    paymentMethods: ['Transferencia', 'Crypto', 'Skrill', 'Neteller']
-  },
-  {
-    id: 'pppoker',
-    name: 'PPPOKER',
-    rakeback: '35-50% PROGRESIVO',
-    bonus: 'Sistema VIP con bonos semanales garantizados',
-    features: [
-      'La app más estable del mercado',
-      'Múltiples clubes con diferentes niveles',
-      'Freerolls exclusivos de $5K semanales',
-      'Todos los niveles desde NL2 hasta NL5000',
-      'Mesas de PLO y MTTs disponibles',
-      'Estadísticas HUD integradas'
-    ],
-    whatsappMessage: 'Hola, necesito información sobre PPPOKER y el rakeback progresivo',
-    color: 'from-red-500 to-red-700',
-    activePlayers: '5.8K+',
-    paymentTime: '48hrs',
-    minDeposit: '$10',
-    maxDeposit: '$20,000',
-    featured: true,
-    rating: 4.9,
-    level: ['basico', 'medio'], // 👈 agregado
-    pros: ['Mejor software móvil', 'Múltiples formatos de juego', 'Comunidad muy activa'],
-    cons: ['Requiere invitación a clubes'],
-    paymentMethods: ['Transferencia', 'USDT', 'Bitcoin', 'Paypal']
-  },
-  {
-    id: 'suprema',
-    name: 'SUPREMA POKER',
-    rakeback: '60% RAKEBACK VIP',
-    bonus: 'Bonus Reload 50% semanal + Cashback diario',
-    features: [
-      'Tráfico premium 24/7 garantizado',
-      'Las mesas más soft del mercado',
-      'Cashout instantáneo sin límites',
-      'Liga mensual con $20K en premios',
-      'Jackpots progresivos en cash games',
-      'Programa VIP con niveles Diamond'
-    ],
-    whatsappMessage: 'Hola, quiero el 60% rakeback VIP de SUPREMA POKER',
+    whatsappMessage: 'Hola, quiero información sobre COIN POKER y el sistema de CHP tokens',
     color: 'from-purple-500 to-purple-700',
-    activePlayers: '4.5K+',
-    paymentTime: 'Instant',
-    minDeposit: '$50',
+    activePlayers: '1.2K+',
+    paymentTime: 'Instantáneo',
+    minDeposit: '$10 USDT',
     maxDeposit: 'Sin límite',
-    featured: true,
-    rating: 5.0,
-    level: ['avanzado'], // 👈 agregado
-    pros: ['Máximo rakeback del mercado', 'Retiros instantáneos', 'Juegos muy soft'],
-    cons: ['Depósito mínimo más alto'],
-    paymentMethods: ['Crypto', 'Transferencia', 'E-wallets']
-  },
-  {
-    id: 'wpt',
-    name: 'WPT POKER',
-    rakeback: '35% + BONOS',
-    bonus: 'Paquetes para torneos WPT en vivo valorados en $10K',
-    features: [
-      'Marca mundial reconocida oficialmente',
-      'Satélites a eventos WPT en vivo',
-      'Los mejores torneos online del mercado',
-      'Programa VIP Premium con beneficios',
-      'Transmisiones en vivo de mesas finales',
-      'Coaching gratis para miembros VIP'
-    ],
-    whatsappMessage: 'Hola, información sobre WPT POKER y los paquetes para torneos en vivo',
-    color: 'from-yellow-500 to-yellow-700',
-    activePlayers: '2.1K+',
-    paymentTime: '24-48hrs',
-    minDeposit: '$100',
-    maxDeposit: '$50,000',
     featured: false,
-    rating: 4.7,
-    level: ['medio', 'avanzado'], // 👈 agregado
-    pros: ['Prestigio de marca WPT', 'Mejores torneos', 'Satélites a eventos en vivo'],
-    cons: ['Menos tráfico en cash games'],
-    paymentMethods: ['Transferencia', 'Visa/Mastercard', 'Crypto']
-  },
-  {
-    id: 'qqpk',
-    name: 'QQPK',
-    rakeback: '30% FIJO',
-    bonus: 'Fast-fold poker con jackpots progresivos',
-    features: [
-      'Depósitos desde solo $10',
-      'Interface moderna y fácil de usar',
-      'Jackpots progresivos de hasta $100K',
-      'Juegos mixtos: NLH, PLO, OFC',
-      'Torneos turbo cada hora',
-      'Modo anónimo disponible'
-    ],
-    whatsappMessage: 'Hola, quiero información sobre QQPK y los jackpots progresivos',
-    color: 'from-green-500 to-green-700',
-    activePlayers: '1.8K+',
-    paymentTime: '24hrs',
-    minDeposit: '$10',
-    maxDeposit: '$5,000',
-    featured: false,
-    rating: 4.5,
-    level: ['basico'], // 👈 agregado
-    pros: ['Depósito mínimo muy bajo', 'Jackpots atractivos', 'Bueno para principiantes'],
-    cons: ['Rakeback más bajo'],
-    paymentMethods: ['Transferencia', 'Paysafecard', 'Bitcoin']
-  },
-  {
-    id: 'pokerbros',
-    name: 'POKERBROS',
-    rakeback: '45% SEMANAL',
-    bonus: 'Bono de bienvenida $200 + Ticket torneo $50',
-    features: [
-      'Clubes privados exclusivos',
-      'Mesas de Short Deck disponibles',
-      'Torneos con overlays garantizados',
-      'Sistema anti-bots avanzado',
-      'Estadísticas detalladas en tiempo real',
-      'Mesas heads-up disponibles'
-    ],
-    whatsappMessage: 'Hola, quiero unirme a POKERBROS con 45% rakeback',
-    color: 'from-orange-500 to-orange-700',
-    activePlayers: '2.5K+',
-    paymentTime: '24hrs',
-    minDeposit: '$25',
-    maxDeposit: '$15,000',
-    featured: false,
-    rating: 4.6,
-    level: ['medio'], // 👈 agregado
-    pros: ['Clubes exclusivos', 'Variedad de formatos', 'Buen rakeback'],
-    cons: ['App solo móvil'],
-    paymentMethods: ['USDT', 'Transferencia', 'Skrill']
-  },
-  {
-    id: 'natural8',
-    name: 'NATURAL8',
-    rakeback: '40% + PREMIOS',
-    bonus: '$8 gratis sin depósito + Match bonus 200%',
-    features: [
-      'Skin asiático de GGNetwork',
-      'Mejores promociones del mercado',
-      'Carreras de rake mensuales',
-      'Seguro all-in disponible',
-      'Juegos exclusivos asiáticos',
-      'VIP program personalizado'
-    ],
-    whatsappMessage: 'Hola, quiero los $8 gratis de NATURAL8 y el 40% rakeback',
-    color: 'from-teal-500 to-teal-700',
-    activePlayers: '3.1K+',
-    paymentTime: '24hrs',
-    minDeposit: '$10',
-    maxDeposit: '$30,000',
-    featured: false,
-    rating: 4.7,
-    level: ['medio', 'avanzado'], // 👈 agregado
-    pros: ['$8 gratis sin depósito', 'Excelentes promociones', 'Tráfico asiático soft'],
-    cons: ['Horario pico asiático'],
-    paymentMethods: ['Crypto', 'E-wallets', 'Transferencia']
+    rating: 4.4,
+    level: ['avanzado'],
+    pros: ['100% crypto', 'Anónimo', 'Rake mining único'],
+    cons: ['Solo acepta crypto'],
+    paymentMethods: ['Bitcoin', 'Ethereum', 'USDT', 'CHP Token']
   }
 ]
 
-// Resto igual
+// Ofertas especiales actualizadas
 export const specialOffers = [
-  { id: 'doble-rakeback', title: 'DOBLE RAKEBACK', subtitle: 'Primera semana con el doble de rakeback', validUntil: '2024-02-01', rooms: ['xpoker', 'suprema'], type: 'new-players' },
-  { id: 'torneo-especial', title: 'TORNEO $50K GTD', subtitle: 'Entrada gratis para nuevos jugadores', validUntil: '2024-01-31', rooms: ['pppoker', 'wpt'], type: 'tournament' },
-  { id: 'reload-bonus', title: 'RELOAD 100%', subtitle: 'En tu segundo depósito hasta $500', validUntil: '2024-02-15', rooms: ['all'], type: 'reload' }
+  {
+    id: 'freeroll-wpt',
+    title: '💰 FREEROLL $10,000',
+    subtitle: 'TODOS LOS DÍAS en WPT - Solo nuevos jugadores',
+    validUntil: '2024-12-31',
+    rooms: ['wpt'],
+    type: 'freeroll',
+    urgent: true
+  },
+  {
+    id: 'mega-rakeback',
+    title: '⭐ 65% RAKEBACK',
+    subtitle: 'Máximo rakeback en PPPOKER - Cupos limitados',
+    validUntil: '2024-02-29',
+    rooms: ['pppoker'],
+    type: 'rakeback',
+    urgent: true
+  },
+  {
+    id: 'jackpot-xpoker',
+    title: '🎰 JACKPOT S/523,421',
+    subtitle: 'Bad Beat Jackpot en X-POKER - Puede caer HOY',
+    validUntil: '2024-12-31',
+    rooms: ['xpoker'],
+    type: 'jackpot',
+    urgent: true
+  }
 ]
 
+// Métodos de pago destacados
 export const paymentMethods = {
-  transferencia: { name: 'Transferencia Bancaria', icon: '🏦', processingTime: '24-48 horas', minDeposit: '$20', maxDeposit: 'Sin límite', fees: 'Sin comisiones' },
-  crypto: { name: 'Criptomonedas', icon: '₿', processingTime: 'Instantáneo', minDeposit: '$10', maxDeposit: 'Sin límite', fees: 'Sin comisiones', currencies: ['Bitcoin', 'USDT', 'Ethereum'] },
-  skrill: { name: 'Skrill', icon: '💳', processingTime: 'Instantáneo', minDeposit: '$10', maxDeposit: '$10,000', fees: '2%' },
-  neteller: { name: 'Neteller', icon: '💳', processingTime: 'Instantáneo', minDeposit: '$10', maxDeposit: '$10,000', fees: '2%' }
+  yape: {
+    name: 'YAPE',
+    icon: '💜',
+    processingTime: '1 minuto',
+    minDeposit: 'S/10',
+    maxDeposit: 'Sin límite',
+    fees: 'SIN COMISIONES',
+    popular: true,
+    instant: true
+  },
+  plin: {
+    name: 'PLIN',
+    icon: '💚',
+    processingTime: 'Instantáneo',
+    minDeposit: 'S/10',
+    maxDeposit: 'Sin límite',
+    fees: 'SIN COMISIONES',
+    popular: true,
+    instant: true
+  },
+  transferencia: {
+    name: 'BCP/BBVA/Interbank',
+    icon: '🏦',
+    processingTime: 'Mismo día',
+    minDeposit: 'S/20',
+    maxDeposit: 'Sin límite',
+    fees: 'SIN COMISIONES',
+    popular: true
+  },
+  bitcoin: {
+    name: 'Bitcoin',
+    icon: '₿',
+    processingTime: '30 minutos',
+    minDeposit: '$10',
+    maxDeposit: 'Sin límite',
+    fees: 'SIN COMISIONES',
+    anonymous: true
+  },
+  usdt: {
+    name: 'USDT',
+    icon: '💵',
+    processingTime: 'Instantáneo',
+    minDeposit: '$10',
+    maxDeposit: 'Sin límite',
+    fees: 'SIN COMISIONES',
+    popular: true,
+    instant: true
+  }
 }
 
+// Testimonios reales
+export const testimonials = [
+  {
+    id: 1,
+    name: "Juan Carlos M.",
+    location: "Lima",
+    avatar: "JC",
+    content: "Gané S/3,500 este mes solo con el rakeback de PPPOKER. Nunca pensé que jugar poker me daría ingresos extra tan buenos.",
+    profit: "+S/3,500/mes",
+    room: "PPPOKER",
+    rating: 5,
+    verified: true,
+    date: "Enero 2024"
+  },
+  {
+    id: 2,
+    name: "María Fernanda P.",
+    location: "Arequipa",
+    avatar: "MF",
+    content: "El Bad Beat Jackpot de X-POKER me cambió la vida: gané S/45,000 en una sola mano. Los pagos llegaron en 24 horas a mi YAPE.",
+    profit: "S/45,000 JACKPOT",
+    room: "X-POKER",
+    rating: 5,
+    verified: true,
+    date: "Diciembre 2023"
+  },
+  {
+    id: 3,
+    name: "Roberto S.",
+    location: "Trujillo",
+    avatar: "RS",
+    content: "Los freerolls de $10K en WPT son reales. Ya gané 3 veces este mes sin invertir nada. Totalmente recomendado.",
+    profit: "$800 en freerolls",
+    room: "WPT POKER",
+    rating: 5,
+    verified: true,
+    date: "Enero 2024"
+  },
+  {
+    id: 4,
+    name: "Ana Lucía V.",
+    location: "Cusco",
+    avatar: "AL",
+    content: "SUPREMA tiene las mejores mesas de Omaha. El rakeback del 60% me genera S/2,000 extra cada mes. Pagos puntuales con PLIN.",
+    profit: "+S/2,000/mes",
+    room: "SUPREMA",
+    rating: 5,
+    verified: true,
+    date: "Enero 2024"
+  },
+  {
+    id: 5,
+    name: "Diego A.",
+    location: "Piura",
+    avatar: "DA",
+    content: "Empecé con S/10 en PPPOKER hace 6 meses. Ahora juego profesionalmente y vivo del poker. El 65% de rakeback marca la diferencia.",
+    profit: "De S/10 a PRO",
+    room: "PPPOKER",
+    rating: 5,
+    verified: true,
+    date: "Diciembre 2023"
+  }
+]
+
+// Estadísticas en tiempo real (simuladas)
+export const liveStats = {
+  totalPlayersOnline: 5847,
+  jackpotXPoker: 523421,
+  monthlyPaidOut: 2400000,
+  freerollCountdown: "02:34:15",
+  lastBigWin: {
+    player: "Carlos R.",
+    amount: "S/8,500",
+    room: "X-POKER",
+    time: "Hace 2 horas"
+  },
+  activeTables: {
+    pppoker: 234,
+    xpoker: 189,
+    suprema: 156,
+    wpt: 298
+  }
+}
+
+// Info de contacto actualizada
 export const contactInfo = {
   whatsapp: '51955311839',
-  telegram: '@pokerprotrack',
-  email: 'info@pokerprotrack.com',
-  instagram: '@pokerprotrack',
+  telegram: '@pokeragencyperu',
+  email: 'info@pokeragency.pe',
+  instagram: '@pokeragencyperu',
   supportHours: '24/7',
-  languages: ['Español', 'Portugués', 'Inglés']
+  responseTime: '<2 minutos',
+  languages: ['Español', 'Inglés']
 }
 
+// FAQs actualizadas
 export const faqs = [
-  { question: '¿Cómo funciona el comparador?', answer: 'Analizamos y comparamos el rakeback, bonos, promociones y condiciones de todas las salas. Te mostramos cuál es la más rentable según tu nivel y volumen de juego.' },
-  { question: '¿Es gratis usar Poker Pro Track?', answer: 'Sí, nuestro servicio de comparación es 100% gratuito. Te ayudamos a encontrar la mejor sala sin ningún costo.' },
-  { question: '¿Cómo sé cuál sala me conviene?', answer: 'Depende de tu nivel, volumen de juego y preferencias. Usa nuestro comparador y filtros para encontrar la sala perfecta para ti.' },
-  { question: '¿Todas las salas son seguras?', answer: 'Sí, solo listamos salas verificadas con años de trayectoria y miles de jugadores activos. Tu dinero está seguro.' },
-  { question: '¿Puedo jugar en varias salas?', answer: 'Por supuesto, puedes registrarte en todas las salas que desees y aprovechar los diferentes bonos y promociones de cada una.' }
+  {
+    question: '¿Puedo depositar con YAPE o PLIN?',
+    answer: 'Sí, todas nuestras salas aceptan YAPE y PLIN. Los depósitos se procesan en menos de 1 minuto y los retiros en máximo 24 horas.'
+  },
+  {
+    question: '¿El rakeback del 65% es real?',
+    answer: 'Totalmente real. PPPOKER ofrece hasta 65% de rakeback para jugadores VIP. Empiezas con 40% y va subiendo según tu volumen de juego.'
+  },
+  {
+    question: '¿Los freerolls de $10,000 son gratis?',
+    answer: 'Sí, WPT ofrece freerolls de $10,000 TODOS LOS DÍAS completamente gratis para nuevos jugadores. Solo necesitas registrarte con nosotros.'
+  },
+  {
+    question: '¿Cuánto tardo en cobrar mis ganancias?',
+    answer: 'Con YAPE y PLIN cobras en máximo 24 horas. Con crypto es instantáneo. Garantizamos todos los pagos.'
+  },
+  {
+    question: '¿Necesito experiencia para empezar?',
+    answer: 'No, tenemos salas para todos los niveles. PPPOKER y CLUBGG son perfectas para principiantes con depósitos desde S/10.'
+  }
 ]

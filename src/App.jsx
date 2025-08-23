@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaBars, FaTimes, FaHome, FaNewspaper, FaCalculator, FaTrophy, FaPhone, FaDice, FaCoins } from 'react-icons/fa'
+import { FaBars, FaTimes, FaHome, FaNewspaper, FaCalculator, FaTrophy, FaPhone, FaMoneyBillWave, FaStar } from 'react-icons/fa'
 
 // Páginas
 import HomePage from './pages/HomePage'
@@ -11,6 +11,7 @@ import NewsPage from './pages/NewsPage'
 import WhatsAppButton from './components/ui/WhatsAppButton'
 import FloatingAd from './components/ui/FloatingAd'
 import RotatingBanner from './components/ui/RotatingBanner'
+import UrgencyBanner from './components/ui/UrgencyBanner'
 import Footer from './components/layout/Footer'
 
 // Componente de Navegación Mejorado
@@ -35,7 +36,7 @@ const Navigation = () => {
       setTimeout(() => {
         const element = document.getElementById(id)
         if (element) {
-          const offset = 100 // Offset para el header fijo
+          const offset = 120 // Offset para el header fijo (aumentado por el banner urgencia)
           const elementPosition = element.getBoundingClientRect().top
           const offsetPosition = elementPosition + window.pageYOffset - offset
           
@@ -48,9 +49,12 @@ const Navigation = () => {
     }
   }, [location])
   
+  // Navegación actualizada con Pagos y Testimonios
   const navItems = [
     { path: '/', label: 'Inicio', icon: FaHome },
     { path: '/#salas', label: 'Salas', icon: FaTrophy, isHash: true },
+    { path: '/#pagos', label: 'Pagos', icon: FaMoneyBillWave, isHash: true },
+    { path: '/#testimonios', label: 'Testimonios', icon: FaStar, isHash: true },
     { path: '/#calculator', label: 'Calculadora', icon: FaCalculator, isHash: true },
     { path: '/noticias', label: 'Noticias', icon: FaNewspaper },
     { path: '/#contacto', label: 'Contacto', icon: FaPhone, isHash: true }
@@ -68,7 +72,7 @@ const Navigation = () => {
         setTimeout(() => {
           const element = document.getElementById(hash)
           if (element) {
-            const offset = 100
+            const offset = 120
             const elementPosition = element.getBoundingClientRect().top
             const offsetPosition = elementPosition + window.pageYOffset - offset
             window.scrollTo({
@@ -81,7 +85,7 @@ const Navigation = () => {
         // Si ya estamos en home, solo hacer scroll
         const element = document.getElementById(hash)
         if (element) {
-          const offset = 100
+          const offset = 120
           const elementPosition = element.getBoundingClientRect().top
           const offsetPosition = elementPosition + window.pageYOffset - offset
           window.scrollTo({
@@ -97,7 +101,7 @@ const Navigation = () => {
   
   return (
     <>
-      {/* Header Principal */}
+      {/* Header Principal - Ajustado para el banner de urgencia */}
       <nav className={`fixed top-12 w-full z-40 transition-all duration-300 ${
         isScrolled 
           ? 'bg-gray-900/95 backdrop-blur-md shadow-2xl py-3' 
@@ -127,18 +131,22 @@ const Navigation = () => {
               </div>
             </Link>
             
-            {/* Desktop Menu */}
-            <div className="hidden md:flex items-center space-x-6">
+            {/* Desktop Menu - Mejorado con scrolling */}
+            <div className="hidden lg:flex items-center space-x-4 xl:space-x-6">
               {navItems.map(item => (
                 <button
                   key={item.path}
                   onClick={() => handleNavClick(item)}
-                  className={`text-gray-300 hover:text-poker-gold transition-colors flex items-center gap-2 font-medium ${
-                    location.pathname === item.path.split('#')[0] ? 'text-poker-gold' : ''
+                  className={`text-gray-300 hover:text-poker-gold transition-colors flex items-center gap-1 font-medium text-sm xl:text-base ${
+                    location.pathname === item.path.split('#')[0] && 
+                    location.hash === (item.isHash ? `#${item.path.split('#')[1]}` : '') 
+                      ? 'text-poker-gold' 
+                      : ''
                   }`}
                 >
-                  <item.icon className="text-sm" />
-                  {item.label}
+                  <item.icon className="text-xs xl:text-sm" />
+                  <span className="hidden xl:inline">{item.label}</span>
+                  <span className="xl:hidden">{item.label.substring(0, 3)}</span>
                 </button>
               ))}
               
@@ -149,7 +157,7 @@ const Navigation = () => {
                 href="https://wa.me/51955311839?text=Quiero%20empezar%20a%20jugar%20poker%20online"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-gradient-to-r from-poker-gold to-yellow-500 text-black font-bold px-6 py-2 rounded-full hover:shadow-lg hover:shadow-yellow-500/30 transition-all"
+                className="bg-gradient-to-r from-poker-gold to-yellow-500 text-black font-bold px-4 xl:px-6 py-2 rounded-full hover:shadow-lg hover:shadow-yellow-500/30 transition-all text-sm xl:text-base"
               >
                 JUGAR AHORA
               </motion.a>
@@ -158,7 +166,7 @@ const Navigation = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden text-white text-2xl z-50 relative"
+              className="lg:hidden text-white text-2xl z-50 relative"
             >
               <AnimatePresence mode="wait">
                 {isMobileMenuOpen ? (
@@ -186,7 +194,7 @@ const Navigation = () => {
         </div>
       </nav>
       
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Overlay - Actualizado con todas las opciones */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
@@ -196,7 +204,7 @@ const Navigation = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-40 md:hidden"
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-40 lg:hidden"
             />
             
             {/* Menu Panel */}
@@ -205,18 +213,18 @@ const Navigation = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25 }}
-              className="fixed right-0 top-0 h-full w-80 bg-gray-900 z-40 md:hidden shadow-2xl"
+              className="fixed right-0 top-0 h-full w-80 bg-gray-900 z-40 lg:hidden shadow-2xl overflow-y-auto"
             >
-              <div className="flex flex-col items-center space-y-6 p-8 pt-20">
+              <div className="flex flex-col items-center space-y-5 p-8 pt-20">
                 {navItems.map(item => (
                   <motion.button
                     key={item.path}
                     onClick={() => handleNavClick(item)}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
-                    className="text-2xl text-white hover:text-poker-gold transition-colors flex items-center gap-3"
+                    className="text-xl text-white hover:text-poker-gold transition-colors flex items-center gap-3 w-full justify-center"
                   >
-                    <item.icon />
+                    <item.icon className="text-lg" />
                     {item.label}
                   </motion.button>
                 ))}
@@ -235,13 +243,13 @@ const Navigation = () => {
                 
                 {/* Social Links Mobile */}
                 <div className="flex space-x-4 mt-8 pt-8 border-t border-gray-800">
-                  <a href="#" className="text-gray-400 hover:text-white transition">
+                  <a href="https://www.instagram.com/pokeragencyperu" className="text-gray-400 hover:text-white transition">
                     <i className="fab fa-instagram text-xl"></i>
                   </a>
-                  <a href="#" className="text-gray-400 hover:text-white transition">
+                  <a href="https://t.me/pokeragencyperu" className="text-gray-400 hover:text-white transition">
                     <i className="fab fa-telegram text-xl"></i>
                   </a>
-                  <a href="#" className="text-gray-400 hover:text-white transition">
+                  <a href="https://www.facebook.com/pokeragencyperu" className="text-gray-400 hover:text-white transition">
                     <i className="fab fa-facebook text-xl"></i>
                   </a>
                 </div>
@@ -299,7 +307,10 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-poker-black text-white">
-        {/* Banner Rotativo Superior */}
+        {/* Banner de Urgencia Superior - NUEVO */}
+        <UrgencyBanner />
+        
+        {/* Banner Rotativo */}
         <RotatingBanner />
         
         {/* Navegación Global */}
@@ -323,7 +334,7 @@ function App() {
         {/* Footer */}
         <Footer />
         
-        {/* Cookie Banner (opcional) */}
+        {/* Cookie Banner */}
         <CookieBanner />
       </div>
     </Router>
