@@ -18,8 +18,8 @@ const HeroSection = ({ userLevel }) => {
   const getStatsByLevel = () => {
     if (!userLevel) {
       return {
-        stat1: { value: '10+', label: 'Salas Comparadas', icon: FaBalanceScale },
-        stat2: { value: '60%', label: 'Máximo Rakeback', icon: FaMoneyBillWave },
+        stat1: { value: '5+', label: 'Salas Comparadas', icon: FaBalanceScale },
+        stat2: { value: '65%', label: 'Rakeback', icon: FaMoneyBillWave },
         stat3: { value: '100%', label: 'Salas Verificadas', icon: FaUsers },
         stat4: { value: '24/7', label: 'Análisis Actualizado', icon: FaClock }
       }

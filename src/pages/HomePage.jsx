@@ -230,7 +230,9 @@ const HomePage = () => {
       </section>
 
       {/* NUEVA SECCIÓN: Métodos de Pago con YAPE y PLIN destacados */}
-      <PaymentMethods />
+      <section id="pagos">
+        <PaymentMethods />
+      </section>
 
       {/* Calculadora de Rakeback */}
       <div id="calculator">

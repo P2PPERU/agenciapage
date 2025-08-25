@@ -39,7 +39,7 @@ export const salas = [
     rakeback: '40% - 60% GARANTIZADO',
     bonus: '🎰 BAD BEAT JACKPOT GIGANTE',
     features: [
-      '💰 Bad Beat Jackpot actual: S/523,421',
+      '💰 Bad Beat Jackpot actual: S/100k',
       'Mesas de Texas SIEMPRE activas',
       'Cobros en 24 horas garantizados',
       'Soporte VIP en español 24/7',
