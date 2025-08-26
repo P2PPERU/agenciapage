@@ -131,7 +131,6 @@ const SalaCard = ({ sala, index, viewMode = 'compact' }) => {
       <div className="p-5">
         <div className="bg-gradient-to-r from-poker-gold/20 to-yellow-500/20 border border-poker-gold/50 rounded-xl p-3 mb-4 text-center">
           <p className="text-poker-gold font-bold text-xl mb-1">{sala.rakeback}</p>
-          <p className="text-gray-400 text-xs">+ Bonos Semanales</p>
         </div>
         
         {sala.bonus && (

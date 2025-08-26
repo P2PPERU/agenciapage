@@ -74,7 +74,7 @@ export const salas = [
     features: [
       'Mesas de Omaha SIEMPRE activas',
       'Torneos cada hora con overlays',
-      'Las mesas más soft del mercado',
+      'Jack Pot gigante',
       'Cashout instantáneo sin límites',
       'Liga mensual con S/20K en premios',
       'Depósitos con YAPE/PLIN al instante'
@@ -113,7 +113,7 @@ export const salas = [
       'Clasificatorios para eventos en vivo'
     ],
     whatsappMessage: 'Hola, quiero el bono 100% de WPT y el freeroll de $10K diario',
-    color: 'from-blue-600 via-white to-red-600',
+    color: 'from-blue-700 to-red-700',
     activePlayers: '5.1K+',
     paymentTime: '24-48hrs',
     minDeposit: 'S/100',
@@ -140,7 +140,7 @@ export const salas = [
     features: [
       'Mesas de Texas disponibles 24/7',
       'Torneos cada hora',
-      'Clubes privados exclusivos',
+      'BADBEAT JACKPOT MASIVO',
       'Sistema anti-bots avanzado',
       'Estadísticas en tiempo real',
       'Depósitos desde S/30'
@@ -188,7 +188,7 @@ export const salas = [
   {
     id: 'coinpoker',
     name: 'COIN POKER',
-    rakeback: '33% + CHP MINING',
+    rakeback: '25% + CHP MINING',
     bonus: 'Hasta 2000 USDT bono',
     features: [
       'Pagos en crypto instantáneos',

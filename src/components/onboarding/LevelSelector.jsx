@@ -514,7 +514,7 @@ const TestimonialsSection = () => {
           className="text-center mt-12"
         >
           <p className="text-gray-400 mb-6">
-            Únete a más de <span className="text-poker-gold font-bold">5,847 jugadores</span> que ya están ganando
+            Únete a más de <span className="text-poker-gold font-bold">200 jugadores</span> que ya están ganando
           </p>
           <a
             href="https://wa.me/51955311839?text=Quiero%20empezar%20a%20ganar%20como%20los%20testimonios"

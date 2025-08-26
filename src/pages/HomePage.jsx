@@ -254,7 +254,7 @@ const HomePage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               className="text-center"
             >
-              <div className="text-4xl font-bold text-poker-gold mb-2">5,847+</div>
+              <div className="text-4xl font-bold text-poker-gold mb-2">200+</div>
               <p className="text-gray-400">Jugadores Activos</p>
             </motion.div>
             <motion.div
@@ -263,8 +263,8 @@ const HomePage = () => {
               transition={{ delay: 0.1 }}
               className="text-center"
             >
-              <div className="text-4xl font-bold text-green-400 mb-2">S/2.4M</div>
-              <p className="text-gray-400">Pagados este mes</p>
+              <div className="text-4xl font-bold text-green-400 mb-2">S/1M</div>
+              <p className="text-gray-400">Pagados desde 2021</p>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -273,7 +273,7 @@ const HomePage = () => {
               className="text-center"
             >
               <div className="text-4xl font-bold text-blue-400 mb-2">65%</div>
-              <p className="text-gray-400">Máximo Rakeback</p>
+              <p className="text-gray-400">Rakeback</p>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -282,7 +282,7 @@ const HomePage = () => {
               className="text-center"
             >
               <div className="text-4xl font-bold text-purple-400 mb-2">24/7</div>
-              <p className="text-gray-400">Soporte en Español</p>
+              <p className="text-gray-400">Soporte </p>
             </motion.div>
           </div>
         </div>
@@ -300,7 +300,7 @@ const HomePage = () => {
               ¿LISTO PARA EMPEZAR A GANAR?
             </h2>
             <p className="text-2xl text-black/80 mb-8">
-              Únete a más de 5,000 jugadores que ya están ganando
+              Únete a más de 200 jugadores que ya están ganando
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <WhatsAppCTA

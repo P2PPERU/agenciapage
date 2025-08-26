@@ -98,7 +98,7 @@ const Navigation = () => {
                 <span className="text-xl font-bold text-white flex items-center">
                   <span className="hidden sm:inline text-poker-gold/50 mr-1">♠</span>
                   POKER 
-                  <span className="text-poker-gold group-hover:text-yellow-400 transition-colors ml-1">AGENCY</span>
+                  <span className="text-poker-gold group-hover:text-yellow-400 transition-colors ml-1">PRO TRACK</span>
                   <span className="hidden sm:inline text-poker-gold/50 ml-1">♣</span>
                 </span>
                 <span className="text-xs text-gray-400 hidden sm:block">

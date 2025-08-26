@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaTimes, FaTrophy, FaDollarSign, FaFire } from 'react-icons/fa'
-
+import { FaTimes, FaTrophy, FaDollarSign, FaFire, FaClock } from 'react-icons/fa'
+import { useNextTournamentTimer, formatTournamentName } from "../../utils/tournamentTimer"
 const FloatingAd = () => {
   const [isVisible, setIsVisible] = useState(false)
   const [isMinimized, setIsMinimized] = useState(false)
-  const [timeLeft, setTimeLeft] = useState({ hours: 23, minutes: 59, seconds: 59 })
+  
+  // Usar el hook personalizado para el timer real
+  const { nextTournament, timeRemaining, isLoading } = useNextTournamentTimer()
   
   // Mostrar después de 3 segundos
   useEffect(() => {
@@ -16,25 +18,6 @@ const FloatingAd = () => {
     return () => clearTimeout(timer)
   }, [])
   
-  // Countdown timer
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev.seconds > 0) {
-          return { ...prev, seconds: prev.seconds - 1 }
-        } else if (prev.minutes > 0) {
-          return { ...prev, minutes: prev.minutes - 1, seconds: 59 }
-        } else if (prev.hours > 0) {
-          return { hours: prev.hours - 1, minutes: 59, seconds: 59 }
-        } else {
-          return { hours: 23, minutes: 59, seconds: 59 }
-        }
-      })
-    }, 1000)
-    
-    return () => clearInterval(interval)
-  }, [])
-  
   const handleClose = () => {
     setIsVisible(false)
     // Volver a mostrar después de 60 segundos
@@ -43,8 +26,28 @@ const FloatingAd = () => {
     }, 60000)
   }
   
-  const whatsappMessage = encodeURIComponent('¡Quiero participar en el FREEROLL de $10,000 USD diario en WPT!')
+  // Obtener información del torneo para el mensaje de WhatsApp
+  const getTournamentInfo = () => {
+    if (!nextTournament) return { name: 'Freeroll', prize: '$10,000' }
+    
+    return {
+      name: formatTournamentName(nextTournament),
+      prize: nextTournament.type === 'super' ? '$100,000' : '$10,000',
+      day: nextTournament.day,
+      time: nextTournament.time
+    }
+  }
+  
+  const tournamentInfo = getTournamentInfo()
+  
+  const whatsappMessage = encodeURIComponent(
+    `¡Quiero participar en el próximo ${tournamentInfo.name} de ${tournamentInfo.prize} USD en WPT Global! ` +
+    `${nextTournament ? `El torneo es el ${nextTournament.day} a las ${nextTournament.time} hora Perú.` : ''}`
+  )
   const whatsappUrl = `https://wa.me/51955311839?text=${whatsappMessage}`
+  
+  // No mostrar si está cargando
+  if (isLoading) return null
   
   return (
     <>
@@ -58,7 +61,11 @@ const FloatingAd = () => {
             transition={{ type: "spring", damping: 25 }}
             className="hidden md:block fixed right-4 top-1/2 -translate-y-1/2 z-40 max-w-sm"
           >
-            <div className="relative bg-gradient-to-br from-red-600 via-orange-500 to-yellow-500 rounded-2xl shadow-2xl overflow-hidden">
+            <div className={`relative rounded-2xl shadow-2xl overflow-hidden ${
+              nextTournament?.type === 'super' 
+                ? 'bg-gradient-to-br from-purple-600 via-pink-500 to-red-500' 
+                : 'bg-gradient-to-br from-red-600 via-orange-500 to-yellow-500'
+            }`}>
               {/* Efecto de brillo animado */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
               
@@ -81,54 +88,77 @@ const FloatingAd = () => {
                   <FaTimes />
                 </button>
                 
-                {/* Badge EXCLUSIVO */}
+                {/* Badge EXCLUSIVO con información del torneo */}
                 <div className="inline-flex items-center bg-black/30 backdrop-blur text-white px-3 py-1 rounded-full text-xs font-bold mb-3">
                   <FaFire className="mr-1 text-yellow-300 animate-pulse" />
-                  EXCLUSIVO HOY
+                  {nextTournament?.type === 'super' ? 'SUPER DOMINGO' : 'DIARIO'}
                 </div>
                 
-                {/* Título principal */}
+                {/* Título principal con información real */}
                 <div className="text-white mb-4">
                   <h3 className="text-4xl font-black mb-2">
-                    $10,000 USD
+                    {tournamentInfo.prize} USD
                   </h3>
                   <p className="text-2xl font-bold">
                     FREEROLL
                   </p>
                   <p className="text-lg">
-                    TODOS LOS DÍAS
+                    {nextTournament?.type === 'super' ? 'DOMINGOS' : 'TODOS LOS DÍAS'}
                   </p>
+                  {nextTournament && (
+                    <p className="text-sm text-white/80 mt-1">
+                      Próximo: {nextTournament.day} {nextTournament.date} - {nextTournament.time}h
+                    </p>
+                  )}
                 </div>
                 
                 {/* Logo WPT */}
                 <div className="bg-white/20 backdrop-blur rounded-lg p-3 mb-4">
                   <p className="text-white font-bold text-xl">
-                    🏆 WPT POKER
+                    {nextTournament?.type === 'super' ? '👑' : '🏆'} WPT POKER
                   </p>
                   <p className="text-white/90 text-sm">
                     Solo con nosotros
                   </p>
                 </div>
                 
-                {/* Timer */}
+                {/* Timer con tiempo real */}
                 <div className="bg-black/30 backdrop-blur rounded-lg p-3 mb-4">
-                  <p className="text-white/80 text-xs mb-1">Próximo torneo en:</p>
-                  <div className="flex gap-2 justify-center">
-                    <div className="bg-white/20 rounded px-2 py-1">
-                      <span className="text-white font-bold text-lg">{String(timeLeft.hours).padStart(2, '0')}</span>
-                      <span className="text-white/60 text-xs block">HRS</span>
+                  <p className="text-white/80 text-xs mb-1 flex items-center gap-1">
+                    <FaClock className="text-yellow-300" />
+                    {timeRemaining.isExpired ? 'Buscando próximo torneo...' : 'Comienza en:'}
+                  </p>
+                  
+                  {!timeRemaining.isExpired && (
+                    <div className="flex gap-2 justify-center">
+                      <div className="bg-white/20 rounded px-2 py-1">
+                        <span className="text-white font-bold text-lg">
+                          {String(timeRemaining.hours).padStart(2, '0')}
+                        </span>
+                        <span className="text-white/60 text-xs block">HRS</span>
+                      </div>
+                      <span className="text-white text-lg">:</span>
+                      <div className="bg-white/20 rounded px-2 py-1">
+                        <span className="text-white font-bold text-lg">
+                          {String(timeRemaining.minutes).padStart(2, '0')}
+                        </span>
+                        <span className="text-white/60 text-xs block">MIN</span>
+                      </div>
+                      <span className="text-white text-lg">:</span>
+                      <div className="bg-white/20 rounded px-2 py-1">
+                        <span className="text-white font-bold text-lg">
+                          {String(timeRemaining.seconds).padStart(2, '0')}
+                        </span>
+                        <span className="text-white/60 text-xs block">SEG</span>
+                      </div>
                     </div>
-                    <span className="text-white text-lg">:</span>
-                    <div className="bg-white/20 rounded px-2 py-1">
-                      <span className="text-white font-bold text-lg">{String(timeLeft.minutes).padStart(2, '0')}</span>
-                      <span className="text-white/60 text-xs block">MIN</span>
+                  )}
+                  
+                  {timeRemaining.isExpired && (
+                    <div className="text-white/60 text-center">
+                      ⏳ Actualizando horarios...
                     </div>
-                    <span className="text-white text-lg">:</span>
-                    <div className="bg-white/20 rounded px-2 py-1">
-                      <span className="text-white font-bold text-lg">{String(timeLeft.seconds).padStart(2, '0')}</span>
-                      <span className="text-white/60 text-xs block">SEG</span>
-                    </div>
-                  </div>
+                  )}
                 </div>
                 
                 {/* CTA Button */}
@@ -142,13 +172,13 @@ const FloatingAd = () => {
                 >
                   <span className="flex items-center justify-center gap-2">
                     <FaTrophy />
-                    GANAR AHORA
+                    REGISTRARME AHORA
                   </span>
                 </motion.a>
                 
                 {/* Texto adicional */}
                 <p className="text-white/80 text-xs text-center mt-3">
-                  ⚡ Sin depósito • 100% Gratis
+                  ⚡ Sin depósito • 100% Gratis • Hora Perú
                 </p>
               </div>
             </div>
@@ -173,7 +203,11 @@ const FloatingAd = () => {
             exit={{ y: 100, opacity: 0 }}
             className="md:hidden fixed bottom-20 left-2 right-2 z-40"
           >
-            <div className="relative bg-gradient-to-br from-red-600 via-orange-500 to-yellow-500 rounded-2xl shadow-2xl p-4">
+            <div className={`relative rounded-2xl shadow-2xl p-4 ${
+              nextTournament?.type === 'super' 
+                ? 'bg-gradient-to-br from-purple-600 via-pink-500 to-red-500' 
+                : 'bg-gradient-to-br from-red-600 via-orange-500 to-yellow-500'
+            }`}>
               {/* Símbolos de fondo */}
               <div className="absolute inset-0 opacity-10 flex justify-around items-center text-4xl">
                 <span>♠</span><span>♥</span><span>♦</span><span>♣</span>
@@ -190,16 +224,27 @@ const FloatingAd = () => {
                 
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex-1">
-                    <h3 className="text-white font-black text-2xl">$10,000 USD</h3>
-                    <p className="text-white font-bold">FREEROLL DIARIO</p>
-                    <p className="text-white/90 text-sm">WPT - Solo con nosotros</p>
+                    <h3 className="text-white font-black text-2xl">
+                      {tournamentInfo.prize} USD
+                    </h3>
+                    <p className="text-white font-bold">FREEROLL</p>
+                    <p className="text-white/90 text-sm">
+                      {nextTournament ? `${nextTournament.day} ${nextTournament.time}h` : 'WPT - Solo con nosotros'}
+                    </p>
+                    
+                    {/* Mini timer para móvil */}
+                    {!timeRemaining.isExpired && (
+                      <div className="text-white/90 text-xs mt-1">
+                        ⏰ {timeRemaining.hours}h {timeRemaining.minutes}m {timeRemaining.seconds}s
+                      </div>
+                    )}
                   </div>
                   
                   <a
                     href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-green-500 text-white font-bold px-6 py-3 rounded-xl whitespace-nowrap animate-pulse"
+                    className="bg-green-500 text-white font-bold px-4 py-3 rounded-xl whitespace-nowrap animate-pulse text-sm"
                   >
                     JUGAR AHORA
                   </a>
@@ -220,7 +265,9 @@ const FloatingAd = () => {
             onClick={() => setIsMinimized(false)}
             className="hidden md:flex fixed right-4 top-1/2 -translate-y-1/2 z-40 bg-gradient-to-r from-red-600 to-orange-500 text-white p-4 rounded-l-2xl shadow-lg hover:scale-110 transition-all items-center gap-2"
           >
-            <span className="writing-mode-vertical text-sm font-bold">FREEROLL $10K</span>
+            <span className="writing-mode-vertical text-sm font-bold">
+              FREEROLL {tournamentInfo.prize === '$100,000' ? '$100K' : '$10K'}
+            </span>
             <FaTrophy className="text-xl" />
           </motion.button>
         )}
@@ -245,11 +292,19 @@ const FloatingAd = () => {
   )
 }
 
-// Versión alternativa más simple
+// Versión alternativa más simple con timer real
 export const SimpleFloatingAd = () => {
   const [isVisible, setIsVisible] = useState(true)
+  const { nextTournament, timeRemaining } = useNextTournamentTimer()
   
   if (!isVisible) return null
+  
+  const tournamentInfo = {
+    prize: nextTournament?.type === 'super' ? '$100,000' : '$10,000',
+    name: nextTournament?.type === 'super' ? 'SUPER FREEROLL' : 'FREEROLL DIARIO'
+  }
+  
+  const whatsappMessage = encodeURIComponent(`Quiero el ${tournamentInfo.name} de ${tournamentInfo.prize} USD en WPT`)
   
   return (
     <motion.div
@@ -257,7 +312,11 @@ export const SimpleFloatingAd = () => {
       animate={{ scale: 1, opacity: 1 }}
       className="fixed bottom-24 right-4 z-40 max-w-xs"
     >
-      <div className="bg-gradient-to-r from-red-600 to-orange-500 rounded-xl p-4 shadow-2xl">
+      <div className={`rounded-xl p-4 shadow-2xl ${
+        nextTournament?.type === 'super' 
+          ? 'bg-gradient-to-r from-purple-600 to-pink-500' 
+          : 'bg-gradient-to-r from-red-600 to-orange-500'
+      }`}>
         <button
           onClick={() => setIsVisible(false)}
           className="absolute -top-2 -right-2 bg-black text-white rounded-full w-6 h-6 flex items-center justify-center text-xs"
@@ -266,11 +325,22 @@ export const SimpleFloatingAd = () => {
         </button>
         
         <div className="text-white text-center">
-          <p className="text-3xl font-black mb-1">$10,000 USD</p>
-          <p className="font-bold mb-2">FREEROLL DIARIO</p>
-          <p className="text-sm mb-3">WPT • SOLO CON NOSOTROS</p>
+          <p className="text-3xl font-black mb-1">{tournamentInfo.prize} USD</p>
+          <p className="font-bold mb-2">{tournamentInfo.name}</p>
+          
+          {/* Timer simple */}
+          {!timeRemaining.isExpired && (
+            <p className="text-sm mb-2">
+              ⏰ {timeRemaining.hours}h {timeRemaining.minutes}m {timeRemaining.seconds}s
+            </p>
+          )}
+          
+          <p className="text-sm mb-3">
+            {nextTournament ? `${nextTournament.day} ${nextTournament.time}h Perú` : 'WPT • SOLO CON NOSOTROS'}
+          </p>
+          
           <a
-            href="https://wa.me/51955311839?text=Quiero%20el%20freeroll%20de%2010000%20USD"
+            href={`https://wa.me/51955311839?text=${whatsappMessage}`}
             className="block bg-white text-red-600 font-bold py-2 px-4 rounded-lg hover:bg-gray-100 transition"
           >
             GANAR AHORA →

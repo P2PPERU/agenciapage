@@ -17,7 +17,7 @@ export const bonuses = [
     amount: '$16.20 USD',
     description: 'Con cualquier depósito de $10 o más recibes este paquete al instante',
     icon: '🎁',
-    requirements: 'Bono poker $5 + Casino $5 + Tickets $4.20',
+    requirements: 'Bono poker $5 + Casino $5 + Tickets $4.20 + Global Spins $1 + Monedas $3',
     color: 'from-purple-500 to-purple-700',
     featured: true
   },
@@ -27,7 +27,7 @@ export const bonuses = [
     amount: 'Hasta $480',
     description: 'Tickets gratis para MTT y Global Spins según tu depósito',
     icon: '🎫',
-    requirements: 'Desde $10 - Escalas según el monto',
+    requirements: 'Desde $10 - Escalas según el monto depositado',
     color: 'from-blue-500 to-blue-700'
   },
   {
@@ -36,58 +36,92 @@ export const bonuses = [
     amount: 'Hasta $100',
     description: 'Monedas gratis para usar en el casino de WPT Global',
     icon: '🪙',
-    requirements: 'Incluidas en el paquete de bienvenida',
+    requirements: 'Incluidas automáticamente en el paquete de bienvenida',
     color: 'from-green-500 to-green-700'
+  },
+  {
+    id: 5,
+    title: 'Global Spins Premium',
+    amount: 'Hasta $50',
+    description: 'Acceso a Global Spins con premios especiales',
+    icon: '🌟',
+    requirements: 'Disponibles con depósitos de $100+',
+    color: 'from-pink-500 to-rose-700'
   }
 ]
 
 export const registrationSteps = [
   {
     step: 1,
-    title: 'Descarga la App',
-    description: 'Selecciona tu plataforma y descarga WPT Global',
+    title: 'Descarga WPT Global',
+    description: 'Selecciona tu plataforma favorita y descarga la aplicación oficial de WPT Global',
     iconName: 'FaDownload',
-    action: 'Descargar',
+    action: 'Descargar aplicación',
     downloads: [
-      { platform: 'iOS', icon: '📱', url: 'https://testflight.apple.com/join/E8MUn83b' },
-      { platform: 'Mac', icon: '🍏', url: 'https://downloads.wptglobal.com/latest/WPTG.dmg' },
-      { platform: 'Android', icon: '🤖', url: 'https://downloads.wptglobal.com/latest/WPTG.apk' },
-      { platform: 'Windows', icon: '💻', url: 'https://downloads.wptglobal.com/latest/WPTG.exe' }
+      { 
+        platform: 'iOS (iPhone/iPad)', 
+        icon: '📱', 
+        url: 'https://testflight.apple.com/join/E8MUn83b' 
+      },
+      { 
+        platform: 'Mac (macOS)', 
+        icon: '🍏', 
+        url: 'https://downloads.wptglobal.com/latest/WPTG.dmg' 
+      },
+      { 
+        platform: 'Android', 
+        icon: '🤖', 
+        url: 'https://downloads.wptglobal.com/latest/WPTG.apk' 
+      },
+      { 
+        platform: 'Windows (PC)', 
+        icon: '💻', 
+        url: 'https://downloads.wptglobal.com/latest/WPTG.exe' 
+      }
     ]
   },
   {
     step: 2,
     title: 'Selecciona Andorra como País',
-    description: 'En el registro, selecciona Andorra como país principal',
+    description: 'Durante el registro inicial, es crucial seleccionar Andorra como tu país de residencia',
     iconName: 'FaGlobeAmericas',
     action: 'Seleccionar país',
-    highlight: 'Importante: Usa Andorra, no Perú'
+    highlight: '⚠️ CRÍTICO: Debes elegir ANDORRA, no Perú. Esto es obligatorio para acceder desde Perú.'
   },
   {
     step: 3,
-    title: 'Crea tu Cuenta',
-    description: 'Registra tu cuenta usando tu correo electrónico real',
+    title: 'Crea tu Cuenta WPT',
+    description: 'Registra tu nueva cuenta usando tu correo electrónico personal activo',
     iconName: 'FaUserPlus',
-    action: 'Crear cuenta',
-    highlight: 'Usa tus datos reales (solo cambia el país)'
+    action: 'Crear cuenta nueva',
+    highlight: 'Usa tu email real y una contraseña segura. Confirmarás el email después del registro.'
   },
   {
     step: 4,
-    title: 'Ingresa los Códigos',
-    description: 'Usa nuestros códigos exclusivos para bonos especiales',
+    title: 'Ingresa los Códigos Exclusivos',
+    description: 'Utiliza nuestros códigos especiales para desbloquear bonos y promociones exclusivas',
     iconName: 'FaKey',
-    action: 'Ingresar códigos',
+    action: 'Ingresar códigos promocionales',
     codes: {
-      invitado: '8288C1',
-      bonificacion: 'PeruEV'
-    }
+      bonificacion: 'PeruEV',
+      invitado: '8288C1'
+    },
+    highlight: 'ORDEN IMPORTANTE: Primero el código de bonificación, después el de invitado'
   },
   {
     step: 5,
-    title: 'Verifica y Juega',
-    description: 'Completa la verificación y accede a promociones exclusivas',
+    title: 'Completa tus Datos Personales',
+    description: 'Llena correctamente todos los campos requeridos para activar completamente tu cuenta',
     iconName: 'FaCheckCircle',
-    action: 'Verificar',
+    action: 'Completar información personal',
+    personalData: {
+      nombre: 'Tu nombre y apellido REAL y COMPLETO',
+      direccion: 'Tu dirección física REAL (calle y número)',
+      telefono: 'DEJAR VACÍO - No completar este campo',
+      ciudad: 'LIMA',
+      codigoPostal: '00051'
+    },
+    highlight: 'Datos reales son obligatorios para verificación de cuenta y procesamiento de retiros',
     whatsapp: 'wa.link/bigy9b'
   }
 ]
@@ -95,235 +129,358 @@ export const registrationSteps = [
 export const tournaments = [
   {
     name: '$10K Daily Crazy Freeroll',
-    guarantee: '$10,000 GTD',
-    buyIn: 'GRATIS',
-    time: 'Lunes a Sábado',
-    winner: '$2,000 al ganador',
+    guarantee: '$10,000 GARANTIZADOS',
+    buyIn: '100% GRATIS',
+    time: 'Lunes a Sábado - Horarios variados',
+    winner: '$2,000+ para el campeón',
     type: 'crazy-daily',
-    featured: true
+    featured: true,
+    description: 'El freeroll diario más grande del mundo del poker online'
   },
   {
     name: '$100K Super Crazy Freeroll',
-    guarantee: '$100,000 GTD',
-    buyIn: 'GRATIS',
-    time: 'Domingos',
-    winner: '$20,000 al ganador',
+    guarantee: '$100,000 GARANTIZADOS',
+    buyIn: '100% GRATIS',
+    time: 'Todos los domingos',
+    winner: '$20,000+ para el campeón',
     type: 'crazy-super',
-    featured: true
+    featured: true,
+    description: 'Freeroll dominical con el premio más alto disponible'
   },
   {
-    name: 'Sunday Million',
-    guarantee: '$1,000,000 GTD',
+    name: 'Sunday Million WPT',
+    guarantee: '$1,000,000 GARANTIZADOS',
     buyIn: '$109',
-    time: 'Domingos 18:00',
-    satellites: 'Desde $5',
-    type: 'main'
+    time: 'Domingos a las 18:00 UTC',
+    winner: '$150,000+ típico para el campeón',
+    satellites: 'Satélites desde $5',
+    type: 'main',
+    description: 'El torneo emblema de WPT Global con premios millonarios'
   },
   {
-    name: 'Daily Special',
-    guarantee: '$50,000 GTD',
+    name: 'Daily Special WPT',
+    guarantee: '$50,000 GARANTIZADOS',
     buyIn: '$33',
-    time: 'Todos los días 20:00',
-    satellites: 'Desde $3',
-    type: 'daily'
+    time: 'Todos los días a las 20:00 UTC',
+    winner: '$8,000+ típico para el campeón',
+    satellites: 'Satélites desde $3',
+    type: 'daily',
+    description: 'Torneo diario accesible con excelente relación valor/premio'
+  },
+  {
+    name: 'High Roller Weekly',
+    guarantee: '$250,000 GARANTIZADOS',
+    buyIn: '$530',
+    time: 'Sábados a las 19:00 UTC',
+    winner: '$40,000+ típico para el campeón',
+    satellites: 'Satélites desde $22',
+    type: 'high-roller',
+    description: 'Torneo semanal para jugadores serios con premios elevados'
   }
 ]
 
 export const crazyFreerollsInfo = {
   totalPrize: '$2,000,000',
-  duration: '18 AGO - 5 OCT',
-  description: 'En WPT Global nos volvimos completamente locos por los torneos gratuitos y regalaremos $2,000,000',
+  duration: '25 AGOSTO - 5 OCTUBRE 2025',
+  description: 'WPT Global ha enloquecido completamente y está regalando $2,000,000 en premios totalmente GRATIS durante la serie más grande de freerolls en la historia del poker online',
   ticketWays: [
     {
-      title: '4 tickets semanales GRATIS',
-      description: 'Todos los jugadores registrados reciben 4 tickets por semana',
+      title: '4 Tickets Semanales AUTOMÁTICOS',
+      description: 'Todos los jugadores registrados reciben automáticamente 4 tickets cada semana sin hacer nada',
       icon: '🎟️',
-      multiplier: 'x4'
+      multiplier: '4x por semana',
+      automatic: true
     },
     {
-      title: '24 satélites gratuitos diarios',
-      description: 'Hay 24 satélites gratis por día, cada uno con 20 asientos garantizados',
+      title: '24 Satélites Gratuitos Diarios',
+      description: 'Cada día hay 24 torneos satélite completamente gratis, cada uno otorga 20 asientos garantizados',
       icon: '🎯',
-      multiplier: 'x24'
+      multiplier: '24 diarios = 480/mes',
+      seats: '20 por satélite'
     },
     {
-      title: 'Top 20 gana ticket $100K',
-      description: 'El top 20 del Daily Crazy Freeroll gana un boleto al $100K Sunday',
+      title: 'TOP 20 gana Ticket para $100K',
+      description: 'Los mejores 20 jugadores del Daily Crazy Freeroll obtienen entrada directa al $100K Sunday',
       icon: '🏆',
-      prize: '$100,000'
+      prize: 'Ticket $100,000',
+      requirement: 'Top 20 en Daily'
     },
     {
-      title: 'Juega para ganar tickets',
-      description: 'Juega MTTs/Global Spins/Casino/Deportes para ganar Daily y Sunday tickets',
+      title: 'Juega y Gana Tickets Adicionales',
+      description: 'Participa en MTTs, Global Spins, Casino o Apuestas Deportivas para ganar tickets extra según tu actividad',
       icon: '🎮',
-      activity: 'Multi-juegos'
+      activity: 'Multi-actividades',
+      bonus: 'Tickets adicionales por volumen de juego'
     }
-  ],
-  weeklyRequirements: [
-    { amount: '$10+', reward: '5 tickets para Daily Freeroll' },
-    { amount: '$1,500-$4,999', reward: '1 ticket para $100K Super' },
-    { amount: '$5,000-$9,999', reward: '2 tickets para $100K Super' },
-    { amount: '$10,000+', reward: '3 tickets para $100K Super' }
   ]
 }
 
 export const crazySchedule = [
-  { date: 'Aug-18', day: 'Mon', time: '12:00', name: '$10K Daily Crazy Freeroll Hyper Mystery Opener', prize: '$10K' },
-  { date: 'Aug-19', day: 'Tue', time: '18:00', name: '$10K Daily Crazy Freeroll Super Sonic Kick-off', prize: '$10K' },
-  { date: 'Aug-20', day: 'Wed', time: '23:30', name: '$10K Daily Crazy Freeroll Adrenaline 4-Max', prize: '$10K' },
-  { date: 'Aug-21', day: 'Thu', time: '18:00', name: '$10K Daily Crazy Freeroll Non-Stop Hyper', prize: '$10K' },
-  { date: 'Aug-22', day: 'Fri', time: '23:30', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K' },
-  { date: 'Aug-23', day: 'Sat', time: '12:00', name: '$10K Daily Crazy Freeroll Asia Hyper Sonic', prize: '$10K' },
-  { date: 'Aug-24', day: 'Sun', time: '18:00', name: '$100K Super Crazy Freeroll Hyper EuroStar', prize: '$100K', featured: true },
-  { date: 'Aug-25', day: 'Mon', time: '18:00', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K' },
-  { date: 'Aug-26', day: 'Tue', time: '12:00', name: '$10K Daily Crazy Freeroll Adrenaline 4-Max', prize: '$10K' },
-  { date: 'Aug-27', day: 'Wed', time: '23:30', name: '$10K Daily Crazy Freeroll Super Sonic', prize: '$10K' },
-  { date: 'Aug-28', day: 'Thu', time: '18:00', name: '$10K Daily Crazy Freeroll Non-Stop Hyper', prize: '$10K' },
-  { date: 'Aug-29', day: 'Fri', time: '23:30', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K' },
-  { date: 'Aug-30', day: 'Sat', time: '12:00', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K' },
-  { date: 'Aug-31', day: 'Sun', time: '12:00', name: '$100K Super Crazy Freeroll Asia Grand Dash', prize: '$100K', featured: true },
-  { date: 'Sep-1', day: 'Mon', time: '18:00', name: '$10K Daily Crazy Freeroll Adrenaline 4-Max', prize: '$10K' },
-  { date: 'Sep-2', day: 'Tue', time: '12:00', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K' },
-  { date: 'Sep-3', day: 'Wed', time: '23:30', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K' },
-  { date: 'Sep-4', day: 'Thu', time: '18:00', name: '$10K Daily Crazy Freeroll Super Sonic', prize: '$10K' },
-  { date: 'Sep-5', day: 'Fri', time: '23:30', name: '$10K Daily Crazy Freeroll Adrenaline 4-Max', prize: '$10K' },
-  { date: 'Sep-6', day: 'Sat', time: '12:00', name: '$10K Daily Crazy Freeroll Non-Stop Hyper', prize: '$10K' },
-  { date: 'Sep-7', day: 'Sun', time: '23:30', name: '$100K Super Crazy Freeroll Carnival Frenzy', prize: '$100K', featured: true },
-  { date: 'Sep-8', day: 'Mon', time: '18:00', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K' },
-  { date: 'Sep-9', day: 'Tue', time: '12:00', name: '$10K Daily Crazy Freeroll Adrenaline 4-Max', prize: '$10K' },
-  { date: 'Sep-10', day: 'Wed', time: '23:30', name: '$10K Daily Crazy Freeroll Super Sonic', prize: '$10K' },
-  { date: 'Sep-11', day: 'Thu', time: '18:00', name: '$10K Daily Crazy Freeroll Non-Stop Hyper', prize: '$10K' },
-  { date: 'Sep-12', day: 'Fri', time: '23:30', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K' },
-  { date: 'Sep-13', day: 'Sat', time: '12:00', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K' },
-  { date: 'Sep-14', day: 'Sun', time: '18:00', name: '$100K Super Crazy Freeroll Euro Grand Prix', prize: '$100K', featured: true },
-  { date: 'Sep-15', day: 'Mon', time: '18:00', name: '$10K Daily Crazy Freeroll Adrenaline 4-Max', prize: '$10K' },
-  { date: 'Sep-16', day: 'Tue', time: '12:00', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K' },
-  { date: 'Sep-17', day: 'Wed', time: '23:30', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K' },
-  { date: 'Sep-18', day: 'Thu', time: '18:00', name: '$10K Daily Crazy Freeroll Super Sonic', prize: '$10K' },
-  { date: 'Sep-19', day: 'Fri', time: '23:30', name: '$10K Daily Crazy Freeroll Adrenaline 4-Max', prize: '$10K' },
-  { date: 'Sep-20', day: 'Sat', time: '12:00', name: '$10K Daily Crazy Freeroll Non-Stop Hyper', prize: '$10K' },
-  { date: 'Sep-21', day: 'Sun', time: '23:30', name: '$100K Super Crazy Freeroll Fiesta [Mystery]', prize: '$100K', featured: true },
-  { date: 'Sep-22', day: 'Mon', time: '18:00', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K' },
-  { date: 'Sep-23', day: 'Tue', time: '12:00', name: '$10K Daily Crazy Freeroll Adrenaline 4-Max', prize: '$10K' },
-  { date: 'Sep-24', day: 'Wed', time: '23:30', name: '$10K Daily Crazy Freeroll Super Sonic', prize: '$10K' },
-  { date: 'Sep-25', day: 'Thu', time: '18:00', name: '$10K Daily Crazy Freeroll Non-Stop Hyper', prize: '$10K' },
-  { date: 'Sep-26', day: 'Fri', time: '23:30', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K' },
-  { date: 'Sep-27', day: 'Sat', time: '12:00', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K' },
-  { date: 'Sep-28', day: 'Sun', time: '18:00', name: '$100K Super Crazy Freeroll Sunday Mystery', prize: '$100K', featured: true },
-  { date: 'Sep-29', day: 'Mon', time: '18:00', name: '$10K Daily Crazy Freeroll Adrenaline 4-Max', prize: '$10K' },
-  { date: 'Sep-30', day: 'Tue', time: '12:00', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K' },
-  { date: 'Oct-1', day: 'Wed', time: '23:30', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K' },
-  { date: 'Oct-2', day: 'Thu', time: '18:00', name: '$10K Daily Crazy Freeroll Super Sonic', prize: '$10K' },
-  { date: 'Oct-3', day: 'Fri', time: '23:30', name: '$10K Daily Crazy Freeroll Adrenaline 4-Max [Saver]', prize: '$10K' },
-  { date: 'Oct-4', day: 'Sat', time: '12:00', name: '$10K Daily Crazy Freeroll Non-Stop Hyper [Closer]', prize: '$10K' },
-  { date: 'Oct-5', day: 'Sun', time: '12:00', name: '$100K Super Crazy Freeroll Mystery Finale', prize: '$100K', featured: true }
+  // Agosto 2025 - Desde el 25
+  { date: '26-Ago', day: 'Mar', time: '07:00', name: '$10K Daily Crazy Freeroll Adrenaline 4-Max', prize: '$10K', type: 'daily' },
+  { date: '27-Ago', day: 'Mié', time: '18:30', name: '$10K Daily Crazy Freeroll Super Sonic', prize: '$10K', type: 'daily' },
+  { date: '28-Ago', day: 'Jue', time: '13:00', name: '$10K Daily Crazy Freeroll Non-Stop Hyper', prize: '$10K', type: 'daily' },
+  { date: '29-Ago', day: 'Vie', time: '18:30', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K', type: 'daily' },
+  { date: '30-Ago', day: 'Sáb', time: '07:00', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K', type: 'daily' },
+  { date: '31-Ago', day: 'Dom', time: '07:00', name: '$100K Super Crazy Freeroll Asia Grand Dash', prize: '$100K', type: 'super', featured: true },
+  
+  // Septiembre 2025 - Semana 1
+  { date: '01-Sep', day: 'Lun', time: '13:00', name: '$10K Daily Crazy Freeroll Adrenaline 4-Max', prize: '$10K', type: 'daily' },
+  { date: '02-Sep', day: 'Mar', time: '07:00', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K', type: 'daily' },
+  { date: '03-Sep', day: 'Mié', time: '18:30', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K', type: 'daily' },
+  { date: '04-Sep', day: 'Jue', time: '13:00', name: '$10K Daily Crazy Freeroll Super Sonic', prize: '$10K', type: 'daily' },
+  { date: '05-Sep', day: 'Vie', time: '18:30', name: '$10K Daily Crazy Freeroll Adrenaline 4-Max', prize: '$10K', type: 'daily' },
+  { date: '06-Sep', day: 'Sáb', time: '07:00', name: '$10K Daily Crazy Freeroll Non-Stop Hyper', prize: '$10K', type: 'daily' },
+  { date: '07-Sep', day: 'Dom', time: '18:30', name: '$100K Super Crazy Freeroll Carnival Frenzy', prize: '$100K', type: 'super', featured: true },
+  
+  // Septiembre 2025 - Semana 2
+  { date: '08-Sep', day: 'Lun', time: '13:00', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K', type: 'daily' },
+  { date: '09-Sep', day: 'Mar', time: '07:00', name: '$10K Daily Crazy Freeroll Adrenaline 4-Max', prize: '$10K', type: 'daily' },
+  { date: '10-Sep', day: 'Mié', time: '18:30', name: '$10K Daily Crazy Freeroll Super Sonic', prize: '$10K', type: 'daily' },
+  { date: '11-Sep', day: 'Jue', time: '13:00', name: '$10K Daily Crazy Freeroll Non-Stop Hyper', prize: '$10K', type: 'daily' },
+  { date: '12-Sep', day: 'Vie', time: '18:30', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K', type: 'daily' },
+  { date: '13-Sep', day: 'Sáb', time: '07:00', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K', type: 'daily' },
+  { date: '14-Sep', day: 'Dom', time: '13:00', name: '$100K Super Crazy Freeroll Euro Grand Prix', prize: '$100K', type: 'super', featured: true },
+  
+  // Septiembre 2025 - Semana 3
+  { date: '15-Sep', day: 'Lun', time: '13:00', name: '$10K Daily Crazy Freeroll Adrenaline 4-Max', prize: '$10K', type: 'daily' },
+  { date: '16-Sep', day: 'Mar', time: '07:00', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K', type: 'daily' },
+  { date: '17-Sep', day: 'Mié', time: '18:30', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K', type: 'daily' },
+  { date: '18-Sep', day: 'Jue', time: '13:00', name: '$10K Daily Crazy Freeroll Super Sonic', prize: '$10K', type: 'daily' },
+  { date: '19-Sep', day: 'Vie', time: '18:30', name: '$10K Daily Crazy Freeroll Adrenaline 4-Max', prize: '$10K', type: 'daily' },
+  { date: '20-Sep', day: 'Sáb', time: '07:00', name: '$10K Daily Crazy Freeroll Non-Stop Hyper', prize: '$10K', type: 'daily' },
+  { date: '21-Sep', day: 'Dom', time: '18:30', name: '$100K Super Crazy Freeroll Fiesta Especial', prize: '$100K', type: 'super', featured: true },
+  
+  // Septiembre 2025 - Semana 4
+  { date: '22-Sep', day: 'Lun', time: '13:00', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K', type: 'daily' },
+  { date: '23-Sep', day: 'Mar', time: '07:00', name: '$10K Daily Crazy Freeroll Adrenaline 4-Max', prize: '$10K', type: 'daily' },
+  { date: '24-Sep', day: 'Mié', time: '18:30', name: '$10K Daily Crazy Freeroll Super Sonic', prize: '$10K', type: 'daily' },
+  { date: '25-Sep', day: 'Jue', time: '13:00', name: '$10K Daily Crazy Freeroll Non-Stop Hyper', prize: '$10K', type: 'daily' },
+  { date: '26-Sep', day: 'Vie', time: '18:30', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K', type: 'daily' },
+  { date: '27-Sep', day: 'Sáb', time: '07:00', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K', type: 'daily' },
+  { date: '28-Sep', day: 'Dom', time: '13:00', name: '$100K Super Crazy Freeroll Septiembre Final', prize: '$100K', type: 'super', featured: true },
+  
+  // Septiembre 2025 - Final del mes
+  { date: '29-Sep', day: 'Lun', time: '13:00', name: '$10K Daily Crazy Freeroll Adrenaline 4-Max', prize: '$10K', type: 'daily' },
+  { date: '30-Sep', day: 'Mar', time: '07:00', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K', type: 'daily' },
+  
+  // Octubre 2025 - Semana final
+  { date: '01-Oct', day: 'Mié', time: '18:30', name: '$10K Daily Crazy Freeroll Hyper Mystery Box', prize: '$10K', type: 'daily' },
+  { date: '02-Oct', day: 'Jue', time: '13:00', name: '$10K Daily Crazy Freeroll Super Sonic', prize: '$10K', type: 'daily' },
+  { date: '03-Oct', day: 'Vie', time: '18:30', name: '$10K Daily Crazy Freeroll Adrenaline 4-Max', prize: '$10K', type: 'daily' },
+  { date: '04-Oct', day: 'Sáb', time: '07:00', name: '$10K Daily Crazy Freeroll Non-Stop Hyper', prize: '$10K', type: 'daily' },
+  { date: '05-Oct', day: 'Dom', time: '13:00', name: '$100K Super Crazy Freeroll GRAN FINALE', prize: '$100K', type: 'super', featured: true }
 ]
 
 export const features = [
-  { iconName: 'FaUsers', title: '50K+ Jugadores', desc: 'Mesas activas 24/7' },
-  { iconName: 'FaClock', title: 'Pagos en 24h', desc: 'Con YAPE y PLIN' },
-  { iconName: 'FaShieldAlt', title: '100% Seguro', desc: 'Licencia oficial' },
-  { iconName: 'FaGamepad', title: 'Multi-plataforma', desc: 'PC, Mac, iOS, Android' }
+  { iconName: 'FaUsers', title: '5,000+ Jugadores Activos', desc: 'Mesas llenas 24/7 en todos los stakes' },
+  { iconName: 'FaClock', title: 'Retiros en 24-48hrs', desc: 'Procesamiento rápido y confiable' },
+  { iconName: 'FaShieldAlt', title: '100% Seguro y Licenciado', desc: 'Regulado por autoridades internacionales' },
+  { iconName: 'FaGamepad', title: 'Disponible en Todas las Plataformas', desc: 'PC, Mac, iOS, Android - Juega donde quieras' }
 ]
 
 export const softwareFeatures = [
-  { title: 'Multi-Mesa', desc: 'Juega hasta 6 mesas simultáneas', iconName: 'FaGamepad' },
-  { title: 'Estadísticas en Vivo', desc: 'HUD integrado con stats en tiempo real', iconName: 'FaChartLine' },
-  { title: 'Notas de Jugadores', desc: 'Guarda notas sobre tus oponentes', iconName: 'FaUsers' },
-  { title: 'Hand Replayer', desc: 'Analiza tus manos jugadas', iconName: 'FaTrophy' },
-  { title: 'Personalización Total', desc: 'Diseña tu mesa como prefieras', iconName: 'FaShieldAlt' },
-  { title: 'Chat con Emojis', desc: 'Interactúa con otros jugadores', iconName: 'FaUsers' }
+  { title: 'Multi-Mesa Avanzado', desc: 'Juega hasta 6 mesas simultáneamente con diseño optimizado', iconName: 'FaGamepad' },
+  { title: 'Estadísticas HUD Integradas', desc: 'Información de oponentes y estadísticas en tiempo real incorporadas', iconName: 'FaChartLine' },
+  { title: 'Sistema de Notas Avanzado', desc: 'Guarda notas detalladas sobre el estilo de juego de tus oponentes', iconName: 'FaUsers' },
+  { title: 'Replay de Manos Completo', desc: 'Analiza cada mano jugada con herramientas profesionales', iconName: 'FaTrophy' },
+  { title: 'Personalización Total de Mesa', desc: 'Customiza colores, diseño y disposición según tus preferencias', iconName: 'FaShieldAlt' },
+  { title: 'Chat Interactivo con Emojis', desc: 'Comunícate con otros jugadores usando el sistema de chat avanzado', iconName: 'FaUsers' }
 ]
 
 export const platforms = [
-  { platform: 'Windows', icon: '💻', version: 'Windows 10+' },
-  { platform: 'Mac OS', icon: '🖥️', version: 'macOS 10.14+' },
-  { platform: 'iOS', icon: '📱', version: 'iOS 13+' },
-  { platform: 'Android', icon: '📲', version: 'Android 8+' }
+  { platform: 'Windows', icon: '💻', version: 'Windows 10 o superior requerido', downloadSize: '~150MB' },
+  { platform: 'Mac OS', icon: '🖥️', version: 'macOS 10.14 Mojave o superior', downloadSize: '~200MB' },
+  { platform: 'iOS', icon: '📱', version: 'iOS 13.0 o superior requerido', downloadSize: '~120MB' },
+  { platform: 'Android', icon: '📲', version: 'Android 8.0 (API 26) o superior', downloadSize: '~100MB' }
 ]
 
 export const ticketsTable = [
   {
     depositRange: '$10 - $29',
     tickets: ['(1) $2.20 MTT Ticket', '(1) $1 Global Spins'],
-    totalValue: '$3.20'
+    totalValue: '$3.20',
+    description: 'Paquete básico para comenzar'
   },
   {
     depositRange: '$30 - $99',
     tickets: ['(2) $5 MTT Tickets', '(5) $1 Global Spins'],
-    totalValue: '$15'
+    totalValue: '$15',
+    description: 'Valor excelente para jugadores regulares'
   },
   {
     depositRange: '$100 - $499',
     tickets: ['(2) $5 MTT Tickets', '(1) $10 Global Spins', '(2) $5 Global Spins'],
-    totalValue: '$30'
+    totalValue: '$30',
+    description: 'Paquete intermedio con mayor variedad'
   },
   {
     depositRange: '$500 - $1,499',
     tickets: ['(2) $11 MTT Tickets', '(1) $110 Sunday Slam Ticket', '(1) $25 Global Spins', '(2) $5 Global Spins'],
-    totalValue: '$167'
+    totalValue: '$167',
+    description: 'Incluye acceso a torneos premium'
   },
   {
     depositRange: '$1,500 - $2,999',
     tickets: ['(2) $22 MTT Tickets', '(2) $110 Sunday Slam Tickets', '(3) $25 Global Spins'],
-    totalValue: '$339'
+    totalValue: '$339',
+    description: 'Paquete VIP con múltiples entradas premium'
   },
   {
     depositRange: '$3,000+',
     tickets: ['(2) $55 MTT Tickets', '(2) $110 Sunday Slam Tickets', '(3) $50 Global Spins'],
-    totalValue: '$480'
+    totalValue: '$480',
+    description: 'Paquete máximo con los mejores beneficios'
   }
 ]
 
 export const bonusDetails = {
   totalRewards: '$3,580',
+  maxDeposit: '$3,000',
+  minDeposit: '$10',
   instantPackage: {
     amount: '$16.20',
     includes: [
-      'Bono poker: $5',
-      'Bono casino: $5',
-      'Ticket MTT: $2.20',
-      'Global Spins: $1',
-      'Monedas casino: $3'
-    ]
+      'Bono de poker: $5 (jugable inmediatamente)',
+      'Bono de casino: $5 (para slots y juegos de mesa)',
+      'Ticket MTT: $2.20 (para torneos multi-mesa)',
+      'Global Spins: $1 (spins premium)',
+      'Monedas de casino adicionales: $3 (bonus extra)'
+    ],
+    conditions: 'Se acredita automáticamente con cualquier depósito de $10+'
   },
   cashbackInfo: {
-    timeLimit: '90 días',
-    pokerPercent: '50%',
-    pokerRate: '$1 por cada $4 en rake',
+    timeLimit: '90 días naturales',
+    pokerPercent: '25',
+    pokerRate: '$1 en efectivo por cada $4 de rake generado',
     casinoPercent: '50%',
-    casinoRate: '$1 por cada $500 apostados'
-  }
+    casinoRate: '$1 en efectivo por cada $500 apostados en casino',
+    withdrawalConditions: 'El cashback se puede retirar inmediatamente sin restricciones adicionales'
+  },
+  additionalBenefits: [
+    'Acceso prioritario a nuevos torneos',
+    'Invitaciones exclusivas a eventos especiales',
+    'Soporte VIP personalizado',
+    'Límites de retiro elevados desde el primer día',
+    'Bonos de recarga mensuales exclusivos'
+  ]
 }
 
 export const promosPeru = {
-  title: '🔥 Exclusivo con PERU EV+ y Escuela Poker 🔥',
+  title: '🔥 PROMOCIONES EXCLUSIVAS PERU EV+ 🔥',
+  subtitle: 'Beneficios especiales disponibles solo para jugadores peruanos registrados a través de nuestros códigos',
   freerolls: [
     {
       name: '$10,000 Freeroll Diario',
-      prize: '$2,000 para el ganador',
-      frequency: 'Todos los días',
-      icon: '💰'
+      prize: '$2,000+ para el campeón',
+      frequency: 'Lunes a Sábado',
+      icon: '💰',
+      time: 'Horarios rotativos para máxima accesibilidad',
+      guaranteed: 'Premio garantizado sin importar participación'
     },
     {
       name: '$100,000 Super Freeroll',
-      prize: '$20,000 para el campeón', 
-      frequency: 'Cada domingo',
-      icon: '🏆'
+      prize: '$20,000+ para el campeón',
+      frequency: 'Todos los domingos',
+      icon: '🏆',
+      time: 'Domingo en la tarde/noche',
+      guaranteed: 'El freeroll dominical más grande disponible'
     }
   ],
-  whatsappHelp: 'wa.link/bigy9b'
+  exclusivePerks: [
+    'Soporte en español 24/7 vía WhatsApp',
+    'Guías de estrategia exclusivas en español',
+    'Comunidad privada de jugadores peruanos',
+    'Análisis de manos gratuito mensual',
+    'Coaching básico incluido para principiantes'
+  ],
+  whatsappHelp: 'wa.link/bigy9b',
+  communitySize: '2,500+ jugadores peruanos activos'
+}
+
+export const systemRequirements = {
+  minimum: {
+    windows: {
+      os: 'Windows 10 (64-bit)',
+      processor: 'Intel Core i3 o AMD equivalente',
+      memory: '4 GB RAM',
+      graphics: 'DirectX 11 compatible',
+      network: 'Conexión a Internet estable',
+      storage: '500 MB de espacio disponible'
+    },
+    mac: {
+      os: 'macOS 10.14 Mojave',
+      processor: 'Intel Core i3 o Apple M1',
+      memory: '4 GB RAM',
+      graphics: 'Metal compatible',
+      network: 'Conexión a Internet estable',
+      storage: '500 MB de espacio disponible'
+    }
+  },
+  recommended: {
+    processor: 'Intel Core i5 o superior / AMD Ryzen 5 o superior',
+    memory: '8 GB RAM o más',
+    network: 'Conexión de banda ancha 10 Mbps+',
+    storage: '1 GB de espacio libre para actualizaciones'
+  }
 }
 
 export const wptConstants = {
   whatsappNumber: '51955311839',
-  promoCode: 'POKERAGENCY2024',
+  promoCode: 'POKERAGENCYPERU2024',
+  inviteCode: '8288C1',
+  bonusCode: 'PeruEV',
   whatsappMessages: {
-    register: 'Quiero%20registrarme%20en%20WPT%20Global%20con%20todos%20los%20bonos',
-    bonuses: 'Quiero%20información%20sobre%20los%20bonos%20de%20WPT',
-    tournaments: 'Quiero%20información%20sobre%20torneos%20WPT',
-    download: 'Quiero%20descargar%20WPT%20Global',
-    stepByStep: 'Quiero%20registrarme%20en%20WPT%20paso%20a%20paso',
-    startNow: 'Quiero%20empezar%20en%20WPT%20Global%20ahora'
+    register: 'Quiero%20registrarme%20en%20WPT%20Global%20con%20todos%20los%20bonos%20y%20códigos%20exclusivos',
+    bonuses: 'Quiero%20información%20completa%20sobre%20los%20bonos%20de%20WPT%20Global',
+    tournaments: 'Quiero%20información%20sobre%20los%20torneos%20y%20freerolls%20de%20WPT',
+    download: 'Quiero%20descargar%20WPT%20Global%20y%20ayuda%20con%20la%20instalación',
+    stepByStep: 'Necesito%20ayuda%20paso%20a%20paso%20para%20registrarme%20en%20WPT%20Global',
+    startNow: 'Quiero%20empezar%20a%20jugar%20en%20WPT%20Global%20inmediatamente',
+    depositHelp: 'Necesito%20ayuda%20con%20depósitos%20y%20métodos%20de%20pago%20en%20WPT',
+    withdrawalHelp: 'Quiero%20información%20sobre%20retiros%20y%20cashouts%20en%20WPT'
+  },
+  supportLinks: {
+    telegram: '@WPTGlobalPeru',
+    discord: 'WPT Global Peru Community',
+    email: 'soporte.peru@wptglobal.com'
   }
+}
+
+// Función helper para obtener torneos por categoría
+export const getTournamentsByCategory = (category) => {
+  return tournaments.filter(tournament => tournament.type === category)
+}
+
+// Función helper para obtener el próximo torneo
+export const getNextTournament = () => {
+  // Esta función podría implementar lógica para calcular el próximo torneo basado en horarios
+  const now = new Date()
+  const featured = tournaments.filter(t => t.featured)
+  return featured[0] || tournaments[0]
+}
+
+// Función helper para formatear moneda
+export const formatCurrency = (amount, currency = 'USD') => {
+  const symbol = currency === 'USD' ? '$' : currency === 'PEN' ? 'S/' : currency
+  return `${symbol}${amount.toLocaleString()}`
+}
+
+export default {
+  bonuses,
+  registrationSteps,
+  tournaments,
+  crazyFreerollsInfo,
+  crazySchedule,
+  features,
+  softwareFeatures,
+  platforms,
+  ticketsTable,
+  bonusDetails,
+  promosPeru,
+  systemRequirements,
+  wptConstants,
+  getTournamentsByCategory,
+  getNextTournament,
+  formatCurrency
 }
