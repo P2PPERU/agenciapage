@@ -1,4 +1,4 @@
-// src/data/wptData.js
+// src/data/wptData.js - VERSIÓN CON ICONOS PREMIUM
 
 export const bonuses = [
   {
@@ -6,7 +6,7 @@ export const bonuses = [
     title: 'Reembolso 100% en CASH',
     amount: 'Hasta $3,000',
     description: 'Deposita de $10 a $3,000 y te devolvemos el monto total EN EFECTIVO',
-    icon: '💰',
+    icon: 'PremiumDollarIcon', // Reemplaza 💰
     requirements: 'Tienes 90 días para recuperarlo jugando',
     color: 'from-yellow-500 to-orange-500',
     featured: true
@@ -16,7 +16,7 @@ export const bonuses = [
     title: 'Paquete de Regalo Instantáneo',
     amount: '$16.20 USD',
     description: 'Con cualquier depósito de $10 o más recibes este paquete al instante',
-    icon: '🎁',
+    icon: 'PremiumGiftIcon', // Reemplaza 🎁
     requirements: 'Bono poker $5 + Casino $5 + Tickets $4.20 + Global Spins $1 + Monedas $3',
     color: 'from-purple-500 to-purple-700',
     featured: true
@@ -26,7 +26,7 @@ export const bonuses = [
     title: 'Tickets para Torneos MTT',
     amount: 'Hasta $480',
     description: 'Tickets gratis para MTT y Global Spins según tu depósito',
-    icon: '🎫',
+    icon: 'PremiumTicketIcon', // Reemplaza 🎫
     requirements: 'Desde $10 - Escalas según el monto depositado',
     color: 'from-blue-500 to-blue-700'
   },
@@ -35,7 +35,7 @@ export const bonuses = [
     title: 'Monedas de Casino Gratis',
     amount: 'Hasta $100',
     description: 'Monedas gratis para usar en el casino de WPT Global',
-    icon: '🪙',
+    icon: 'PremiumCoinsIcon', // Reemplaza 🪙
     requirements: 'Incluidas automáticamente en el paquete de bienvenida',
     color: 'from-green-500 to-green-700'
   },
@@ -44,7 +44,7 @@ export const bonuses = [
     title: 'Global Spins Premium',
     amount: 'Hasta $50',
     description: 'Acceso a Global Spins con premios especiales',
-    icon: '🌟',
+    icon: 'PremiumStarIcon', // Reemplaza 🌟
     requirements: 'Disponibles con depósitos de $100+',
     color: 'from-pink-500 to-rose-700'
   }
@@ -60,22 +60,22 @@ export const registrationSteps = [
     downloads: [
       { 
         platform: 'iOS (iPhone/iPad)', 
-        icon: '📱', 
+        icon: 'PremiumAppleIcon', // Reemplaza 📱
         url: 'https://testflight.apple.com/join/E8MUn83b' 
       },
       { 
         platform: 'Mac (macOS)', 
-        icon: '🍏', 
+        icon: 'PremiumMacIcon', // Reemplaza 🍏
         url: 'https://downloads.wptglobal.com/latest/WPTG.dmg' 
       },
       { 
         platform: 'Android', 
-        icon: '🤖', 
+        icon: 'PremiumAndroidIcon', // Reemplaza 🤖
         url: 'https://downloads.wptglobal.com/latest/WPTG.apk' 
       },
       { 
         platform: 'Windows (PC)', 
-        icon: '💻', 
+        icon: 'PremiumWindowsIcon', // Reemplaza 💻
         url: 'https://downloads.wptglobal.com/latest/WPTG.exe' 
       }
     ]
@@ -86,7 +86,7 @@ export const registrationSteps = [
     description: 'Durante el registro inicial, es crucial seleccionar Andorra como tu país de residencia',
     iconName: 'FaGlobeAmericas',
     action: 'Seleccionar país',
-    highlight: '⚠️ CRÍTICO: Debes elegir ANDORRA, no Perú. Esto es obligatorio para acceder desde Perú.'
+    highlight: 'CRÍTICO: Debes elegir ANDORRA, no Perú. Esto es obligatorio para acceder desde Perú.'
   },
   {
     step: 3,
@@ -187,28 +187,28 @@ export const crazyFreerollsInfo = {
     {
       title: '4 Tickets Semanales AUTOMÁTICOS',
       description: 'Todos los jugadores registrados reciben automáticamente 4 tickets cada semana sin hacer nada',
-      icon: '🎟️',
+      icon: 'PremiumTicketIcon', // Reemplaza 🎟️
       multiplier: '4x por semana',
       automatic: true
     },
     {
       title: '24 Satélites Gratuitos Diarios',
       description: 'Cada día hay 24 torneos satélite completamente gratis, cada uno otorga 20 asientos garantizados',
-      icon: '🎯',
+      icon: 'PremiumTargetIcon', // Reemplaza 🎯
       multiplier: '24 diarios = 480/mes',
       seats: '20 por satélite'
     },
     {
       title: 'TOP 20 gana Ticket para $100K',
       description: 'Los mejores 20 jugadores del Daily Crazy Freeroll obtienen entrada directa al $100K Sunday',
-      icon: '🏆',
+      icon: 'PremiumTrophyIcon', // Reemplaza 🏆
       prize: 'Ticket $100,000',
       requirement: 'Top 20 en Daily'
     },
     {
       title: 'Juega y Gana Tickets Adicionales',
       description: 'Participa en MTTs, Global Spins, Casino o Apuestas Deportivas para ganar tickets extra según tu actividad',
-      icon: '🎮',
+      icon: 'PremiumGamepadIcon', // Reemplaza 🎮
       activity: 'Multi-actividades',
       bonus: 'Tickets adicionales por volumen de juego'
     }
@@ -289,10 +289,30 @@ export const softwareFeatures = [
 ]
 
 export const platforms = [
-  { platform: 'Windows', icon: '💻', version: 'Windows 10 o superior requerido', downloadSize: '~150MB' },
-  { platform: 'Mac OS', icon: '🖥️', version: 'macOS 10.14 Mojave o superior', downloadSize: '~200MB' },
-  { platform: 'iOS', icon: '📱', version: 'iOS 13.0 o superior requerido', downloadSize: '~120MB' },
-  { platform: 'Android', icon: '📲', version: 'Android 8.0 (API 26) o superior', downloadSize: '~100MB' }
+  { 
+    platform: 'Windows', 
+    icon: 'PremiumWindowsIcon', // Reemplaza 💻
+    version: 'Windows 10 o superior requerido', 
+    downloadSize: '~150MB' 
+  },
+  { 
+    platform: 'Mac OS', 
+    icon: 'PremiumMacIcon', // Reemplaza 🖥️
+    version: 'macOS 10.14 Mojave o superior', 
+    downloadSize: '~200MB' 
+  },
+  { 
+    platform: 'iOS', 
+    icon: 'PremiumAppleIcon', // Reemplaza 📱
+    version: 'iOS 13.0 o superior requerido', 
+    downloadSize: '~120MB' 
+  },
+  { 
+    platform: 'Android', 
+    icon: 'PremiumAndroidIcon', // Reemplaza 📲
+    version: 'Android 8.0 (API 26) o superior', 
+    downloadSize: '~100MB' 
+  }
 ]
 
 export const ticketsTable = [
@@ -367,14 +387,14 @@ export const bonusDetails = {
 }
 
 export const promosPeru = {
-  title: '🔥 PROMOCIONES EXCLUSIVAS PERU EV+ 🔥',
+  title: 'PROMOCIONES EXCLUSIVAS PERU EV+',
   subtitle: 'Beneficios especiales disponibles solo para jugadores peruanos registrados a través de nuestros códigos',
   freerolls: [
     {
       name: '$10,000 Freeroll Diario',
       prize: '$2,000+ para el campeón',
       frequency: 'Lunes a Sábado',
-      icon: '💰',
+      icon: 'PremiumDollarIcon', // Reemplaza 💰
       time: 'Horarios rotativos para máxima accesibilidad',
       guaranteed: 'Premio garantizado sin importar participación'
     },
@@ -382,7 +402,7 @@ export const promosPeru = {
       name: '$100,000 Super Freeroll',
       prize: '$20,000+ para el campeón',
       frequency: 'Todos los domingos',
-      icon: '🏆',
+      icon: 'PremiumTrophyIcon', // Reemplaza 🏆
       time: 'Domingo en la tarde/noche',
       guaranteed: 'El freeroll dominical más grande disponible'
     }
@@ -484,3 +504,13 @@ export default {
   getNextTournament,
   formatCurrency
 }
+
+// ICONOS PREMIUM ADICIONALES NECESARIOS PARA PLATAFORMAS
+// Estos iconos también necesitarás crearlos o usar los existentes:
+
+// PremiumAppleIcon - Para iOS/Mac
+// PremiumMacIcon - Para macOS específicamente  
+// PremiumAndroidIcon - Para Android
+// PremiumWindowsIcon - Para Windows PC
+// PremiumTargetIcon - Para los satélites (reemplaza 🎯)
+// PremiumGamepadIcon - Para multi-actividades (reemplaza 🎮)

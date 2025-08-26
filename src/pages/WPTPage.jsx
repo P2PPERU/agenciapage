@@ -1,4 +1,4 @@
-// src/pages/WPTPage.jsx (Versión Responsive Mejorada)
+// src/pages/WPTPage.jsx (Versión con Iconos Premium Mejorados)
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link, useParams, useNavigate } from 'react-router-dom'
@@ -45,6 +45,320 @@ import {
   crazySchedule,
   wptConstants 
 } from '../data/wptData'
+
+// ICONOS PREMIUM MEJORADOS PARA POKER
+const PremiumPokerTableIcon = ({ className }) => (
+  <svg viewBox="0 0 64 64" className={className} fill="none">
+    <defs>
+      <linearGradient id="tableGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#10b981" />
+        <stop offset="50%" stopColor="#059669" />
+        <stop offset="100%" stopColor="#047857" />
+      </linearGradient>
+      <linearGradient id="chipGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#fbbf24" />
+        <stop offset="100%" stopColor="#f59e0b" />
+      </linearGradient>
+      <radialGradient id="glowEffect" cx="50%" cy="30%">
+        <stop offset="0%" stopColor="#ffffff" stopOpacity="0.4"/>
+        <stop offset="100%" stopColor="#ffffff" stopOpacity="0"/>
+      </radialGradient>
+    </defs>
+    
+    {/* Mesa de poker elíptica con sombra */}
+    <ellipse cx="32" cy="34" rx="26" ry="16" fill="#000000" opacity="0.3"/>
+    <ellipse cx="32" cy="32" rx="28" ry="18" fill="url(#tableGradient)" stroke="#065f46" strokeWidth="2"/>
+    <ellipse cx="32" cy="32" rx="24" ry="14" fill="none" stroke="#10b981" strokeWidth="1" opacity="0.7"/>
+    
+    {/* Fichas de poker premium distribuidas */}
+    <g>
+      {/* Ficha dorada premium */}
+      <circle cx="20" cy="25" r="5" fill="url(#chipGradient)" stroke="#d97706" strokeWidth="1.5"/>
+      <circle cx="20" cy="25" r="3.5" fill="none" stroke="#92400e" strokeWidth="0.8"/>
+      <circle cx="20" cy="25" r="2" fill="none" stroke="#fbbf24" strokeWidth="0.5"/>
+      <circle cx="20" cy="25" r="1" fill="#92400e"/>
+      
+      {/* Ficha roja premium */}
+      <circle cx="44" cy="28" r="5" fill="#ef4444" stroke="#dc2626" strokeWidth="1.5"/>
+      <circle cx="44" cy="28" r="3.5" fill="none" stroke="#7f1d1d" strokeWidth="0.8"/>
+      <circle cx="44" cy="28" r="2" fill="none" stroke="#fca5a5" strokeWidth="0.5"/>
+      <circle cx="44" cy="28" r="1" fill="#7f1d1d"/>
+      
+      {/* Ficha azul premium */}
+      <circle cx="32" cy="22" r="5" fill="#3b82f6" stroke="#2563eb" strokeWidth="1.5"/>
+      <circle cx="32" cy="22" r="3.5" fill="none" stroke="#1e3a8a" strokeWidth="0.8"/>
+      <circle cx="32" cy="22" r="2" fill="none" stroke="#93c5fd" strokeWidth="0.5"/>
+      <circle cx="32" cy="22" r="1" fill="#1e3a8a"/>
+      
+      {/* Ficha morada premium */}
+      <circle cx="38" cy="42" r="5" fill="#8b5cf6" stroke="#7c3aed" strokeWidth="1.5"/>
+      <circle cx="38" cy="42" r="3.5" fill="none" stroke="#4c1d95" strokeWidth="0.8"/>
+      <circle cx="38" cy="42" r="2" fill="none" stroke="#c4b5fd" strokeWidth="0.5"/>
+      <circle cx="38" cy="42" r="1" fill="#4c1d95"/>
+    </g>
+    
+    {/* Brillo superior */}
+    <ellipse cx="32" cy="28" rx="20" ry="8" fill="url(#glowEffect)"/>
+    
+    {/* Cartas sobre la mesa */}
+    <g opacity="0.8">
+      <rect x="28" y="30" width="3" height="4" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="0.3" rx="0.3"/>
+      <rect x="32" y="30" width="3" height="4" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="0.3" rx="0.3"/>
+    </g>
+  </svg>
+)
+
+const PremiumTrophyIcon = ({ className }) => (
+  <svg viewBox="0 0 64 64" className={className} fill="none">
+    <defs>
+      <linearGradient id="trophyGold" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#fbbf24" />
+        <stop offset="30%" stopColor="#f59e0b" />
+        <stop offset="70%" stopColor="#d97706" />
+        <stop offset="100%" stopColor="#92400e" />
+      </linearGradient>
+      <linearGradient id="trophyBase" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#4b5563" />
+        <stop offset="50%" stopColor="#374151" />
+        <stop offset="100%" stopColor="#1f2937" />
+      </linearGradient>
+      <radialGradient id="trophyGlow" cx="30%" cy="20%">
+        <stop offset="0%" stopColor="#fef3c7" stopOpacity="0.8"/>
+        <stop offset="100%" stopColor="#fef3c7" stopOpacity="0"/>
+      </radialGradient>
+    </defs>
+    
+    {/* Sombra del trofeo */}
+    <ellipse cx="32" cy="58" rx="18" ry="3" fill="#000000" opacity="0.3"/>
+    
+    {/* Base escalonada del trofeo */}
+    <rect x="18" y="52" width="28" height="6" fill="url(#trophyBase)" rx="2"/>
+    <rect x="20" y="48" width="24" height="6" fill="url(#trophyBase)" rx="2"/>
+    <rect x="22" y="44" width="20" height="6" fill="url(#trophyBase)" rx="1"/>
+    
+    {/* Mango del trofeo */}
+    <rect x="29" y="38" width="6" height="8" fill="url(#trophyGold)" rx="1"/>
+    
+    {/* Copa principal con forma más elegante */}
+    <path d="M20 12 Q20 6 25 6 L39 6 Q44 6 44 12 L42 32 Q42 38 32 38 Q22 38 22 32 Z" 
+          fill="url(#trophyGold)" stroke="#d97706" strokeWidth="1"/>
+    
+    {/* Asas decorativas del trofeo */}
+    <path d="M18 16 Q14 16 14 20 Q14 24 18 24 Q20 24 20 22 Q20 20 18 18" 
+          fill="url(#trophyGold)" stroke="#d97706" strokeWidth="1"/>
+    <path d="M46 16 Q50 16 50 20 Q50 24 46 24 Q44 24 44 22 Q44 20 46 18" 
+          fill="url(#trophyGold)" stroke="#d97706" strokeWidth="1"/>
+    
+    {/* Decoraciones en bandas */}
+    <ellipse cx="32" cy="14" rx="9" ry="2" fill="#fcd34d"/>
+    <ellipse cx="32" cy="22" rx="7" ry="1.5" fill="#fcd34d" opacity="0.8"/>
+    <ellipse cx="32" cy="30" rx="5" ry="1" fill="#fcd34d" opacity="0.6"/>
+    
+    {/* Corona de laurel simplificada */}
+    <path d="M25 10 Q28 8 32 10 Q36 8 39 10 Q36 12 32 12 Q28 12 25 10" 
+          fill="#22c55e" stroke="#16a34a" strokeWidth="0.5"/>
+    
+    {/* Gema central */}
+    <circle cx="32" cy="20" r="3" fill="#ef4444" stroke="#dc2626" strokeWidth="1"/>
+    <circle cx="32" cy="20" r="1.5" fill="#f87171"/>
+    <circle cx="30.5" cy="18.5" r="0.5" fill="#fecaca"/>
+    
+    {/* Brillo general */}
+    <ellipse cx="28" cy="16" rx="4" ry="12" fill="url(#trophyGlow)"/>
+    
+    {/* Inscripción "1st" */}
+    <text x="32" y="32" textAnchor="middle" fill="#92400e" fontSize="6" fontWeight="bold">1st</text>
+  </svg>
+)
+
+const PremiumMoneyIcon = ({ className }) => (
+  <svg viewBox="0 0 64 64" className={className} fill="none">
+    <defs>
+      <linearGradient id="moneyGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#10b981" />
+        <stop offset="50%" stopColor="#059669" />
+        <stop offset="100%" stopColor="#047857" />
+      </linearGradient>
+      <linearGradient id="coinGold" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#fbbf24" />
+        <stop offset="50%" stopColor="#f59e0b" />
+        <stop offset="100%" stopColor="#d97706" />
+      </linearGradient>
+      <radialGradient id="coinShine" cx="30%" cy="30%">
+        <stop offset="0%" stopColor="#fef3c7" stopOpacity="0.9"/>
+        <stop offset="70%" stopColor="#fef3c7" stopOpacity="0.3"/>
+        <stop offset="100%" stopColor="#fef3c7" stopOpacity="0"/>
+      </radialGradient>
+    </defs>
+    
+    {/* Billetes apilados de fondo con sombra */}
+    <g opacity="0.9">
+      {/* Sombras de billetes */}
+      <rect x="9" y="22" width="32" height="18" fill="#000000" opacity="0.2" rx="2" transform="rotate(-8)"/>
+      <rect x="7" y="24" width="32" height="18" fill="#000000" opacity="0.2" rx="2" transform="rotate(-3)"/>
+      
+      {/* Billetes */}
+      <rect x="8" y="20" width="32" height="18" fill="url(#moneyGreen)" rx="2" stroke="#047857" strokeWidth="1" transform="rotate(-5)"/>
+      <rect x="6" y="22" width="32" height="18" fill="url(#moneyGreen)" rx="2" stroke="#047857" strokeWidth="1" opacity="0.8"/>
+      <rect x="10" y="18" width="32" height="18" fill="url(#moneyGreen)" rx="2" stroke="#047857" strokeWidth="1" transform="rotate(8)"/>
+      
+      {/* Detalles de billetes */}
+      <circle cx="24" cy="28" r="3" fill="#047857" opacity="0.6" transform="rotate(8)"/>
+      <text x="24" y="32" textAnchor="middle" fill="#047857" fontSize="4" fontWeight="bold" transform="rotate(8)">$</text>
+    </g>
+    
+    {/* Monedas doradas premium */}
+    <g>
+      {/* Sombras de monedas */}
+      <circle cx="44" cy="37" r="10" fill="#000000" opacity="0.2"/>
+      <circle cx="40" cy="27" r="10" fill="#000000" opacity="0.2"/>
+      <circle cx="47" cy="22" r="10" fill="#000000" opacity="0.2"/>
+      
+      {/* Moneda trasera */}
+      <circle cx="42" cy="35" r="10" fill="url(#coinGold)" stroke="#d97706" strokeWidth="1.5"/>
+      <circle cx="42" cy="35" r="7" fill="none" stroke="#f59e0b" strokeWidth="1"/>
+      <circle cx="42" cy="35" r="4" fill="none" stroke="#fbbf24" strokeWidth="0.8"/>
+      <text x="42" y="40" textAnchor="middle" fill="#92400e" fontSize="10" fontWeight="bold">$</text>
+      
+      {/* Moneda media */}
+      <circle cx="38" cy="25" r="10" fill="url(#coinGold)" stroke="#d97706" strokeWidth="1.5"/>
+      <circle cx="38" cy="25" r="7" fill="none" stroke="#f59e0b" strokeWidth="1"/>
+      <circle cx="38" cy="25" r="4" fill="none" stroke="#fbbf24" strokeWidth="0.8"/>
+      <ellipse cx="38" cy="25" rx="5" ry="7" fill="url(#coinShine)"/>
+      <text x="38" y="30" textAnchor="middle" fill="#92400e" fontSize="10" fontWeight="bold">$</text>
+      
+      {/* Moneda frontal */}
+      <circle cx="45" cy="20" r="10" fill="url(#coinGold)" stroke="#d97706" strokeWidth="1.5"/>
+      <circle cx="45" cy="20" r="7" fill="none" stroke="#f59e0b" strokeWidth="1"/>
+      <circle cx="45" cy="20" r="4" fill="none" stroke="#fbbf24" strokeWidth="0.8"/>
+      <ellipse cx="45" cy="20" rx="6" ry="8" fill="url(#coinShine)"/>
+      <text x="45" y="25" textAnchor="middle" fill="#92400e" fontSize="10" fontWeight="bold">$</text>
+    </g>
+    
+    {/* Brillos adicionales */}
+    <ellipse cx="40" cy="16" rx="4" ry="2" fill="#fef3c7" opacity="0.8"/>
+    <ellipse cx="35" cy="21" rx="3" ry="1.5" fill="#fef3c7" opacity="0.6"/>
+    <ellipse cx="39" cy="31" rx="2" ry="1" fill="#fef3c7" opacity="0.4"/>
+  </svg>
+)
+
+// NUEVOS ICONOS PARA BADGES
+const PremiumReembolsoIcon = ({ className }) => (
+  <svg viewBox="0 0 64 64" className={className} fill="none">
+    <defs>
+      <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#f59e0b" />
+        <stop offset="50%" stopColor="#d97706" />
+        <stop offset="100%" stopColor="#92400e" />
+      </linearGradient>
+      <radialGradient id="shieldGlow" cx="50%" cy="30%">
+        <stop offset="0%" stopColor="#fef3c7" stopOpacity="0.8"/>
+        <stop offset="100%" stopColor="#fef3c7" stopOpacity="0"/>
+      </radialGradient>
+    </defs>
+    
+    {/* Escudo protector */}
+    <path d="M32 8 Q20 12 20 24 Q20 40 32 56 Q44 40 44 24 Q44 12 32 8 Z" 
+          fill="url(#shieldGradient)" stroke="#92400e" strokeWidth="1.5"/>
+    
+    {/* Brillo del escudo */}
+    <ellipse cx="32" cy="20" rx="8" ry="16" fill="url(#shieldGlow)"/>
+    
+    {/* Símbolo de reembolso - flecha circular */}
+    <circle cx="32" cy="28" r="12" fill="none" stroke="#fef3c7" strokeWidth="2"/>
+    <path d="M28 20 L32 16 L36 20 M32 16 L32 28" stroke="#fef3c7" strokeWidth="2.5" strokeLinecap="round"/>
+    <path d="M36 36 L32 40 L28 36 M32 40 L32 28" stroke="#fef3c7" strokeWidth="2.5" strokeLinecap="round"/>
+    
+    {/* Símbolo de dinero */}
+    <text x="32" y="46" textAnchor="middle" fill="#fef3c7" fontSize="8" fontWeight="bold">$</text>
+  </svg>
+)
+
+const PremiumPackageIcon = ({ className }) => (
+  <svg viewBox="0 0 64 64" className={className} fill="none">
+    <defs>
+      <linearGradient id="boxGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#8b5cf6" />
+        <stop offset="50%" stopColor="#7c3aed" />
+        <stop offset="100%" stopColor="#5b21b6" />
+      </linearGradient>
+      <linearGradient id="ribbonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#fbbf24" />
+        <stop offset="100%" stopColor="#f59e0b" />
+      </linearGradient>
+    </defs>
+    
+    {/* Sombra de la caja */}
+    <rect x="12" y="32" width="40" height="24" fill="#000000" opacity="0.3" rx="2"/>
+    
+    {/* Caja principal */}
+    <rect x="12" y="30" width="40" height="24" fill="url(#boxGradient)" rx="2" stroke="#5b21b6" strokeWidth="1"/>
+    
+    {/* Tapa de la caja */}
+    <rect x="12" y="20" width="40" height="12" fill="url(#boxGradient)" rx="2" stroke="#5b21b6" strokeWidth="1"/>
+    
+    {/* Cinta dorada */}
+    <rect x="30" y="16" width="4" height="28" fill="url(#ribbonGradient)"/>
+    <rect x="10" y="24" width="44" height="4" fill="url(#ribbonGradient)"/>
+    
+    {/* Lazo superior */}
+    <ellipse cx="28" cy="18" rx="4" ry="2" fill="url(#ribbonGradient)"/>
+    <ellipse cx="36" cy="18" rx="4" ry="2" fill="url(#ribbonGradient)"/>
+    <circle cx="32" cy="18" r="2" fill="url(#ribbonGradient)"/>
+    
+    {/* Brillos */}
+    <rect x="16" y="24" width="8" height="2" fill="#c4b5fd" opacity="0.6" rx="1"/>
+    <rect x="30" y="36" width="12" height="1" fill="#c4b5fd" opacity="0.4" rx="0.5"/>
+    
+    {/* Fichas saliendo de la caja */}
+    <circle cx="46" cy="14" r="3" fill="#f59e0b" stroke="#d97706" strokeWidth="1"/>
+    <circle cx="50" cy="18" r="3" fill="#ef4444" stroke="#dc2626" strokeWidth="1"/>
+    <circle cx="42" cy="10" r="3" fill="#22c55e" stroke="#16a34a" strokeWidth="1"/>
+  </svg>
+)
+
+const PremiumTicketIcon = ({ className }) => (
+  <svg viewBox="0 0 64 64" className={className} fill="none">
+    <defs>
+      <linearGradient id="ticketGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#3b82f6" />
+        <stop offset="50%" stopColor="#2563eb" />
+        <stop offset="100%" stopColor="#1d4ed8" />
+      </linearGradient>
+      <pattern id="ticketPattern" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+        <circle cx="4" cy="4" r="1" fill="#60a5fa" opacity="0.3"/>
+      </pattern>
+    </defs>
+    
+    {/* Sombra del ticket */}
+    <rect x="8" y="26" width="48" height="20" fill="#000000" opacity="0.3" rx="3"/>
+    
+    {/* Tickets apilados */}
+    <rect x="6" y="22" width="48" height="20" fill="url(#ticketGradient)" rx="3" stroke="#1d4ed8" strokeWidth="1" opacity="0.8"/>
+    <rect x="8" y="24" width="48" height="20" fill="url(#ticketGradient)" rx="3" stroke="#1d4ed8" strokeWidth="1"/>
+    
+    {/* Patrón de puntos */}
+    <rect x="8" y="24" width="48" height="20" fill="url(#ticketPattern)" rx="3"/>
+    
+    {/* Perforaciones del ticket */}
+    <circle cx="36" cy="24" r="2" fill="#1e40af"/>
+    <circle cx="36" cy="44" r="2" fill="#1e40af"/>
+    
+    {/* Línea punteada */}
+    <line x1="36" y1="26" x2="36" y2="42" stroke="#60a5fa" strokeWidth="1" strokeDasharray="2,2"/>
+    
+    {/* Texto del ticket */}
+    <rect x="12" y="28" width="20" height="12" fill="#1e40af" opacity="0.3" rx="1"/>
+    <text x="22" y="36" textAnchor="middle" fill="#bfdbfe" fontSize="6" fontWeight="bold">VIP</text>
+    
+    {/* Valor del ticket */}
+    <text x="46" y="36" textAnchor="middle" fill="#bfdbfe" fontSize="8" fontWeight="bold">$$$</text>
+    
+    {/* Estrella premium */}
+    <path d="M50 18 L52 22 L56 22 L53 25 L54 29 L50 27 L46 29 L47 25 L44 22 L48 22 Z" 
+          fill="#fbbf24" stroke="#f59e0b" strokeWidth="0.5"/>
+  </svg>
+)
 
 const iconMap = {
   FaUsers: FaUsers,
@@ -246,51 +560,87 @@ const WPTPage = () => {
               </div>
             </motion.div>
 
-            {/* Features de poker room - GRID RESPONSIVE */}
+            {/* Features de poker room con ICONOS PREMIUM - GRID RESPONSIVE */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
               className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8 max-w-xs xs:max-w-sm sm:max-w-4xl mx-auto"
             >
-              <div className="bg-black/30 backdrop-blur-xl rounded-lg sm:rounded-xl p-3 sm:p-4 border border-green-500/30">
-                <div className="text-xl sm:text-2xl mb-1 sm:mb-2">🎯</div>
+              <motion.div 
+                whileHover={{ scale: 1.02, y: -2 }}
+                className="bg-black/30 backdrop-blur-xl rounded-lg sm:rounded-xl p-3 sm:p-4 border border-green-500/30 hover:border-green-500/50 transition-all duration-300"
+              >
+                <div className="flex justify-center mb-2 sm:mb-3">
+                  <PremiumPokerTableIcon className="w-8 h-8 sm:w-12 sm:h-12" />
+                </div>
                 <h4 className="text-white font-bold mb-1 text-sm sm:text-base">MESAS ULTRA-SOFT</h4>
                 <p className="text-green-400 text-xs sm:text-sm">Jugadores recreacionales 24/7</p>
-              </div>
+              </motion.div>
               
-              <div className="bg-black/30 backdrop-blur-xl rounded-lg sm:rounded-xl p-3 sm:p-4 border border-blue-500/30">
-                <div className="text-xl sm:text-2xl mb-1 sm:mb-2">🏆</div>
+              <motion.div 
+                whileHover={{ scale: 1.02, y: -2 }}
+                className="bg-black/30 backdrop-blur-xl rounded-lg sm:rounded-xl p-3 sm:p-4 border border-blue-500/30 hover:border-blue-500/50 transition-all duration-300"
+              >
+                <div className="flex justify-center mb-2 sm:mb-3">
+                  <PremiumTrophyIcon className="w-8 h-8 sm:w-12 sm:h-12" />
+                </div>
                 <h4 className="text-white font-bold mb-1 text-sm sm:text-base">FREEROLLS DIARIOS</h4>
                 <p className="text-blue-400 text-xs sm:text-sm">$10K garantizados gratis</p>
-              </div>
+              </motion.div>
               
-              <div className="bg-black/30 backdrop-blur-xl rounded-lg sm:rounded-xl p-3 sm:p-4 border border-yellow-500/30 xs:col-span-1 sm:col-span-1">
-                <div className="text-xl sm:text-2xl mb-1 sm:mb-2">💰</div>
+              <motion.div 
+                whileHover={{ scale: 1.02, y: -2 }}
+                className="bg-black/30 backdrop-blur-xl rounded-lg sm:rounded-xl p-3 sm:p-4 border border-yellow-500/30 hover:border-yellow-500/50 transition-all duration-300 xs:col-span-1 sm:col-span-1"
+              >
+                <div className="flex justify-center mb-2 sm:mb-3">
+                  <PremiumMoneyIcon className="w-8 h-8 sm:w-12 sm:h-12" />
+                </div>
                 <h4 className="text-white font-bold mb-1 text-sm sm:text-base">BONOS MASIVOS</h4>
                 <p className="text-yellow-400 text-xs sm:text-sm">Hasta $3,580 en recompensas</p>
-              </div>
+              </motion.div>
             </motion.div>
             
-            {/* Badges de ofertas - RESPONSIVE */}
+            {/* Badges de ofertas con ICONOS PREMIUM - RESPONSIVE */}
             <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-6 sm:mb-8 px-2">
-              {bonuses.slice(0, 3).map((bonus, idx) => (
-                <motion.div
-                  key={bonus.id}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: idx * 0.1 }}
-                  whileHover={{ scale: 1.05 }}
-                  className={`bg-gradient-to-r ${bonus.color} text-white px-3 sm:px-6 py-2 sm:py-3 rounded-full font-bold shadow-lg text-xs sm:text-base`}
-                >
-                  <span className="text-sm sm:text-base">{bonus.icon}</span> 
-                  <span className="ml-1">{bonus.title.split(' ')[0]}</span>
-                  <span className="hidden xs:inline ml-1">{bonus.amount}</span>
-                </motion.div>
-              ))}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.1 }}
+                whileHover={{ scale: 1.05 }}
+                className="bg-gradient-to-r from-orange-500 to-yellow-500 text-white px-3 sm:px-4 py-2 sm:py-3 rounded-full font-bold shadow-lg text-xs sm:text-sm flex items-center gap-2"
+              >
+                <PremiumReembolsoIcon className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span>Reembolso</span>
+                <span className="hidden xs:inline">Hasta $3,000</span>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 }}
+                whileHover={{ scale: 1.05 }}
+                className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-3 sm:px-4 py-2 sm:py-3 rounded-full font-bold shadow-lg text-xs sm:text-sm flex items-center gap-2"
+              >
+                <PremiumPackageIcon className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span>Paquete</span>
+                <span className="hidden xs:inline">$16.20 USD</span>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3 }}
+                whileHover={{ scale: 1.05 }}
+                className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-3 sm:px-4 py-2 sm:py-3 rounded-full font-bold shadow-lg text-xs sm:text-sm flex items-center gap-2"
+              >
+                <PremiumTicketIcon className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span>Tickets</span>
+                <span className="hidden xs:inline">Hasta $480</span>
+              </motion.div>
             </div>
             
-            {/* CTAs principales - PROPORCIONES BALANCEADAS */}
+            {/* CTAs principales con ICONOS MEJORADOS - PROPORCIONES BALANCEADAS */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-2 sm:px-0 max-w-lg sm:max-w-none mx-auto">
               <motion.a
                 href={`https://wa.me/${wptConstants.whatsappNumber}?text=${wptConstants.whatsappMessages.register}`}
@@ -304,13 +654,20 @@ const WPTPage = () => {
                 REGISTRARME AHORA
               </motion.a>
               
-              <Link
-                to="/wpt/bonos"
-                className="inline-flex items-center justify-center bg-gray-800 hover:bg-gray-700 text-white font-bold px-6 sm:px-6 py-3 sm:py-3 rounded-full text-base sm:text-lg border-2 border-gray-700"
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <FaGift className="mr-2 text-lg sm:text-xl" />
-                VER BONOS
-              </Link>
+                <Link
+                  to="/wpt/bonos"
+                  className="inline-flex items-center justify-center bg-gray-800 hover:bg-gray-700 text-white font-bold px-6 sm:px-6 py-3 sm:py-3 rounded-full text-base sm:text-lg border-2 border-gray-700 transition-all duration-300"
+                >
+                  <div className="w-5 h-5 mr-2">
+                    <PremiumMoneyIcon className="w-5 h-5" />
+                  </div>
+                  VER BONOS
+                </Link>
+              </motion.div>
             </div>
             
             {/* Contador de Freeroll - RESPONSIVE */}
@@ -325,7 +682,9 @@ const WPTPage = () => {
               }`}
             >
               <div className="flex items-center justify-center gap-2 mb-2">
-                <span className="text-xl sm:text-2xl">{tournamentDisplay.emoji}</span>
+                <div className="w-6 h-6 sm:w-8 sm:h-8">
+                  <PremiumTrophyIcon className="w-full h-full" />
+                </div>
                 <p className={`font-bold text-sm sm:text-base text-center ${
                   nextTournament?.type === 'super' ? 'text-purple-400' : 'text-red-400'
                 }`}>
@@ -406,21 +765,24 @@ const WPTPage = () => {
       <div className="sticky top-16 sm:top-20 z-30 bg-gray-900 border-b border-gray-800">
         <div className="container mx-auto px-3 sm:px-4">
           <div className="flex overflow-x-auto gap-2 py-3 sm:py-4 scrollbar-hide">
-            {['bonos', 'registro', 'torneos'].map(tab => (
+            {[
+              { key: 'bonos', icon: PremiumMoneyIcon, label: 'BONOS' },
+              { key: 'registro', icon: null, label: 'REGISTRO' },
+              { key: 'torneos', icon: PremiumTrophyIcon, label: 'TORNEOS' }
+            ].map(tab => (
               <Link
-                key={tab}
-                to={`/wpt/${tab}`}
+                key={tab.key}
+                to={`/wpt/${tab.key}`}
                 onClick={scrollToContent}
-                className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-bold transition whitespace-nowrap text-sm sm:text-base flex-shrink-0 ${
-                  activeTab === tab 
+                className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-bold transition whitespace-nowrap text-sm sm:text-base flex-shrink-0 flex items-center gap-2 ${
+                  activeTab === tab.key 
                     ? 'bg-gradient-to-r from-blue-600 to-red-600 text-white' 
                     : 'bg-gray-800 text-gray-400 hover:text-white'
                 }`}
               >
-                {tab === 'bonos' && '🎁 '}
-                {tab === 'registro' && '📝 '}
-                {tab === 'torneos' && '🏆 '}
-                {tab.toUpperCase()}
+                {tab.icon && <tab.icon className="w-4 h-4" />}
+                {!tab.icon && tab.key === 'registro' && '📝'}
+                {tab.label}
               </Link>
             ))}
           </div>

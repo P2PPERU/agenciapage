@@ -12,6 +12,7 @@ import WPTPage from './pages/WPTPage'
 // Componentes
 import WhatsAppButton from './components/ui/WhatsAppButton'
 import FloatingAd from './components/ui/FloatingAd'
+import BonusFloatingAd from './components/ui/BonusFloatingAd'
 import RotatingBanner from './components/ui/RotatingBanner'
 import UrgencyBanner from './components/ui/UrgencyBanner'
 import Footer from './components/layout/Footer'
@@ -196,6 +197,9 @@ function App() {
         <RotatingBanner />
         <Navigation />
         <WhatsAppButton />
+        
+        {/* FloatingAds - Bonus a la izquierda, Torneos a la derecha */}
+        <BonusFloatingAd />
         <FloatingAd />
         
         <main className="pt-28">
