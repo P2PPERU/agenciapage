@@ -16,6 +16,9 @@ import {
   FaGift
 } from 'react-icons/fa'
 
+// Importar el sistema de iconos premium
+import { PremiumIcon, usePremiumIcon } from '../../utils/iconMapping'
+
 const iconMap = {
   FaWhatsapp: FaWhatsapp,
   FaDownload: FaDownload,
@@ -28,6 +31,8 @@ const iconMap = {
 }
 
 const WPTRegistrationSection = ({ registrationSteps, promosPeru }) => {
+  const { renderIcon } = usePremiumIcon()
+
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text).then(() => {
       // Mostrar notificación temporal
@@ -69,9 +74,11 @@ const WPTRegistrationSection = ({ registrationSteps, promosPeru }) => {
           className="mb-6"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            🎉 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-white to-red-400">
+            <PremiumIcon name="PremiumTrophyIcon" className="w-12 h-12 inline mx-2" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-white to-red-400">
               JUEGA EN WPT GLOBAL
-            </span> 🎉
+            </span>
+            <PremiumIcon name="PremiumTrophyIcon" className="w-12 h-12 inline mx-2" />
           </h2>
           <div className="inline-block bg-gradient-to-r from-poker-gold/20 to-orange-500/20 border border-poker-gold rounded-full px-6 py-2">
             <span className="text-poker-gold font-bold">CON PERU EV+ Y ESCUELA POKER</span>
@@ -150,8 +157,8 @@ const WPTRegistrationSection = ({ registrationSteps, promosPeru }) => {
                             className="group bg-gray-800 hover:bg-gray-700 p-4 rounded-xl transition-all duration-300 border border-gray-700 hover:border-poker-gold"
                           >
                             <div className="text-center">
-                              <div className="text-4xl mb-2 group-hover:scale-110 transition-transform">
-                                {download.icon}
+                              <div className="text-4xl mb-2 group-hover:scale-110 transition-transform flex justify-center">
+                                <PremiumIcon name={download.icon} className="w-12 h-12" />
                               </div>
                               <span className="text-white font-semibold block">{download.platform}</span>
                               <FaExternalLinkAlt className="text-gray-400 text-xs mx-auto mt-2 group-hover:text-poker-gold transition-colors" />
@@ -174,7 +181,7 @@ const WPTRegistrationSection = ({ registrationSteps, promosPeru }) => {
                         <div className="bg-gradient-to-r from-purple-500/20 to-purple-700/20 border border-purple-500 rounded-xl p-6">
                           <div className="flex items-center justify-between mb-3">
                             <label className="text-purple-400 font-bold text-lg flex items-center">
-                              <span className="text-2xl mr-2">💎</span>
+                              <PremiumIcon name="PremiumGiftIcon" className="w-6 h-6 mr-2" />
                               1º - Código de Bonificación:
                             </label>
                             <button
@@ -197,7 +204,7 @@ const WPTRegistrationSection = ({ registrationSteps, promosPeru }) => {
                         <div className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500 rounded-xl p-6">
                           <div className="flex items-center justify-between mb-3">
                             <label className="text-yellow-400 font-bold text-lg flex items-center">
-                              <span className="text-2xl mr-2">🔑</span>
+                              <PremiumIcon name="PremiumTicketIcon" className="w-6 h-6 mr-2" />
                               2º - Código de Invitado:
                             </label>
                             <button
@@ -218,7 +225,7 @@ const WPTRegistrationSection = ({ registrationSteps, promosPeru }) => {
                         
                         <div className="bg-green-500/20 border border-green-500 rounded-lg p-4">
                           <p className="text-green-400 font-semibold flex items-center">
-                            <span className="text-xl mr-2">💰</span>
+                            <PremiumIcon name="PremiumDollarIcon" className="w-6 h-6 mr-2" />
                             Con estos códigos obtendrás bonificaciones especiales y saldo extra para empezar
                           </p>
                         </div>
@@ -239,7 +246,7 @@ const WPTRegistrationSection = ({ registrationSteps, promosPeru }) => {
                           {/* Nombre y Apellido */}
                           <div className="bg-black/30 rounded-lg p-4 border border-green-500/50">
                             <label className="text-green-400 font-bold block mb-2 flex items-center">
-                              <span className="text-lg mr-2">✅</span>
+                              <PremiumIcon name="PremiumCheckIcon" className="w-5 h-5 mr-2" />
                               Nombre y Apellido:
                             </label>
                             <p className="text-white font-bold text-lg">{step.personalData.nombre}</p>
@@ -249,7 +256,7 @@ const WPTRegistrationSection = ({ registrationSteps, promosPeru }) => {
                           {/* Dirección */}
                           <div className="bg-black/30 rounded-lg p-4 border border-green-500/50">
                             <label className="text-green-400 font-bold block mb-2 flex items-center">
-                              <span className="text-lg mr-2">🏠</span>
+                              <PremiumIcon name="PremiumTargetIcon" className="w-5 h-5 mr-2" />
                               Dirección:
                             </label>
                             <p className="text-white font-bold text-lg">{step.personalData.direccion}</p>
@@ -259,7 +266,7 @@ const WPTRegistrationSection = ({ registrationSteps, promosPeru }) => {
                           {/* Teléfono */}
                           <div className="bg-black/30 rounded-lg p-4 border border-red-500/50">
                             <label className="text-red-400 font-bold block mb-2 flex items-center">
-                              <span className="text-lg mr-2">📞</span>
+                              <PremiumIcon name="PremiumWhatsAppIcon" className="w-5 h-5 mr-2" />
                               Teléfono:
                             </label>
                             <p className="text-red-400 font-bold text-lg">{step.personalData.telefono}</p>
@@ -269,7 +276,7 @@ const WPTRegistrationSection = ({ registrationSteps, promosPeru }) => {
                           {/* Ciudad */}
                           <div className="bg-black/30 rounded-lg p-4 border border-green-500/50">
                             <label className="text-green-400 font-bold block mb-2 flex items-center">
-                              <span className="text-lg mr-2">🏙️</span>
+                              <PremiumIcon name="PremiumTargetIcon" className="w-5 h-5 mr-2" />
                               Ciudad:
                             </label>
                             <p className="text-white font-bold text-xl">{step.personalData.ciudad}</p>
@@ -279,7 +286,7 @@ const WPTRegistrationSection = ({ registrationSteps, promosPeru }) => {
                           {/* Código Postal */}
                           <div className="bg-black/30 rounded-lg p-4 border border-green-500/50 md:col-span-2">
                             <label className="text-green-400 font-bold block mb-2 flex items-center">
-                              <span className="text-lg mr-2">📮</span>
+                              <PremiumIcon name="PremiumTicketIcon" className="w-5 h-5 mr-2" />
                               Código Postal:
                             </label>
                             <p className="text-white font-bold text-3xl">{step.personalData.codigoPostal}</p>
@@ -340,7 +347,9 @@ const WPTRegistrationSection = ({ registrationSteps, promosPeru }) => {
                 whileHover={{ scale: 1.02 }}
                 className="bg-black/30 backdrop-blur rounded-2xl p-8 text-center border border-yellow-500/30 hover:border-yellow-500/60 transition-colors"
               >
-                <div className="text-6xl mb-4">{freeroll.icon}</div>
+                <div className="mb-4 flex justify-center">
+                  <PremiumIcon name={freeroll.icon} className="w-16 h-16" />
+                </div>
                 <h4 className="text-2xl font-bold text-white mb-3">{freeroll.name}</h4>
                 <p className="text-yellow-400 font-bold text-xl mb-2">{freeroll.prize}</p>
                 <p className="text-gray-300 text-lg">{freeroll.frequency}</p>
@@ -377,7 +386,7 @@ const WPTRegistrationSection = ({ registrationSteps, promosPeru }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-300">
           <div className="space-y-3">
             <div className="flex items-start gap-3">
-              <FaCheckCircle className="text-green-400 mt-1 flex-shrink-0" />
+              <PremiumIcon name="PremiumCheckIcon" className="w-5 h-5 mt-1 flex-shrink-0" />
               <div>
                 <strong className="text-white">País:</strong>
                 <br />Selecciona <span className="text-yellow-400 font-bold">ANDORRA</span> (no Perú)
@@ -385,7 +394,7 @@ const WPTRegistrationSection = ({ registrationSteps, promosPeru }) => {
             </div>
             
             <div className="flex items-start gap-3">
-              <FaCheckCircle className="text-green-400 mt-1 flex-shrink-0" />
+              <PremiumIcon name="PremiumCheckIcon" className="w-5 h-5 mt-1 flex-shrink-0" />
               <div>
                 <strong className="text-white">Códigos (en orden):</strong>
                 <br />1º: <span className="text-purple-400 font-bold">PeruEV</span>
@@ -394,7 +403,7 @@ const WPTRegistrationSection = ({ registrationSteps, promosPeru }) => {
             </div>
             
             <div className="flex items-start gap-3">
-              <FaCheckCircle className="text-green-400 mt-1 flex-shrink-0" />
+              <PremiumIcon name="PremiumCheckIcon" className="w-5 h-5 mt-1 flex-shrink-0" />
               <div>
                 <strong className="text-white">Datos personales:</strong>
                 <br />Usa tus <span className="text-green-400 font-bold">datos reales</span> (nombre, dirección)
@@ -404,7 +413,7 @@ const WPTRegistrationSection = ({ registrationSteps, promosPeru }) => {
           
           <div className="space-y-3">
             <div className="flex items-start gap-3">
-              <FaCheckCircle className="text-green-400 mt-1 flex-shrink-0" />
+              <PremiumIcon name="PremiumCheckIcon" className="w-5 h-5 mt-1 flex-shrink-0" />
               <div>
                 <strong className="text-white">Ciudad:</strong>
                 <br /><span className="text-yellow-400 font-bold">LIMA</span>
@@ -412,7 +421,7 @@ const WPTRegistrationSection = ({ registrationSteps, promosPeru }) => {
             </div>
             
             <div className="flex items-start gap-3">
-              <FaCheckCircle className="text-green-400 mt-1 flex-shrink-0" />
+              <PremiumIcon name="PremiumCheckIcon" className="w-5 h-5 mt-1 flex-shrink-0" />
               <div>
                 <strong className="text-white">Código Postal:</strong>
                 <br /><span className="text-yellow-400 font-bold">00051</span>
@@ -420,7 +429,7 @@ const WPTRegistrationSection = ({ registrationSteps, promosPeru }) => {
             </div>
             
             <div className="flex items-start gap-3">
-              <FaCheckCircle className="text-red-400 mt-1 flex-shrink-0" />
+              <PremiumIcon name="PremiumClockIcon" className="w-5 h-5 mt-1 flex-shrink-0 text-red-400" />
               <div>
                 <strong className="text-white">Teléfono:</strong>
                 <br /><span className="text-red-400 font-bold">DEJAR VACÍO</span> (muy importante)
@@ -431,7 +440,7 @@ const WPTRegistrationSection = ({ registrationSteps, promosPeru }) => {
         
         <div className="mt-8 text-center">
           <p className="text-gray-400 mb-4">
-            ¿Tienes dudas o necesitas ayuda con algún paso? 👇
+            ¿Tienes dudas o necesitas ayuda con algún paso?
           </p>
           <a
             href="https://wa.me/51955311839?text=Necesito%20ayuda%20paso%20a%20paso%20para%20registrarme%20en%20WPT%20Global"

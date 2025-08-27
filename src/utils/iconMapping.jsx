@@ -1,4 +1,4 @@
-// src/utils/iconMapping.js - SISTEMA DE MAPEO DE ICONOS PREMIUM
+// src/utils/iconMapping.jsx - SISTEMA DE MAPEO DE ICONOS PREMIUM
 import React from 'react'
 
 // TODOS LOS ICONOS PREMIUM CENTRALIZADOS
@@ -203,6 +203,75 @@ const PremiumGamepadIcon = ({ className = "w-6 h-6" }) => (
   </svg>
 )
 
+// ICONOS ADICIONALES NECESARIOS
+const PremiumCheckIcon = ({ className = "w-6 h-6" }) => (
+  <svg viewBox="0 0 32 32" className={className} fill="none">
+    <defs>
+      <linearGradient id="checkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#10b981" />
+        <stop offset="50%" stopColor="#059669" />
+        <stop offset="100%" stopColor="#047857" />
+      </linearGradient>
+      <radialGradient id="checkGlow" cx="50%" cy="30%">
+        <stop offset="0%" stopColor="#dcfce7" stopOpacity="0.8"/>
+        <stop offset="100%" stopColor="#dcfce7" stopOpacity="0"/>
+      </radialGradient>
+    </defs>
+    <circle cx="16" cy="16" r="14" fill="url(#checkGradient)" stroke="#047857" strokeWidth="2"/>
+    <ellipse cx="16" cy="12" rx="8" ry="10" fill="url(#checkGlow)"/>
+    <path d="M10 16 L14 20 L22 12" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+    <circle cx="16" cy="16" r="10" fill="none" stroke="#34d399" strokeWidth="1" opacity="0.6"/>
+  </svg>
+)
+
+const PremiumWhatsAppIcon = ({ className = "w-6 h-6" }) => (
+  <svg viewBox="0 0 32 32" className={className} fill="none">
+    <defs>
+      <linearGradient id="whatsappGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#25d366" />
+        <stop offset="50%" stopColor="#22c55e" />
+        <stop offset="100%" stopColor="#16a34a" />
+      </linearGradient>
+      <radialGradient id="whatsappGlow" cx="30%" cy="30%">
+        <stop offset="0%" stopColor="#dcfce7" stopOpacity="0.9"/>
+        <stop offset="100%" stopColor="#dcfce7" stopOpacity="0"/>
+      </radialGradient>
+    </defs>
+    <circle cx="16" cy="16" r="14" fill="url(#whatsappGradient)" stroke="#15803d" strokeWidth="2"/>
+    <ellipse cx="13" cy="12" rx="6" ry="8" fill="url(#whatsappGlow)"/>
+    <path d="M12 8.5c-2.5 0-4.5 2-4.5 4.5 0 1 .3 1.9.8 2.7l-.8 3.3 3.4-.9c.7.4 1.6.6 2.5.6 2.5 0 4.5-2 4.5-4.5s-2-4.5-4.5-4.5z" 
+          fill="#ffffff" stroke="none"/>
+    <path d="M10.5 11.5l.7-.1c.2 0 .4.1.5.3l.6 1.4c.1.2 0 .4-.1.5l-.4.4c-.1.1-.1.3 0 .5.5 1.2 1.5 2.2 2.7 2.7.2.1.4.1.5 0l.4-.4c.1-.1.3-.2.5-.1l1.4.6c.2.1.3.3.3.5l-.1.7c-.1.5-.5.8-1 .8-2.8 0-5.1-2.3-5.1-5.1 0-.5.3-.9.8-1z" 
+          fill="#25d366"/>
+  </svg>
+)
+
+const PremiumClockIcon = ({ className = "w-6 h-6" }) => (
+  <svg viewBox="0 0 32 32" className={className} fill="none">
+    <defs>
+      <linearGradient id="clockGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#3b82f6" />
+        <stop offset="50%" stopColor="#2563eb" />
+        <stop offset="100%" stopColor="#1d4ed8" />
+      </linearGradient>
+      <radialGradient id="clockFace" cx="50%" cy="50%">
+        <stop offset="0%" stopColor="#f8fafc" />
+        <stop offset="80%" stopColor="#e2e8f0" />
+        <stop offset="100%" stopColor="#cbd5e1" />
+      </radialGradient>
+    </defs>
+    <circle cx="16" cy="16" r="14" fill="url(#clockGradient)" stroke="#1e40af" strokeWidth="2"/>
+    <circle cx="16" cy="16" r="10" fill="url(#clockFace)" stroke="#64748b" strokeWidth="1"/>
+    <circle cx="16" cy="8" r="1" fill="#475569"/>
+    <circle cx="24" cy="16" r="1" fill="#475569"/>
+    <circle cx="16" cy="24" r="1" fill="#475569"/>
+    <circle cx="8" cy="16" r="1" fill="#475569"/>
+    <line x1="16" y1="16" x2="16" y2="12" stroke="#1e40af" strokeWidth="2" strokeLinecap="round"/>
+    <line x1="16" y1="16" x2="20" y2="16" stroke="#1e40af" strokeWidth="2" strokeLinecap="round"/>
+    <circle cx="16" cy="16" r="2" fill="#1e40af"/>
+  </svg>
+)
+
 // MAPEO DE ICONOS PREMIUM
 export const PREMIUM_ICON_MAP = {
   PremiumDollarIcon,
@@ -216,7 +285,10 @@ export const PREMIUM_ICON_MAP = {
   PremiumWindowsIcon,
   PremiumMacIcon,
   PremiumTargetIcon,
-  PremiumGamepadIcon
+  PremiumGamepadIcon,
+  PremiumCheckIcon,
+  PremiumWhatsAppIcon,
+  PremiumClockIcon
 }
 
 // HOOK PARA RENDERIZAR ICONOS DINÁMICAMENTE
@@ -240,53 +312,6 @@ export const PremiumIcon = ({ name, className = "w-6 h-6", ...props }) => {
   const { renderIcon } = usePremiumIcon()
   return renderIcon(name, { className, ...props })
 }
-
-// ====================================================
-// EJEMPLOS DE USO EN TUS COMPONENTES:
-// ====================================================
-
-// Ejemplo 1: En WPTBonusesSection.jsx
-/*
-import { PremiumIcon, usePremiumIcon } from '../utils/iconMapping'
-import { bonuses } from '../data/wptData'
-
-const WPTBonusesSection = () => {
-  const { renderIcon } = usePremiumIcon()
-  
-  return (
-    <div>
-      {bonuses.map(bonus => (
-        <div key={bonus.id}>
-          {renderIcon(bonus.icon, { className: "w-8 h-8" })}
-          <h3>{bonus.title}</h3>
-        </div>
-      ))}
-    </div>
-  )
-}
-*/
-
-// Ejemplo 2: Usando el componente PremiumIcon directamente
-/*
-import { PremiumIcon } from '../utils/iconMapping'
-
-const MiComponente = () => (
-  <div>
-    <PremiumIcon name="PremiumDollarIcon" className="w-10 h-10" />
-    <PremiumIcon name="PremiumGiftIcon" className="w-6 h-6 text-red-500" />
-  </div>
-)
-*/
-
-// Ejemplo 3: Para plataformas de descarga
-/*
-{step.downloads?.map((download, i) => (
-  <div key={i}>
-    <PremiumIcon name={download.icon} className="w-12 h-12" />
-    <span>{download.platform}</span>
-  </div>
-))}
-*/
 
 export default {
   PREMIUM_ICON_MAP,

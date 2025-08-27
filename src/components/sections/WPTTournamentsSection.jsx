@@ -1,11 +1,17 @@
-// src/components/sections/WPTTournamentsSection.jsx
+// src/components/sections/WPTTournamentsSection.jsx - VERSIÓN COMPLETA Y CORREGIDA
 import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { FaTrophy, FaTicketAlt, FaCalendarAlt, FaClock, FaGift, FaUsers, FaFire, FaCoins, FaFilter, FaStar, FaBolt } from 'react-icons/fa'
 
+// ✅ IMPORTAR EL SISTEMA DE ICONOS PREMIUM
+import { usePremiumIcon, PremiumIcon } from '../../utils/iconMapping.jsx'
+
 const WPTTournamentsSection = ({ tournaments, crazyFreerollsInfo, crazySchedule }) => {
   const [filterType, setFilterType] = useState('all')
   const [currentWeek, setCurrentWeek] = useState('all')
+
+  // ✅ USAR EL HOOK DE ICONOS PREMIUM
+  const { renderIcon } = usePremiumIcon()
 
   // Calcular estadísticas del calendario
   const calendarStats = useMemo(() => {
@@ -124,7 +130,10 @@ const WPTTournamentsSection = ({ tournaments, crazyFreerollsInfo, crazySchedule 
             <div className="flex justify-between items-start mb-4">
               <h3 className="text-xl font-bold text-white flex-1">{tournament.name}</h3>
               <div className="text-3xl ml-4">
-                {tournament.type === 'crazy-daily' ? '🎰' : '👑'}
+                {tournament.type === 'crazy-daily' ? 
+                  <PremiumIcon name="PremiumCoinsIcon" className="w-8 h-8" /> : 
+                  <PremiumIcon name="PremiumTrophyIcon" className="w-8 h-8" />
+                }
               </div>
             </div>
             
@@ -176,7 +185,10 @@ const WPTTournamentsSection = ({ tournaments, crazyFreerollsInfo, crazySchedule 
                 transition={{ delay: idx * 0.1 }}
                 className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 text-center hover:from-gray-700 hover:to-gray-800 transition-all duration-300 border border-gray-600 hover:border-gray-500"
               >
-                <div className="text-4xl mb-3">{way.icon}</div>
+                {/* ✅ RENDERIZAR ICONOS PREMIUM PARA TICKET WAYS */}
+                <div className="text-4xl mb-3 flex justify-center">
+                  {renderIcon(way.icon, { className: "w-12 h-12" })}
+                </div>
                 <h4 className="text-white font-bold mb-2">{way.title}</h4>
                 <p className="text-gray-400 text-sm mb-3">{way.description}</p>
                 
@@ -193,7 +205,8 @@ const WPTTournamentsSection = ({ tournaments, crazyFreerollsInfo, crazySchedule 
                   )}
                   {way.automatic && (
                     <span className="bg-green-500 text-white px-2 py-1 rounded-full font-bold text-xs block">
-                      ✅ AUTOMÁTICO
+                      <PremiumIcon name="PremiumCheckIcon" className="w-3 h-3 inline mr-1" />
+                      AUTOMÁTICO
                     </span>
                   )}
                 </div>
@@ -266,12 +279,12 @@ const WPTTournamentsSection = ({ tournaments, crazyFreerollsInfo, crazySchedule 
           {/* Información importante */}
           <div className="bg-orange-500/20 border border-orange-500/50 rounded-lg p-4 mb-6">
             <div className="flex items-start gap-3">
-              <FaClock className="text-orange-400 text-xl mt-1" />
+              <PremiumIcon name="PremiumClockIcon" className="w-6 h-6 text-orange-400 mt-1 flex-shrink-0" />
               <div>
-                <h4 className="text-orange-400 font-bold mb-1">Horarios en Zona Perú (UTC-5)</h4>
+                <h4 className="text-orange-400 font-bold mb-1">Horarios en Perú </h4>
                 <p className="text-gray-300 text-sm">
-                  <strong>Torneos $10K:</strong> Lunes a Sábado en horarios rotativos (07:00, 13:00, 16:30) <br/>
-                  <strong>Torneos $100K:</strong> Todos los domingos a las 18:00 hora Perú
+                  <strong>Torneos $10K:</strong> Lunes a Sábado en horarios rotativos (07:00, 13:00, 18:30) <br/>
+                  <strong>Torneos $100K:</strong> Todos los domingos en horarios rotativos (07:00, 13:00, 18:30)
                 </p>
               </div>
             </div>
@@ -321,7 +334,9 @@ const WPTTournamentsSection = ({ tournaments, crazyFreerollsInfo, crazySchedule 
                     tournament.type === 'super' ? 'text-purple-400' : 'text-yellow-400'
                   }`}>
                     {tournament.prize}
-                    {tournament.type === 'super' && <span className="ml-2">👑</span>}
+                    {tournament.type === 'super' && 
+                      <PremiumIcon name="PremiumTrophyIcon" className="w-5 h-5 inline ml-2" />
+                    }
                   </div>
                   
                   <div className="bg-green-500/20 text-green-400 border border-green-500/50 px-3 py-1 rounded-full text-sm font-bold">
@@ -371,7 +386,7 @@ const WPTTournamentsSection = ({ tournaments, crazyFreerollsInfo, crazySchedule 
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <FaFire className="mr-3" />
+          <PremiumIcon name="PremiumWhatsAppIcon" className="w-6 h-6 mr-3" />
           ¡UNIRME AHORA A LOS CRAZY FREEROLLS 2025!
         </motion.a>
         <p className="text-gray-400 mt-4 text-sm">
