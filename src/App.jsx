@@ -1,13 +1,16 @@
-// src/App.jsx
+// src/App.jsx - VERSIÓN COMPLETA ACTUALIZADA
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaBars, FaTimes, FaHome, FaNewspaper, FaCalculator, FaTrophy, FaPhone, FaMoneyBillWave, FaStar } from 'react-icons/fa'
+import { FaBars, FaTimes, FaHome, FaNewspaper, FaCalculator, FaTrophy, FaPhone, FaMoneyBillWave, FaStar, FaUserShield } from 'react-icons/fa'
 
 // Páginas
 import HomePage from './pages/HomePage'
 import NewsPage from './pages/NewsPage'
 import WPTPage from './pages/WPTPage'
+import RakebackPage from './pages/RakebackPage' // NUEVA PÁGINA
+import AdminPanel from './pages/AdminPanel' // NUEVA PÁGINA
+import NewsDetailPage from './pages/NewsDetailPage'
 
 // Componentes
 import WhatsAppButton from './components/ui/WhatsAppButton'
@@ -30,11 +33,12 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
   
-  // ------------------ NAV ITEMS ------------------
+  // ------------------ NAV ITEMS ACTUALIZADOS ------------------
   const navItems = [
     { path: '/', label: 'Inicio', icon: FaHome },
     { path: '/#salas', label: 'Salas', icon: FaTrophy, isHash: true },
-    { path: '/wpt', label: 'WPT GLOBAL', icon: FaTrophy, highlight: true }, // 🔥 NUEVO
+    { path: '/wpt', label: 'WPT GLOBAL', icon: FaTrophy, highlight: true },
+    { path: '/rakeback', label: 'RAKEBACK', icon: FaMoneyBillWave, highlight: true, isNew: true }, // NUEVO
     { path: '/#pagos', label: 'Pagos', icon: FaMoneyBillWave, isHash: true },
     { path: '/#testimonios', label: 'Testimonios', icon: FaStar, isHash: true },
     { path: '/#calculator', label: 'Calculadora', icon: FaCalculator, isHash: true },
@@ -114,16 +118,35 @@ const Navigation = () => {
                 <button
                   key={item.path}
                   onClick={() => handleNavClick(item)}
-                  className={`text-gray-300 hover:text-poker-gold transition-colors flex items-center gap-1 font-medium text-sm xl:text-base
-                    ${location.pathname === item.path.split('#')[0] || (item.path === '/wpt' && location.pathname.startsWith('/wpt')) ? 'text-poker-gold' : ''}
+                  className={`text-gray-300 hover:text-poker-gold transition-colors flex items-center gap-1 font-medium text-sm xl:text-base relative
+                    ${location.pathname === item.path.split('#')[0] || 
+                      (item.path === '/wpt' && location.pathname.startsWith('/wpt')) ||
+                      (item.path === '/rakeback' && location.pathname.startsWith('/rakeback'))
+                      ? 'text-poker-gold' : ''}
                     ${item.highlight ? 'bg-gradient-to-r from-blue-600 to-red-600 text-white px-3 py-1 rounded-full' : ''}`}
                 >
                   <item.icon className="text-xs xl:text-sm" />
                   <span className="hidden xl:inline">{item.label}</span>
                   <span className="xl:hidden">{item.label.substring(0, 3)}</span>
                   {item.highlight && <span className="ml-1 text-xs">🔥</span>}
+                  {item.isNew && (
+                    <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-1 rounded-full animate-pulse">
+                      NEW
+                    </span>
+                  )}
                 </button>
               ))}
+            </div>
+            
+            {/* Admin Button - Solo en desktop */}
+            <div className="hidden xl:flex items-center ml-4">
+              <Link
+                to="/admin"
+                className="text-gray-400 hover:text-poker-gold transition-colors p-2"
+                title="Panel Admin"
+              >
+                <FaUserShield className="text-lg" />
+              </Link>
             </div>
             
             {/* Mobile Menu Button */}
@@ -164,14 +187,33 @@ const Navigation = () => {
                   onClick={() => handleNavClick(item)}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`text-xl text-white hover:text-poker-gold transition-colors flex items-center gap-3 w-full justify-center
+                  className={`text-xl text-white hover:text-poker-gold transition-colors flex items-center gap-3 w-full justify-center relative
                     ${item.highlight ? 'bg-gradient-to-r from-blue-600 to-red-600 text-white px-4 py-2 rounded-full' : ''}`}
                 >
                   <item.icon className="text-lg" />
                   {item.label}
                   {item.highlight && <span className="ml-1">🔥</span>}
+                  {item.isNew && (
+                    <span className="absolute -top-1 -right-8 bg-green-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
+                      NEW
+                    </span>
+                  )}
                 </motion.button>
               ))}
+              
+              {/* Admin Link en Mobile */}
+              <motion.button
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  navigate('/admin')
+                }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="text-xl text-gray-400 hover:text-poker-gold transition-colors flex items-center gap-3 w-full justify-center border-t border-gray-800 pt-5"
+              >
+                <FaUserShield className="text-lg" />
+                Admin
+              </motion.button>
             </div>
           </motion.div>
         )}
@@ -180,7 +222,7 @@ const Navigation = () => {
   )
 }
 
-// ------------------ APP ------------------
+// ------------------ APP PRINCIPAL ------------------
 function App() {
   const [isLoading, setIsLoading] = useState(true)
   
@@ -210,7 +252,12 @@ function App() {
             <Route path="/wpt" element={<WPTPage />} />
             <Route path="/wpt/:section" element={<WPTPage />} />
             
+            {/* NUEVAS RUTAS */}
+            <Route path="/rakeback" element={<RakebackPage />} />
+            <Route path="/admin" element={<AdminPanel />} />
+            
             <Route path="/noticias" element={<NewsPage />} />
+            <Route path="/noticias/:slug" element={<NewsDetailPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
@@ -262,10 +309,20 @@ const CookieBanner = () => {
   
   if (!showBanner) return null
   return (
-    <motion.div initial={{ y: 100 }} animate={{ y: 0 }} exit={{ y: 100 }} className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 p-4 z-30">
+    <motion.div 
+      initial={{ y: 100 }} 
+      animate={{ y: 0 }} 
+      exit={{ y: 100 }} 
+      className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 p-4 z-30"
+    >
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
-        <p className="text-sm text-gray-300 mb-3 md:mb-0">🍪 Usamos cookies para mejorar tu experiencia. Al continuar, aceptas nuestra política.</p>
-        <button onClick={acceptCookies} className="bg-poker-gold text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-500 transition">
+        <p className="text-sm text-gray-300 mb-3 md:mb-0">
+          🍪 Usamos cookies para mejorar tu experiencia. Al continuar, aceptas nuestra política.
+        </p>
+        <button 
+          onClick={acceptCookies} 
+          className="bg-poker-gold text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-500 transition"
+        >
           Aceptar
         </button>
       </div>
