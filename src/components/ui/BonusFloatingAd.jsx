@@ -225,15 +225,28 @@ const BonusFloatingAd = () => {
             animate={{ scale: 1 }}
             exit={{ scale: 0 }}
             onClick={() => setIsMinimized(false)}
-            className="hidden md:flex fixed left-4 top-1/2 -translate-y-1/2 z-40 bg-gradient-to-br from-purple-600 via-pink-600 to-red-600 text-white p-3 rounded-r-xl shadow-lg items-center gap-1"
+            className="hidden md:flex fixed left-4 top-1/2 -translate-y-1/2 z-40 bg-gradient-to-br from-purple-600 via-pink-600 to-red-600 text-white p-4 rounded-r-xl shadow-2xl items-center gap-2 border-l-4 border-yellow-400"
           >
             <motion.div 
               animate={{ rotate: [0, 360] }}
               transition={{ duration: 3, repeat: Infinity }}
             >
-              <FaCrown className="text-lg text-yellow-300" />
+              <FaCrown className="text-xl text-yellow-300" />
             </motion.div>
-            <span className="writing-mode-vertical text-xs font-bold">200%</span>
+            <motion.span 
+              animate={{ 
+                scale: [1, 1.1, 1],
+                textShadow: [
+                  "0 0 5px rgba(255,215,0,0.5)", 
+                  "0 0 15px rgba(255,215,0,0.8)", 
+                  "0 0 5px rgba(255,215,0,0.5)"
+                ]
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="writing-mode-vertical text-2xl font-black text-transparent bg-gradient-to-b from-yellow-300 via-yellow-500 to-orange-400 bg-clip-text"
+            >
+              200%
+            </motion.span>
           </motion.button>
         )}
       </AnimatePresence>

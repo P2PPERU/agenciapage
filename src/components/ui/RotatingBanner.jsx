@@ -1,19 +1,23 @@
+// src/components/ui/RotatingBanner.jsx
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaFire, FaTrophy, FaGift, FaCoins, FaTimes } from 'react-icons/fa'
+import { FaFire, FaTrophy, FaGift, FaCoins, FaTimes, FaChevronDown, FaWhatsapp } from 'react-icons/fa'
 
 const RotatingBanner = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isVisible, setIsVisible] = useState(true)
-  
-  // Mensajes promocionales con sus estilos
+  const [isMobileExpanded, setIsMobileExpanded] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
   const promotions = [
     {
       id: 'wpt',
       room: 'WPT POKER',
       message: '100% DE BONO DE DEPÓSITO + TICKETS DE TORNEOS + FREEROLL',
+      mobileMessage: '100% BONO + TICKETS + FREEROLL',
+      shortMessage: '100% BONO',
       gradient: 'from-yellow-500 via-yellow-600 to-orange-600',
-      icon: <FaTrophy className="text-2xl" />,
+      icon: <FaTrophy className="text-xl md:text-2xl" />,
       symbols: '♠ ♥',
       whatsappMsg: 'Quiero el bono 100% de WPT POKER + tickets de torneos'
     },
@@ -21,8 +25,10 @@ const RotatingBanner = () => {
       id: 'xpoker',
       room: 'X-POKER',
       message: 'RAKEBACK AL 60% + JACKPOT GIGANTE',
+      mobileMessage: '60% RAKEBACK + JACKPOT',
+      shortMessage: '60% RAKEBACK',
       gradient: 'from-blue-500 via-blue-600 to-blue-700',
-      icon: <FaCoins className="text-2xl" />,
+      icon: <FaCoins className="text-xl md:text-2xl" />,
       symbols: '♦ ♣',
       whatsappMsg: 'Quiero el 60% rakeback de X-POKER y el jackpot gigante'
     },
@@ -30,46 +36,186 @@ const RotatingBanner = () => {
       id: 'pppoker',
       room: 'PPPOKER',
       message: 'MEJORES MESAS DE OMAHA Y TORNEOS',
+      mobileMessage: 'MEJORES MESAS OMAHA',
+      shortMessage: 'MESAS OMAHA',
       gradient: 'from-red-500 via-red-600 to-red-700',
-      icon: <FaGift className="text-2xl" />,
+      icon: <FaGift className="text-xl md:text-2xl" />,
       symbols: '♠ ♦',
       whatsappMsg: 'Quiero jugar Omaha en PPPOKER'
     }
   ]
-  
-  // Rotar entre promociones cada 8 segundos (más tiempo)
+
+  // Detectar si es móvil
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % promotions.length)
-    }, 8000) // Aumentado de 5 a 8 segundos
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
     
-    return () => clearInterval(interval)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
   }, [])
-  
+
+  // Rotación automática para desktop
+  useEffect(() => {
+    if (!isMobile) {
+      const interval = setInterval(() => {
+        setCurrentIndex((prev) => (prev + 1) % promotions.length)
+      }, 8000)
+      return () => clearInterval(interval)
+    }
+  }, [isMobile])
+
   const currentPromo = promotions[currentIndex]
   const whatsappUrl = `https://wa.me/51955311839?text=${encodeURIComponent(currentPromo.whatsappMsg)}`
-  
+
   if (!isVisible) return null
-  
+
+  // VERSION MÓVIL
+  if (isMobile) {
+    return (
+      <div className="fixed top-16 left-0 right-0 z-45">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentPromo.id}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+            className={`bg-gradient-to-r ${currentPromo.gradient} shadow-lg relative overflow-hidden`}
+          >
+            {/* Fondo símbolos para móvil */}
+            <div className="absolute inset-0 opacity-5">
+              <div className="flex items-center justify-around h-full">
+                {[...Array(6)].map((_, i) => (
+                  <span key={i} className="text-2xl">
+                    {currentPromo.symbols}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative">
+              {/* Banner compacto */}
+              <motion.div
+                onClick={() => setIsMobileExpanded(!isMobileExpanded)}
+                className="cursor-pointer px-4 py-3"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="text-white">
+                      {currentPromo.icon}
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-white font-bold text-xs">
+                        {currentPromo.room}
+                      </span>
+                      <span className="text-white/90 font-medium text-xs">
+                        {currentPromo.shortMessage}
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-2">
+                    <motion.div
+                      animate={{ rotate: isMobileExpanded ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <FaChevronDown className="text-white text-sm" />
+                    </motion.div>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setIsVisible(false)
+                      }}
+                      className="text-white/70 hover:text-white"
+                    >
+                      <FaTimes size={14} />
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Panel expandido */}
+              <AnimatePresence>
+                {isMobileExpanded && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="border-t border-white/20 bg-black/10"
+                  >
+                    <div className="p-4">
+                      <div className="text-center mb-4">
+                        <p className="text-white font-medium text-sm mb-2">
+                          {currentPromo.mobileMessage}
+                        </p>
+                      </div>
+                      
+                      {/* Selector de ofertas para móvil */}
+                      <div className="grid grid-cols-3 gap-2 mb-4">
+                        {promotions.map((promo, index) => (
+                          <motion.button
+                            key={promo.id}
+                            onClick={() => setCurrentIndex(index)}
+                            whileTap={{ scale: 0.95 }}
+                            className={`p-2 rounded-lg text-xs font-medium transition-all ${
+                              index === currentIndex
+                                ? 'bg-white text-gray-800'
+                                : 'bg-white/20 text-white'
+                            }`}
+                          >
+                            <div className="flex flex-col items-center gap-1">
+                              <div className="text-sm">
+                                {promo.icon}
+                              </div>
+                              <span>{promo.room}</span>
+                            </div>
+                          </motion.button>
+                        ))}
+                      </div>
+
+                      {/* Botón de WhatsApp */}
+                      <motion.a
+                        href={whatsappUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileTap={{ scale: 0.95 }}
+                        className="w-full bg-green-500 text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-green-600 transition-colors"
+                      >
+                        <FaWhatsapp />
+                        ACTIVAR OFERTA
+                      </motion.a>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    )
+  }
+
+  // VERSION DESKTOP (original mejorada)
   return (
-    <div className="fixed top-0 left-0 right-0 z-50">
+    <div className="fixed top-10 left-0 right-0 z-45">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentPromo.id}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ 
-            duration: 1, // Transición más lenta y suave
-            ease: "easeInOut"
-          }}
-          className={`bg-gradient-to-r ${currentPromo.gradient} shadow-lg`}
+          transition={{ duration: 1, ease: "easeInOut" }}
+          className={`bg-gradient-to-r ${currentPromo.gradient} shadow-lg min-h-[90px] flex items-center`}
         >
-          <div className="relative overflow-hidden">
-            {/* Fondo con símbolos estáticos (sin movimiento mareador) */}
+          <div className="relative w-full overflow-hidden">
+            
+            {/* Fondo símbolos */}
             <div className="absolute inset-0 opacity-10">
               <div className="flex items-center justify-around h-full">
-                {[...Array(10)].map((_, i) => (
+                {[...Array(12)].map((_, i) => (
                   <motion.span 
                     key={i} 
                     className="text-4xl"
@@ -82,51 +228,40 @@ const RotatingBanner = () => {
                 ))}
               </div>
             </div>
-            
+
             {/* Contenido principal */}
-            <div className="relative container mx-auto px-4 py-3">
-              <div className="flex items-center justify-between">
-                {/* Sección izquierda - Icono con animación suave */}
+            <div className="relative container mx-auto px-6 py-5">
+              <div className="flex items-center justify-between gap-4">
+
+                {/* Icono */}
                 <motion.div
-                  animate={{ 
-                    scale: [1, 1.1, 1],
-                    rotate: [0, 5, -5, 0]
-                  }}
-                  transition={{ 
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                  className="hidden sm:block text-white"
+                  animate={{ scale: [1, 1.1, 1], rotate: [0, 5, -5, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  className="text-white"
                 >
                   {currentPromo.icon}
                 </motion.div>
-                
-                {/* Sección central - Mensaje estático o con animación muy suave */}
-                <div className="flex-1 mx-4 text-center">
+
+                {/* Texto */}
+                <div className="flex-1 text-center">
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="flex flex-col sm:flex-row items-center justify-center gap-2"
+                    className="flex items-center justify-center gap-3"
                   >
-                    <span className="text-white font-black text-sm md:text-lg flex items-center gap-2">
-                      <FaFire className="text-yellow-300" />
-                      <span className="bg-black/20 px-3 py-1 rounded">
-                        {currentPromo.room}
-                      </span>
-                      <span className="hidden md:inline">
-                        {currentPromo.message}
-                      </span>
-                      <span className="md:hidden">
-                        {currentPromo.message.substring(0, 30)}...
-                      </span>
+                    <FaFire className="text-yellow-300 text-xl" />
+                    <span className="bg-black/20 px-4 py-2 rounded font-black text-white text-lg">
+                      {currentPromo.room}
+                    </span>
+                    <span className="text-white font-black text-lg">
+                      {currentPromo.message}
                     </span>
                   </motion.div>
                 </div>
-                
-                {/* Sección derecha - CTA y cerrar */}
-                <div className="flex items-center gap-2">
+
+                {/* Botones */}
+                <div className="flex items-center gap-3">
                   <motion.a
                     href={whatsappUrl}
                     target="_blank"
@@ -136,33 +271,35 @@ const RotatingBanner = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.3 }}
-                    className="bg-white/20 backdrop-blur text-white font-bold px-3 md:px-6 py-2 rounded-full hover:bg-white/30 transition-all text-xs md:text-sm whitespace-nowrap"
+                    className="bg-white/20 backdrop-blur text-white font-bold px-8 py-3 rounded-full hover:bg-white/30 transition-all text-sm flex items-center gap-2"
                   >
+                    <FaWhatsapp />
                     ACTIVAR OFERTA
                   </motion.a>
                   
                   <button
                     onClick={() => setIsVisible(false)}
-                    className="text-white/70 hover:text-white transition p-1"
+                    className="text-white/70 hover:text-white transition p-2"
                   >
-                    <FaTimes size={16} />
+                    <FaTimes size={18} />
                   </button>
                 </div>
               </div>
             </div>
-            
-            {/* Indicadores de promoción con transición suave */}
-            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex gap-1 pb-1">
+
+            {/* Indicadores */}
+            <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-2">
               {promotions.map((_, index) => (
-                <motion.div
+                <motion.button
                   key={index}
+                  onClick={() => setCurrentIndex(index)}
                   initial={{ opacity: 0.3 }}
                   animate={{ 
                     opacity: index === currentIndex ? 1 : 0.3,
                     scale: index === currentIndex ? 1.2 : 1
                   }}
                   transition={{ duration: 0.5 }}
-                  className={`h-1 w-8 rounded-full bg-white`}
+                  className="h-2 w-10 rounded-full bg-white hover:bg-white/80 cursor-pointer"
                 />
               ))}
             </div>
@@ -170,69 +307,6 @@ const RotatingBanner = () => {
         </motion.div>
       </AnimatePresence>
     </div>
-  )
-}
-
-// Versión alternativa ultra simple sin animaciones mareadores
-export const SimpleFadeBanner = () => {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isVisible, setIsVisible] = useState(true)
-  
-  const messages = [
-    { 
-      text: 'WPT POKER: 100% BONO + TICKETS + FREEROLL', 
-      color: 'bg-gradient-to-r from-yellow-500 to-orange-500',
-      room: 'WPT'
-    },
-    { 
-      text: 'X-POKER: 60% RAKEBACK + JACKPOT', 
-      color: 'bg-gradient-to-r from-blue-500 to-blue-600',
-      room: 'X-POKER'
-    },
-    { 
-      text: 'PPPOKER: MEJORES MESAS OMAHA', 
-      color: 'bg-gradient-to-r from-red-500 to-red-600',
-      room: 'PPP'
-    }
-  ]
-  
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % messages.length)
-    }, 10000) // 10 segundos por mensaje
-    return () => clearInterval(timer)
-  }, [])
-  
-  if (!isVisible) return null
-  
-  return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={currentIndex}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 1.5 }}
-        className={`${messages[currentIndex].color} text-white py-3 text-center font-bold fixed top-0 left-0 right-0 z-50`}
-      >
-        <div className="container mx-auto px-4 flex items-center justify-between">
-          <span className="flex-1">
-            🔥 {messages[currentIndex].text}
-          </span>
-          <div className="flex items-center gap-2">
-            <a 
-              href={`https://wa.me/51955311839?text=Quiero info de ${messages[currentIndex].room}`}
-              className="bg-white/20 px-4 py-1 rounded-full text-sm hover:bg-white/30 transition"
-            >
-              ACTIVAR
-            </a>
-            <button onClick={() => setIsVisible(false)} className="text-white/70 hover:text-white">
-              <FaTimes size={14} />
-            </button>
-          </div>
-        </div>
-      </motion.div>
-    </AnimatePresence>
   )
 }
 

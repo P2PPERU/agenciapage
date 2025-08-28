@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaFire } from 'react-icons/fa'
+import { FaFire, FaTimes } from 'react-icons/fa'
 
 const UrgencyBanner = () => {
   const [currentOffer, setCurrentOffer] = useState(0)
   const [playersToday, setPlayersToday] = useState(17)
   const [playersOnline, setPlayersOnline] = useState(5847)
-  
+  const [isVisible, setIsVisible] = useState(true)
+
   const specialOffers = [
     {
       id: 'freeroll-wpt',
@@ -20,45 +21,64 @@ const UrgencyBanner = () => {
     },
     {
       id: 'jackpot-xpoker',
-      title: '🎰 JACKPOT S/523,421',
+      title: '🎰 JACKPOT S/100,421',
       subtitle: 'Bad Beat Jackpot en X-POKER - Puede caer HOY'
     }
   ]
-  
+
   useEffect(() => {
+    if (!isVisible) return
+
     const interval = setInterval(() => {
       setCurrentOffer((prev) => (prev + 1) % specialOffers.length)
     }, 5000)
-    
+
     const playerInterval = setInterval(() => {
       setPlayersToday(prev => prev + Math.floor(Math.random() * 3))
       setPlayersOnline(prev => prev + Math.floor(Math.random() * 10) - 5)
     }, 30000)
-    
+
     return () => {
       clearInterval(interval)
       clearInterval(playerInterval)
     }
-  }, [])
-  
+  }, [isVisible])
+
+  const handleClose = () => {
+    setIsVisible(false)
+    // Opcional: Reaparece después de 5 minutos
+    setTimeout(() => {
+      setIsVisible(true)
+    }, 300000) // 5 minutos
+  }
+
   const offer = specialOffers[currentOffer]
-  
+
+  if (!isVisible) return null
+
   return (
     <AnimatePresence mode="wait">
       <motion.div
         key={offer.id}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="bg-gradient-to-r from-red-600 to-orange-500 py-2 px-4 fixed top-0 w-full z-50"
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: -100, opacity: 0 }}
+        transition={{ type: "spring", damping: 20 }}
+        className="bg-gradient-to-r from-red-600 to-orange-500 py-2 px-4 fixed top-16 w-full z-50 shadow-lg"
       >
-        <div className="container mx-auto flex items-center justify-between">
+        <div className="container mx-auto flex items-center justify-between relative">
           <div className="flex items-center gap-4">
-            <FaFire className="text-yellow-300 animate-pulse" />
+            <motion.div
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 1, repeat: Infinity }}
+            >
+              <FaFire className="text-yellow-300" />
+            </motion.div>
             <span className="text-white font-bold text-sm md:text-base">
               {offer.title} - {offer.subtitle}
             </span>
           </div>
+          
           <div className="flex items-center gap-4">
             <span className="text-white text-xs md:text-sm hidden sm:inline">
               🔥 {playersToday} jugadores hoy | 🟢 {playersOnline.toLocaleString()} online
@@ -71,6 +91,17 @@ const UrgencyBanner = () => {
             >
               OBTENER
             </a>
+            
+            {/* Botón de cerrar */}
+            <motion.button
+              onClick={handleClose}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="text-white/80 hover:text-white transition-colors ml-2 p-1 rounded-full hover:bg-white/10"
+              title="Cerrar banner"
+            >
+              <FaTimes className="text-sm" />
+            </motion.button>
           </div>
         </div>
       </motion.div>

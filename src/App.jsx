@@ -8,8 +8,8 @@ import { FaBars, FaTimes, FaHome, FaNewspaper, FaCalculator, FaTrophy, FaPhone, 
 import HomePage from './pages/HomePage'
 import NewsPage from './pages/NewsPage'
 import WPTPage from './pages/WPTPage'
-import RakebackPage from './pages/RakebackPage' // NUEVA PÁGINA
-import AdminPanel from './pages/AdminPanel' // NUEVA PÁGINA
+import RakebackPage from './pages/RakebackPage'
+import AdminPanel from './pages/AdminPanel'
 import NewsDetailPage from './pages/NewsDetailPage'
 
 // Componentes
@@ -38,7 +38,7 @@ const Navigation = () => {
     { path: '/', label: 'Inicio', icon: FaHome },
     { path: '/#salas', label: 'Salas', icon: FaTrophy, isHash: true },
     { path: '/wpt', label: 'WPT GLOBAL', icon: FaTrophy, highlight: true },
-    { path: '/rakeback', label: 'RAKEBACK', icon: FaMoneyBillWave, highlight: true, isNew: true }, // NUEVO
+    { path: '/rakeback', label: 'BONOS', icon: FaMoneyBillWave, highlight: true, isNew: true },
     { path: '/#pagos', label: 'Pagos', icon: FaMoneyBillWave, isHash: true },
     { path: '/#testimonios', label: 'Testimonios', icon: FaStar, isHash: true },
     { path: '/#calculator', label: 'Calculadora', icon: FaCalculator, isHash: true },
@@ -57,7 +57,7 @@ const Navigation = () => {
         setTimeout(() => {
           const element = document.getElementById(hash)
           if (element) {
-            const offset = 120
+            const offset = 140
             const elementPosition = element.getBoundingClientRect().top
             const offsetPosition = elementPosition + window.pageYOffset - offset
             window.scrollTo({ top: offsetPosition, behavior: 'smooth' })
@@ -66,7 +66,7 @@ const Navigation = () => {
       } else {
         const element = document.getElementById(hash)
         if (element) {
-          const offset = 120
+          const offset = 140
           const elementPosition = element.getBoundingClientRect().top
           const offsetPosition = elementPosition + window.pageYOffset - offset
           window.scrollTo({ top: offsetPosition, behavior: 'smooth' })
@@ -82,10 +82,10 @@ const Navigation = () => {
   
   return (
     <>
-      <nav className={`fixed top-12 w-full z-40 transition-all duration-300 ${
+      <nav className={`fixed top-0 w-full z-60 transition-all duration-300 ${
         isScrolled 
           ? 'bg-gray-900/95 backdrop-blur-md shadow-2xl py-3' 
-          : 'bg-gradient-to-b from-black/80 to-transparent py-4'
+          : 'bg-gradient-to-b from-black/90 to-black/60 py-4'
       }`}>
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center">
@@ -178,7 +178,7 @@ const Navigation = () => {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25 }}
-            className="fixed right-0 top-0 h-full w-80 bg-gray-900 z-40 lg:hidden shadow-2xl overflow-y-auto"
+            className="fixed right-0 top-0 h-full w-80 bg-gray-900 z-50 lg:hidden shadow-2xl overflow-y-auto"
           >
             <div className="flex flex-col items-center space-y-5 p-8 pt-20">
               {navItems.map(item => (
@@ -235,9 +235,12 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-poker-black text-white">
-        <UrgencyBanner />
-        <RotatingBanner />
+        {/* HEADER PRINCIPAL - SIEMPRE ARRIBA */}
         <Navigation />
+        
+        {/* BANNER ROTATIVO - DEBAJO DEL HEADER */}
+        <RotatingBanner />
+        
         <WhatsAppButton />
         
         {/* FloatingAds - Bonus a la izquierda, Torneos a la derecha */}
@@ -252,7 +255,7 @@ function App() {
             <Route path="/wpt" element={<WPTPage />} />
             <Route path="/wpt/:section" element={<WPTPage />} />
             
-            {/* NUEVAS RUTAS */}
+            {/* RUTAS ADICIONALES */}
             <Route path="/rakeback" element={<RakebackPage />} />
             <Route path="/admin" element={<AdminPanel />} />
             
