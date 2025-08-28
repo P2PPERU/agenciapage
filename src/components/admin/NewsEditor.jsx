@@ -1,6 +1,6 @@
-// src/components/admin/NewsEditor.jsx - VERSIÓN CORREGIDA
+// src/components/admin/NewsEditor.jsx - VERSIÓN ACTUALIZADA
 import { useState, useEffect } from 'react';
-import CustomRichEditor from './CustomRichEditor';
+import TipTapEditor from '../editor/TipTapEditor'; // ✅ Importación actualizada
 import { 
   FaSave, FaTimes, FaUpload, FaImages, FaNewspaper 
 } from 'react-icons/fa';
@@ -262,12 +262,13 @@ const NewsEditor = ({
           {/* Editor Personalizado */}
           <div>
             <label className="text-gray-400 text-sm mb-2 block">Contenido</label>
-            <CustomRichEditor
+            <TipTapEditor   // ✅ Uso actualizado
               value={content}
               onChange={setContent}
               onImageUpload={handleImageUploadToServer}
               placeholder="Escribe el contenido de tu noticia..."
-              minHeight="400px"
+              token={token}
+              API_URL={API_URL}
             />
           </div>
         </div>

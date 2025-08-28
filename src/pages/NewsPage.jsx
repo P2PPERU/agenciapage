@@ -1,4 +1,4 @@
-// src/pages/NewsPage.jsx - ACTUALIZADA CON BACKEND REAL
+// src/pages/NewsPage.jsx - ACTUALIZADA CON CORRECCIONES PARA TEXTO DESBORDADO
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaCalendar, FaUser, FaEye, FaShare, FaWhatsapp, FaTelegram, FaTwitter, FaFacebook, FaSearch, FaFire, FaTrophy, FaNewspaper, FaSpinner } from 'react-icons/fa'
@@ -93,6 +93,13 @@ const NewsPage = () => {
     }
     
     window.open(shareUrls[platform], '_blank')
+  }
+
+  // Función para truncar texto largo
+  const truncateText = (text, maxLength = 100) => {
+    if (!text) return ''
+    if (text.length <= maxLength) return text
+    return text.substring(0, maxLength) + '...'
   }
   
   return (
@@ -207,8 +214,8 @@ const NewsPage = () => {
                       {article.tags && (
                         <div className="absolute bottom-4 left-4 flex gap-2">
                           {article.tags.split(',').slice(0, 3).map(tag => (
-                            <span key={tag} className="bg-black/50 backdrop-blur text-white px-3 py-1 rounded-full text-xs">
-                              {tag.trim()}
+                            <span key={tag} className="bg-black/50 backdrop-blur text-white px-3 py-1 rounded-full text-xs break-words max-w-20">
+                              {truncateText(tag.trim(), 15)}
                             </span>
                           ))}
                         </div>
@@ -217,23 +224,43 @@ const NewsPage = () => {
                     
                     {/* Contenido */}
                     <div className="p-6">
-                      <h2 className="text-2xl font-bold text-white mb-3 hover:text-poker-gold transition-colors">
+                      {/* TÍTULO CON CONTROL DE OVERFLOW */}
+                      <h2 className="text-2xl font-bold text-white mb-3 hover:text-poker-gold transition-colors break-words hyphens-auto overflow-hidden" style={{
+                        wordWrap: 'break-word',
+                        overflowWrap: 'break-word',
+                        lineHeight: '1.3',
+                        display: '-webkit-box',
+                        WebkitLineClamp: 3,
+                        WebkitBoxOrient: 'vertical'
+                      }}>
                         {article.title}
                       </h2>
-                      <p className="text-gray-400 mb-4 line-clamp-2">
-                        {article.excerpt}
+                      
+                      {/* EXTRACTO CON CONTROL DE OVERFLOW */}
+                      <p className="text-gray-400 mb-4 break-words overflow-hidden" style={{
+                        wordWrap: 'break-word',
+                        overflowWrap: 'break-word',
+                        display: '-webkit-box',
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: 'vertical'
+                      }}>
+                        {truncateText(article.excerpt, 150)}
                       </p>
                       
                       {/* Meta información */}
-                      <div className="flex items-center justify-between text-sm text-gray-500">
-                        <div className="flex items-center gap-4">
-                          <span className="flex items-center gap-1">
+                      <div className="flex items-center justify-between text-sm text-gray-500 flex-wrap gap-2">
+                        <div className="flex items-center gap-4 flex-wrap">
+                          <span className="flex items-center gap-1 break-all">
                             <FaCalendar />
-                            {new Date(article.created_at).toLocaleDateString()}
+                            <span className="truncate max-w-24">
+                              {new Date(article.created_at).toLocaleDateString()}
+                            </span>
                           </span>
                           <span className="flex items-center gap-1">
                             <FaUser />
-                            {article.author}
+                            <span className="truncate max-w-16">
+                              {truncateText(article.author, 10)}
+                            </span>
                           </span>
                           <span className="flex items-center gap-1">
                             <FaEye />
@@ -294,19 +321,39 @@ const NewsPage = () => {
                             <span className="text-4xl text-gray-600">🃏</span>
                           </div>
                         )}
-                        <span className="absolute top-2 right-2 bg-gray-900/80 text-white px-2 py-1 rounded text-xs">
-                          {article.category}
+                        <span className="absolute top-2 right-2 bg-gray-900/80 text-white px-2 py-1 rounded text-xs truncate max-w-20">
+                          {truncateText(article.category, 10)}
                         </span>
                       </div>
                       <div className="p-4">
-                        <h3 className="text-lg font-bold text-white mb-2 line-clamp-2">
+                        {/* TÍTULO CON CONTROL ESTRICTO */}
+                        <h3 className="text-lg font-bold text-white mb-2 break-words hyphens-auto" style={{
+                          wordWrap: 'break-word',
+                          overflowWrap: 'break-word',
+                          display: '-webkit-box',
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: 'vertical',
+                          overflow: 'hidden'
+                        }}>
                           {article.title}
                         </h3>
-                        <p className="text-sm text-gray-400 line-clamp-2 mb-3">
-                          {article.excerpt}
+                        
+                        {/* EXTRACTO CON CONTROL */}
+                        <p className="text-sm text-gray-400 mb-3 break-words" style={{
+                          wordWrap: 'break-word',
+                          overflowWrap: 'break-word',
+                          display: '-webkit-box',
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: 'vertical',
+                          overflow: 'hidden'
+                        }}>
+                          {truncateText(article.excerpt, 80)}
                         </p>
+                        
                         <div className="flex items-center justify-between text-xs text-gray-500">
-                          <span>{new Date(article.created_at).toLocaleDateString()}</span>
+                          <span className="truncate">
+                            {new Date(article.created_at).toLocaleDateString()}
+                          </span>
                           <span>{article.views} vistas</span>
                         </div>
                       </div>
@@ -322,7 +369,7 @@ const NewsPage = () => {
                   <h3 className="text-2xl font-bold text-black mb-2">
                     🎁 BONO ESPECIAL
                   </h3>
-                  <p className="text-black/80 mb-4">
+                  <p className="text-black/80 mb-4 break-words">
                     Deposita hoy y recibe 200% extra hasta S/1000
                   </p>
                   <a 
@@ -350,16 +397,23 @@ const NewsPage = () => {
                           onClick={() => navigate(`/noticias/${article.slug}`)}
                         >
                           <div className="flex items-start gap-3">
-                            <span className="text-2xl font-bold text-poker-gold">
+                            <span className="text-2xl font-bold text-poker-gold flex-shrink-0">
                               {index + 1}
                             </span>
-                            <div className="flex-1">
-                              <h4 className="text-white font-semibold mb-1 hover:text-poker-gold transition line-clamp-2">
+                            <div className="flex-1 min-w-0">
+                              <h4 className="text-white font-semibold mb-1 hover:text-poker-gold transition break-words" style={{
+                                wordWrap: 'break-word',
+                                overflowWrap: 'break-word',
+                                display: '-webkit-box',
+                                WebkitLineClamp: 2,
+                                WebkitBoxOrient: 'vertical',
+                                overflow: 'hidden'
+                              }}>
                                 {article.title}
                               </h4>
                               <div className="flex items-center gap-3 text-xs text-gray-500">
                                 <span>{article.views} vistas</span>
-                                <span>{article.category}</span>
+                                <span className="truncate">{truncateText(article.category, 10)}</span>
                               </div>
                             </div>
                           </div>
@@ -373,7 +427,7 @@ const NewsPage = () => {
                   <h3 className="text-xl font-bold text-white mb-4">
                     📧 Newsletter
                   </h3>
-                  <p className="text-gray-400 mb-4">
+                  <p className="text-gray-400 mb-4 break-words">
                     Recibe las mejores estrategias y promociones directo en tu email
                   </p>
                   <input
@@ -442,7 +496,7 @@ const NewsPage = () => {
                   />
                 )}
                 <div className="p-8">
-                  <div className="flex items-center gap-4 mb-4">
+                  <div className="flex items-center gap-4 mb-4 flex-wrap">
                     <span className="bg-poker-gold text-black px-3 py-1 rounded-full text-sm font-bold">
                       {selectedArticle.category}
                     </span>
@@ -453,18 +507,23 @@ const NewsPage = () => {
                     )}
                   </div>
                   
-                  <h1 className="text-4xl font-bold text-white mb-4">
+                  {/* TÍTULO DEL MODAL CON CONTROL */}
+                  <h1 className="text-4xl font-bold text-white mb-4 break-words hyphens-auto" style={{
+                    wordWrap: 'break-word',
+                    overflowWrap: 'break-word',
+                    lineHeight: '1.2'
+                  }}>
                     {selectedArticle.title}
                   </h1>
                   
-                  <div className="flex items-center gap-6 text-sm text-gray-400 mb-6">
+                  <div className="flex items-center gap-6 text-sm text-gray-400 mb-6 flex-wrap">
                     <span className="flex items-center gap-1">
                       <FaCalendar />
                       {new Date(selectedArticle.created_at).toLocaleDateString()}
                     </span>
                     <span className="flex items-center gap-1">
                       <FaUser />
-                      {selectedArticle.author}
+                      <span className="break-words">{selectedArticle.author}</span>
                     </span>
                     <span className="flex items-center gap-1">
                       <FaEye />
@@ -472,19 +531,30 @@ const NewsPage = () => {
                     </span>
                   </div>
                   
+                  {/* CONTENIDO DEL MODAL CON CONTROL DE OVERFLOW */}
                   <div className="prose prose-invert max-w-none">
-                    <p className="text-xl text-gray-300 mb-6">
+                    <p className="text-xl text-gray-300 mb-6 break-words" style={{
+                      wordWrap: 'break-word',
+                      overflowWrap: 'break-word'
+                    }}>
                       {selectedArticle.excerpt}
                     </p>
                     {selectedArticle.content_html ? (
-                    <div 
-                      className="text-gray-300"
-                      dangerouslySetInnerHTML={{ __html: selectedArticle.content_html }}
-                    />
+                      <div 
+                        className="text-gray-300 break-words overflow-hidden prose-img:max-w-full prose-img:h-auto"
+                        style={{
+                          wordWrap: 'break-word',
+                          overflowWrap: 'break-word'
+                        }}
+                        dangerouslySetInnerHTML={{ __html: selectedArticle.content_html }}
+                      />
                     ) : (
-                      <div className="text-gray-300 whitespace-pre-wrap">
-                      {selectedArticle.content}
-                    </div>
+                      <div className="text-gray-300 whitespace-pre-wrap break-words" style={{
+                        wordWrap: 'break-word',
+                        overflowWrap: 'break-word'
+                      }}>
+                        {selectedArticle.content}
+                      </div>
                     )}
                   </div>
                   
@@ -493,7 +563,7 @@ const NewsPage = () => {
                       <p className="text-sm text-gray-400 mb-3">Etiquetas:</p>
                       <div className="flex flex-wrap gap-2">
                         {selectedArticle.tags.split(',').map(tag => (
-                          <span key={tag} className="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm">
+                          <span key={tag} className="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm break-words">
                             {tag.trim()}
                           </span>
                         ))}
@@ -503,26 +573,26 @@ const NewsPage = () => {
                   
                   <div className="mt-8 pt-8 border-t border-gray-800">
                     <p className="text-sm text-gray-400 mb-3">Compartir:</p>
-                    <div className="flex gap-3">
+                    <div className="flex gap-3 flex-wrap">
                       <button 
                         onClick={() => shareArticle(selectedArticle, 'whatsapp')}
-                        className="bg-whatsapp text-white px-4 py-2 rounded-lg hover:opacity-80 transition"
+                        className="bg-whatsapp text-white px-4 py-2 rounded-lg hover:opacity-80 transition flex items-center gap-2"
                       >
-                        <FaWhatsapp className="inline mr-2" />
+                        <FaWhatsapp />
                         WhatsApp
                       </button>
                       <button 
                         onClick={() => shareArticle(selectedArticle, 'telegram')}
-                        className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:opacity-80 transition"
+                        className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:opacity-80 transition flex items-center gap-2"
                       >
-                        <FaTelegram className="inline mr-2" />
+                        <FaTelegram />
                         Telegram
                       </button>
                       <button 
                         onClick={() => shareArticle(selectedArticle, 'twitter')}
-                        className="bg-blue-400 text-white px-4 py-2 rounded-lg hover:opacity-80 transition"
+                        className="bg-blue-400 text-white px-4 py-2 rounded-lg hover:opacity-80 transition flex items-center gap-2"
                       >
-                        <FaTwitter className="inline mr-2" />
+                        <FaTwitter />
                         Twitter
                       </button>
                     </div>
