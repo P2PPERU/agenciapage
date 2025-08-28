@@ -1,6 +1,6 @@
-// src/components/editor/TextBubbleMenu.jsx - VERSIÓN CORREGIDA
+// src/components/editor/TextBubbleMenu.jsx - IMPORTACIÓN CORREGIDA
 import React from 'react';
-import { BubbleMenu } from '@tiptap/react';
+import { BubbleMenu } from '@tiptap/extension-bubble-menu'; // ✅ Importación correcta
 import {
   FaBold, FaItalic, FaStrikethrough,
   FaLink, FaHighlighter, FaQuoteLeft

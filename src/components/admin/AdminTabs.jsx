@@ -1,14 +1,25 @@
 // src/components/admin/AdminTabs.jsx
-import { FaChartLine, FaNewspaper, FaUsers, FaDollarSign } from 'react-icons/fa';
+import { 
+  FaChartLine, 
+  FaNewspaper, 
+  FaUsers, 
+  FaDollarSign,
+  FaEdit,
+  FaGift,
+  FaBullseye
+} from 'react-icons/fa';
 
 const AdminTabs = ({ activeTab, onTabChange }) => {
   const tabs = [
     { id: 'dashboard', name: 'Dashboard', icon: FaChartLine },
     { id: 'news', name: 'Noticias', icon: FaNewspaper },
     { id: 'users', name: 'Usuarios', icon: FaUsers },
-    { id: 'rake', name: 'Rake', icon: FaDollarSign }
+    { id: 'edit-users', name: 'Editar Usuarios', icon: FaEdit },
+    { id: 'rake', name: 'Rake', icon: FaDollarSign },
+    { id: 'gifts', name: 'Regalos', icon: FaGift },
+    { id: 'goals', name: 'Metas', icon: FaBullseye }
   ];
-  
+
   return (
     <div className="flex space-x-2 mb-6 overflow-x-auto">
       {tabs.map(tab => (

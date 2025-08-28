@@ -1,8 +1,10 @@
-// src/components/admin/NewsEditor.jsx - VERSIÓN ACTUALIZADA
+// src/components/admin/NewsEditor.jsx - VERSIÓN CON URLS CORREGIDAS
 import { useState, useEffect } from 'react';
-import TipTapEditor from '../editor/TipTapEditor'; // ✅ Importación actualizada
+import TipTapEditor from '../editor/TipTapEditor';
+import EditorErrorBoundary from '../editor/EditorErrorBoundary';
+import ImageUploadTest from '../editor/ImageUploadTest';
 import { 
-  FaSave, FaTimes, FaUpload, FaImages, FaNewspaper 
+  FaSave, FaTimes, FaUpload, FaImages, FaNewspaper, FaBug 
 } from 'react-icons/fa';
 
 const NewsEditor = ({ 
@@ -28,6 +30,26 @@ const NewsEditor = ({
   const [gallery, setGallery] = useState([]);
   const [galleryPreviews, setGalleryPreviews] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showDebug, setShowDebug] = useState(false);
+  
+  // ⭐ Función para construir URL completa de forma consistente
+  const buildFullImageUrl = (imagePath) => {
+    if (!imagePath) return null;
+    
+    // Si ya es una URL completa, devolverla tal como está
+    if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+      return imagePath;
+    }
+    
+    // Si es una ruta relativa, construir URL completa
+    if (imagePath.startsWith('/')) {
+      const baseUrl = API_URL.replace('/api', ''); // http://localhost:5000
+      return `${baseUrl}${imagePath}`;
+    }
+    
+    // Fallback
+    return `${API_URL.replace('/api', '')}/${imagePath}`;
+  };
   
   // Cargar datos si es edición
   useEffect(() => {
@@ -43,18 +65,25 @@ const NewsEditor = ({
       });
       setContent(editingNews.content_html || editingNews.content || '');
       
+      // ⭐ Construir URL de imagen de forma consistente
       if (editingNews.image) {
-        setFeaturedImagePreview(`${API_URL.replace('/api', '')}${editingNews.image}`);
+        const fullImageUrl = buildFullImageUrl(editingNews.image);
+        setFeaturedImagePreview(fullImageUrl);
+        console.log('🖼️ Imagen existente:', fullImageUrl);
       }
     }
   }, [editingNews, API_URL]);
   
-  // Función para subir imagen al servidor SIN COMPRESIÓN
+  // ⭐ Función CORREGIDA para subir imagen al servidor
   const handleImageUploadToServer = async (file) => {
+    console.log('📤 NewsEditor: Subiendo imagen:', file.name);
     const formData = new FormData();
     formData.append('image', file);
     
     try {
+      console.log('📤 NewsEditor: URL endpoint:', `${API_URL}/admin/upload-image`);
+      console.log('📤 NewsEditor: Token presente:', !!token);
+      
       const response = await fetch(`${API_URL}/admin/upload-image`, {
         method: 'POST',
         headers: {
@@ -63,18 +92,43 @@ const NewsEditor = ({
         body: formData
       });
       
-      const data = await response.json();
-      if (data.success) {
-        return data.fullUrl || `${API_URL.replace('/api', '')}${data.url}`;
+      console.log('📤 NewsEditor: Response status:', response.status);
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('📤 NewsEditor: Error response:', errorText);
+        throw new Error(`Error ${response.status}: ${errorText}`);
       }
-      return null;
+      
+      const data = await response.json();
+      console.log('📤 NewsEditor: Response data:', data);
+      
+      if (data.success) {
+        // ⭐ CAMBIO CLAVE: Asegurar que siempre retornamos URL completa
+        let fullUrl = data.fullUrl;
+        
+        if (!fullUrl && data.url) {
+          // Construir URL completa si solo tenemos la relativa
+          fullUrl = buildFullImageUrl(data.url);
+        }
+        
+        console.log('📤 NewsEditor: URL completa construida:', fullUrl);
+        
+        if (!fullUrl) {
+          throw new Error('No se pudo construir la URL de la imagen');
+        }
+        
+        return fullUrl;
+      } else {
+        throw new Error('Respuesta del servidor sin éxito');
+      }
     } catch (error) {
-      console.error('Error subiendo imagen:', error);
-      return null;
+      console.error('📤 NewsEditor: Error completo:', error);
+      throw error;
     }
   };
   
-  // Manejar imagen principal SIN COMPRESIÓN
+  // Manejar imagen principal
   const handleFeaturedImage = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -96,7 +150,7 @@ const NewsEditor = ({
     }
   };
   
-  // Manejar galería SIN COMPRESIÓN
+  // Manejar galería
   const handleGalleryImages = (e) => {
     const files = Array.from(e.target.files);
     
@@ -135,20 +189,33 @@ const NewsEditor = ({
       formData.append(key, newsForm[key]);
     });
     
+    // ⭐ IMPORTANTE: Procesar contenido para asegurar URLs absolutas
+    let processedContent = content;
+    
+    // Reemplazar URLs relativas por absolutas en el contenido HTML
+    if (processedContent && API_URL) {
+      const baseUrl = API_URL.replace('/api', '');
+      processedContent = processedContent.replace(
+        /src="\/uploads\//g, 
+        `src="${baseUrl}/uploads/`
+      );
+      console.log('📝 Contenido procesado con URLs absolutas');
+    }
+    
     // Agregar contenido
     const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = content;
+    tempDiv.innerHTML = processedContent;
     const textContent = tempDiv.textContent || tempDiv.innerText || '';
     
     formData.append('content', textContent);
-    formData.append('content_html', content);
+    formData.append('content_html', processedContent);
     
-    // Agregar imagen principal SIN MODIFICAR
+    // Agregar imagen principal
     if (featuredImage) {
       formData.append('featuredImage', featuredImage);
     }
     
-    // Agregar galería SIN MODIFICAR
+    // Agregar galería
     gallery.forEach(file => {
       formData.append('gallery', file);
     });
@@ -188,6 +255,18 @@ const NewsEditor = ({
         </h2>
         <div className="flex gap-2">
           <button
+            onClick={() => setShowDebug(!showDebug)}
+            className={`px-3 py-2 rounded-lg transition flex items-center gap-2 ${
+              showDebug 
+                ? 'bg-blue-600 text-white' 
+                : 'bg-gray-700 text-gray-300 hover:bg-blue-600'
+            }`}
+            title="Herramientas de debug"
+          >
+            <FaBug />
+            Debug
+          </button>
+          <button
             onClick={onCancel}
             className="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
           >
@@ -203,6 +282,21 @@ const NewsEditor = ({
           </button>
         </div>
       </div>
+
+      {/* Debug Panel */}
+      {showDebug && (
+        <div className="mb-6 space-y-4">
+          <ImageUploadTest token={token} API_URL={API_URL} />
+          <div className="bg-gray-900 p-3 rounded text-xs text-gray-400">
+            <div><strong>API_URL:</strong> {API_URL}</div>
+            <div><strong>Base URL:</strong> {API_URL.replace('/api', '')}</div>
+            <div><strong>Token presente:</strong> {token ? '✅ Sí' : '❌ No'}</div>
+            <div><strong>Contenido actual:</strong> {content.length} caracteres</div>
+            <div><strong>Imágenes en contenido:</strong> {(content.match(/<img/g) || []).length}</div>
+            <div><strong>Preview imagen:</strong> {featuredImagePreview ? '✅ Sí' : '❌ No'}</div>
+          </div>
+        </div>
+      )}
       
       <div className="grid lg:grid-cols-3 gap-6">
         {/* Panel Principal */}
@@ -259,21 +353,25 @@ const NewsEditor = ({
             </div>
           </div>
           
-          {/* Editor Personalizado */}
+          {/* Editor Personalizado con Error Boundary */}
           <div>
-            <label className="text-gray-400 text-sm mb-2 block">Contenido</label>
-            <TipTapEditor   // ✅ Uso actualizado
-              value={content}
-              onChange={setContent}
-              onImageUpload={handleImageUploadToServer}
-              placeholder="Escribe el contenido de tu noticia..."
-              token={token}
-              API_URL={API_URL}
-            />
+            <label className="text-gray-400 text-sm mb-2 block">
+              Contenido del Artículo
+            </label>
+            <EditorErrorBoundary>
+              <TipTapEditor
+                value={content}
+                onChange={setContent}
+                onImageUpload={handleImageUploadToServer}
+                placeholder="Escribe el contenido de tu noticia. Puedes arrastrar imágenes directamente aquí..."
+                token={token}
+                API_URL={API_URL}
+              />
+            </EditorErrorBoundary>
           </div>
         </div>
         
-        {/* Panel Lateral */}
+        {/* Panel Lateral - mismo código que antes */}
         <div className="space-y-6">
           {/* Imagen Principal */}
           <div>
@@ -284,6 +382,10 @@ const NewsEditor = ({
                   src={featuredImagePreview} 
                   alt="Preview" 
                   className="w-full h-48 object-cover rounded-lg"
+                  onError={(e) => {
+                    console.error('❌ Error cargando preview:', featuredImagePreview);
+                    e.target.style.display = 'none';
+                  }}
                 />
                 <button
                   onClick={() => {
@@ -312,52 +414,7 @@ const NewsEditor = ({
             )}
           </div>
           
-          {/* Galería */}
-          <div>
-            <label className="text-gray-400 text-sm mb-2 block">Galería de Imágenes</label>
-            {galleryPreviews.length > 0 && (
-              <div className="grid grid-cols-2 gap-2 mb-3">
-                {galleryPreviews.map((preview, index) => (
-                  <div key={index} className="relative">
-                    <img 
-                      src={preview} 
-                      alt={`Gallery ${index + 1}`}
-                      className="w-full h-20 object-cover rounded"
-                    />
-                    <button
-                      onClick={() => {
-                        const newGallery = [...gallery];
-                        const newPreviews = [...galleryPreviews];
-                        newGallery.splice(index, 1);
-                        newPreviews.splice(index, 1);
-                        setGallery(newGallery);
-                        setGalleryPreviews(newPreviews);
-                      }}
-                      className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded text-xs hover:bg-red-600"
-                    >
-                      <FaTimes size={10} />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
-            
-            <label className="block cursor-pointer">
-              <div className="border-2 border-dashed border-gray-600 rounded-lg p-3 text-center hover:border-yellow-500 transition">
-                <FaImages className="text-xl text-gray-400 mx-auto mb-1" />
-                <p className="text-xs text-gray-400">Agregar a galería</p>
-              </div>
-              <input
-                type="file"
-                accept="image/jpeg,image/jpg,image/png,image/gif,image/webp"
-                multiple
-                onChange={handleGalleryImages}
-                className="hidden"
-              />
-            </label>
-          </div>
-          
-          {/* Opciones */}
+          {/* Opciones - mismo código que antes */}
           <div className="space-y-4">
             <label className="flex items-center gap-2 text-white">
               <input

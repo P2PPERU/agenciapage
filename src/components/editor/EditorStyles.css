@@ -1,22 +1,30 @@
-/* src/components/editor/EditorStyles.css */
+/* src/components/editor/EditorStyles.css - VERSIÓN MEJORADA CON MEJOR CONTROL DE IMÁGENES */
 
-/* Contenedor principal */
+/* =============================================
+   CONTENEDOR PRINCIPAL
+   ============================================= */
 .tiptap-editor-container {
   background: #111827;
   border-radius: 0.75rem;
   overflow: hidden;
   border: 1px solid #374151;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Barra de herramientas */
+/* =============================================
+   BARRA DE HERRAMIENTAS
+   ============================================= */
 .menu-bar {
   background: #1f2937;
   border-bottom: 1px solid #374151;
-  padding: 0.5rem;
+  padding: 0.75rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .menu-group {
@@ -24,27 +32,30 @@
   gap: 0.25rem;
   background: #111827;
   padding: 0.25rem;
-  border-radius: 0.375rem;
+  border-radius: 0.5rem;
+  border: 1px solid #374151;
 }
 
 .menu-button {
-  padding: 0.5rem;
+  padding: 0.5rem 0.75rem;
   background: transparent;
   border: none;
   color: #9ca3af;
-  border-radius: 0.25rem;
+  border-radius: 0.375rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.875rem;
-  min-width: 2rem;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
 }
 
 .menu-button:hover:not(:disabled) {
   background: #374151;
   color: #f3f4f6;
+  transform: translateY(-1px);
 }
 
 .menu-button:disabled {
@@ -55,199 +66,313 @@
 .menu-button.is-active {
   background: #fbbf24;
   color: #000;
+  box-shadow: 0 2px 4px rgba(251, 191, 36, 0.3);
 }
 
-/* Editor principal */
+/* =============================================
+   EDITOR PRINCIPAL
+   ============================================= */
 .editor-wrapper {
   position: relative;
-  min-height: 400px;
-  max-height: 600px;
+  min-height: 500px;
+  max-height: 700px;
   overflow-y: auto;
-  background: #0a0a0b;
+  background: #0f172a;
 }
 
 .editor-content .ProseMirror {
-  padding: 1.5rem;
-  min-height: 400px;
+  padding: 2rem;
+  min-height: 500px;
   outline: none;
   color: #f3f4f6;
-  font-size: 1rem;
+  font-size: 1.125rem;
   line-height: 1.75;
+  font-family: 'Inter', system-ui, sans-serif;
 }
 
-/* Placeholder */
+/* =============================================
+   PLACEHOLDER
+   ============================================= */
 .editor-content .ProseMirror p.is-editor-empty:first-child::before {
   content: attr(data-placeholder);
   float: left;
   color: #6b7280;
   pointer-events: none;
   height: 0;
+  font-style: italic;
 }
 
-/* Estilos de contenido */
+/* =============================================
+   ESTILOS DE CONTENIDO
+   ============================================= */
 .editor-content .ProseMirror h1 {
   font-size: 2.5rem;
-  font-weight: bold;
-  margin: 1.5rem 0;
+  font-weight: 800;
+  margin: 2rem 0 1rem;
   color: #fbbf24;
   line-height: 1.2;
+  letter-spacing: -0.025em;
 }
 
 .editor-content .ProseMirror h2 {
   font-size: 2rem;
-  font-weight: bold;
-  margin: 1.25rem 0;
+  font-weight: 700;
+  margin: 1.75rem 0 0.75rem;
   color: #f59e0b;
   line-height: 1.3;
 }
 
 .editor-content .ProseMirror h3 {
   font-size: 1.5rem;
-  font-weight: bold;
-  margin: 1rem 0;
+  font-weight: 600;
+  margin: 1.5rem 0 0.5rem;
   color: #d97706;
   line-height: 1.4;
 }
 
 .editor-content .ProseMirror p {
-  margin: 0.75rem 0;
+  margin: 1rem 0;
+  text-align: justify;
 }
 
 .editor-content .ProseMirror ul,
 .editor-content .ProseMirror ol {
-  margin: 1rem 0;
+  margin: 1.5rem 0;
   padding-left: 2rem;
 }
 
 .editor-content .ProseMirror li {
-  margin: 0.25rem 0;
+  margin: 0.5rem 0;
 }
 
 .editor-content .ProseMirror blockquote {
   border-left: 4px solid #fbbf24;
-  padding-left: 1rem;
-  margin: 1rem 0;
+  padding-left: 1.5rem;
+  margin: 2rem 0;
   font-style: italic;
-  color: #9ca3af;
+  color: #cbd5e1;
+  background: rgba(251, 191, 36, 0.05);
+  border-radius: 0 0.5rem 0.5rem 0;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .editor-content .ProseMirror pre {
-  background: #1f2937;
-  padding: 1rem;
-  border-radius: 0.5rem;
+  background: #1e293b;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
   overflow-x: auto;
-  margin: 1rem 0;
+  margin: 2rem 0;
+  border: 1px solid #334155;
+  font-family: 'Fira Code', monospace;
 }
 
 .editor-content .ProseMirror code {
-  background: #374151;
-  padding: 0.2rem 0.4rem;
-  border-radius: 0.25rem;
-  font-family: monospace;
+  background: #1e293b;
+  color: #fbbf24;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9em;
 }
 
-/* Enlaces */
+.editor-content .ProseMirror .highlight {
+  background: rgba(251, 191, 36, 0.3);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+}
+
+/* =============================================
+   ESTILOS DE ENLACES
+   ============================================= */
 .editor-content .ProseMirror a,
 .editor-link {
   color: #3b82f6;
   text-decoration: underline;
   cursor: pointer;
+  transition: color 0.2s ease;
 }
 
 .editor-content .ProseMirror a:hover,
 .editor-link:hover {
   color: #60a5fa;
+  text-decoration-color: #60a5fa;
 }
 
-/* Imágenes */
+/* =============================================
+   ESTILOS DE IMÁGENES FORZADOS PARA VISIBILIDAD
+   ============================================= */
 .editor-content .ProseMirror img,
-.editor-image {
-  max-width: 100%;
-  height: auto;
+.editor-image,
+.editor-content-area img {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  max-width: 100% !important;
+  height: auto !important;
   border-radius: 0.5rem;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 2px solid transparent;
+  margin: 1rem 0;
+  z-index: 1;
 }
 
+.editor-content .ProseMirror img:hover,
+.editor-image:hover,
+.editor-content-area img:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  border-color: rgba(251, 191, 36, 0.5);
+}
+
+/* Forzar que las imágenes sean visibles incluso si hay problemas */
+.editor-content .ProseMirror img[src] {
+  background: #374151;
+  min-height: 100px;
+  position: relative;
+}
+
+.editor-content .ProseMirror img[src]:before {
+  content: "🖼️ Cargando imagen...";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #9ca3af;
+  font-size: 14px;
+  z-index: -1;
+}
+
+/* Selección de imagen en editor */
 .editor-content .ProseMirror img.ProseMirror-selectednode {
-  outline: 3px solid #fbbf24;
-  outline-offset: 2px;
+  outline: 3px solid #fbbf24 !important;
+  outline-offset: 3px;
+  animation: pulse 2s infinite;
 }
 
-/* YouTube embeds */
+/* Controles de imagen popup */
+.image-controls-popup {
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.image-controls-popup button:hover {
+  background: #4b5563 !important;
+  transform: scale(1.05);
+}
+
+/* Estados de carga */
+.editor-status {
+  font-family: monospace;
+}
+
+.editor-instructions {
+  border-top: 1px solid #374151;
+}
+
+/* =============================================
+   YOUTUBE EMBEDS
+   ============================================= */
+.editor-content .ProseMirror .youtube-embed,
 .editor-content .ProseMirror div[data-youtube-video] {
   position: relative;
+  width: 100%;
   padding-bottom: 56.25%;
   height: 0;
   overflow: hidden;
-  margin: 1rem 0;
-  border-radius: 0.5rem;
+  margin: 2rem auto;
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
+.editor-content .ProseMirror .youtube-embed iframe,
 .editor-content .ProseMirror div[data-youtube-video] iframe {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
+  border: none;
 }
 
-/* Tablas */
+/* =============================================
+   TABLAS
+   ============================================= */
 .editor-content .ProseMirror table {
   border-collapse: collapse;
   width: 100%;
-  margin: 1rem 0;
+  margin: 2rem auto;
+  background: #1e293b;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .editor-content .ProseMirror th,
 .editor-content .ProseMirror td {
-  border: 1px solid #374151;
-  padding: 0.5rem;
+  border: 1px solid #334155;
+  padding: 0.75rem 1rem;
   text-align: left;
 }
 
 .editor-content .ProseMirror th {
-  background: #1f2937;
-  font-weight: bold;
+  background: #0f172a;
+  font-weight: 600;
+  color: #fbbf24;
 }
 
-/* Bubble Menu */
+.editor-content .ProseMirror tr:hover {
+  background: rgba(51, 65, 85, 0.3);
+}
+
+/* =============================================
+   BUBBLE MENUS
+   ============================================= */
 .text-bubble-menu,
 .image-bubble-menu {
   background: #1f2937;
   border: 1px solid #374151;
-  border-radius: 0.5rem;
-  padding: 0.25rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  border-radius: 0.75rem;
+  padding: 0.5rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
 }
 
 .bubble-menu-content {
   display: flex;
-  gap: 0.25rem;
+  gap: 0.5rem;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .bubble-button {
-  padding: 0.5rem;
+  padding: 0.5rem 0.75rem;
   background: transparent;
   border: none;
   color: #9ca3af;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
   font-size: 0.875rem;
-  min-width: 2rem;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .bubble-button:hover {
   background: #374151;
   color: #f3f4f6;
+  transform: translateY(-1px);
 }
 
 .bubble-button.is-active {
   background: #fbbf24;
   color: #000;
+  box-shadow: 0 2px 8px rgba(251, 191, 36, 0.3);
 }
 
 .bubble-button-danger:hover {
@@ -257,18 +382,36 @@
 
 .menu-divider {
   width: 1px;
-  height: 1.5rem;
-  background: #374151;
+  height: 2rem;
+  background: #4b5563;
   margin: 0 0.25rem;
 }
 
-/* Floating Menu */
+/* Información de imagen */
+.image-info {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #374151;
+}
+
+.info-badge {
+  background: #374151;
+  color: #9ca3af;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* =============================================
+   FLOATING MENU
+   ============================================= */
 .floating-menu {
   background: #1f2937;
   border: 1px solid #374151;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   padding: 0.5rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
   display: flex;
   gap: 0.25rem;
 }
@@ -278,9 +421,9 @@
   background: transparent;
   border: none;
   color: #9ca3af;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
   font-size: 0.875rem;
 }
 
@@ -294,7 +437,9 @@
   color: #000;
 }
 
-/* Diálogos */
+/* =============================================
+   DIÁLOGOS
+   ============================================= */
 .editor-dialog-overlay {
   position: fixed;
   inset: 0;
@@ -303,106 +448,120 @@
   align-items: center;
   justify-content: center;
   z-index: 9999;
+  backdrop-filter: blur(4px);
 }
 
 .editor-dialog {
   background: #1f2937;
-  border-radius: 0.75rem;
-  padding: 1.5rem;
+  border-radius: 1rem;
+  padding: 2rem;
   min-width: 400px;
   max-width: 90%;
   border: 1px solid #374151;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 .editor-dialog h3 {
   color: #f3f4f6;
-  margin-bottom: 1rem;
-  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
   font-weight: 600;
 }
 
-.editor-dialog input {
+.editor-dialog input,
+.editor-dialog textarea {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.75rem 1rem;
   background: #111827;
   border: 1px solid #374151;
-  border-radius: 0.375rem;
+  border-radius: 0.5rem;
   color: #f3f4f6;
   margin-bottom: 1rem;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
 }
 
-.editor-dialog input:focus {
+.editor-dialog input:focus,
+.editor-dialog textarea:focus {
   outline: none;
   border-color: #fbbf24;
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.1);
 }
 
 .dialog-buttons {
   display: flex;
-  gap: 0.75rem;
+  gap: 1rem;
   justify-content: flex-end;
+  margin-top: 1.5rem;
 }
 
 .btn-primary {
-  padding: 0.5rem 1.25rem;
+  padding: 0.75rem 1.5rem;
   background: linear-gradient(to right, #fbbf24, #f59e0b);
   color: #000;
   border: none;
-  border-radius: 0.375rem;
+  border-radius: 0.5rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
 }
 
 .btn-primary:hover {
   opacity: 0.9;
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
 }
 
 .btn-secondary {
-  padding: 0.5rem 1.25rem;
+  padding: 0.75rem 1.5rem;
   background: #374151;
   color: #f3f4f6;
   border: none;
-  border-radius: 0.375rem;
+  border-radius: 0.5rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
 }
 
 .btn-secondary:hover {
   background: #4b5563;
 }
 
-/* Galería */
+/* =============================================
+   GALERÍA
+   ============================================= */
 .gallery-dialog {
-  max-width: 800px;
-  width: 90%;
+  max-width: 900px;
+  width: 95%;
 }
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
   max-height: 400px;
   overflow-y: auto;
-  margin-bottom: 1rem;
-  padding: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
   background: #111827;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid #374151;
 }
 
 .gallery-item {
   aspect-ratio: 1;
   cursor: pointer;
-  border-radius: 0.375rem;
+  border-radius: 0.5rem;
   overflow: hidden;
   border: 2px solid transparent;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
+  position: relative;
 }
 
 .gallery-item:hover {
   border-color: #fbbf24;
   transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 .gallery-item img {
@@ -411,14 +570,36 @@
   object-fit: cover;
 }
 
-/* Footer del editor */
+/* =============================================
+   INSTRUCCIONES DEL EDITOR
+   ============================================= */
+.editor-instructions {
+  background: #1f2937;
+  border-top: 1px solid #374151;
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.editor-instructions p {
+  margin: 0;
+  color: #9ca3af;
+}
+
+.editor-instructions strong {
+  color: #fbbf24;
+}
+
+/* =============================================
+   FOOTER DEL EDITOR
+   ============================================= */
 .editor-footer {
   background: #1f2937;
   border-top: 1px solid #374151;
   padding: 0.75rem 1.5rem;
   display: flex;
-  justify-content: flex-end;
-  gap: 1.5rem;
+  justify-content: space-between;
+  align-items: center;
   font-size: 0.875rem;
   color: #6b7280;
 }
@@ -430,20 +611,44 @@
   gap: 0.25rem;
 }
 
-/* Loading */
+/* =============================================
+   LOADING
+   ============================================= */
 .editor-loading {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 400px;
+  min-height: 500px;
   color: #6b7280;
-  font-size: 1rem;
+  font-size: 1.125rem;
+  font-style: italic;
 }
 
-/* Responsive */
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 1024px) {
+  .editor-content .ProseMirror {
+    padding: 1.5rem;
+  }
+  
+  .image-wrapper.image-left,
+  .image-wrapper.image-right {
+    float: none !important;
+    margin: 1.5rem auto !important;
+    display: block;
+    text-align: center;
+  }
+  
+  .image-wrapper.image-large img,
+  .image-wrapper.image-full img {
+    max-width: 100% !important;
+  }
+}
+
 @media (max-width: 768px) {
   .menu-bar {
-    padding: 0.375rem;
+    padding: 0.5rem;
     gap: 0.375rem;
   }
   
@@ -454,20 +659,51 @@
   
   .menu-button {
     padding: 0.375rem;
-    min-width: 1.75rem;
+    min-width: 2rem;
+    min-height: 2rem;
+  }
+  
+  .editor-content .ProseMirror {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+  
+  .editor-content .ProseMirror h1 {
+    font-size: 2rem;
+  }
+  
+  .editor-content .ProseMirror h2 {
+    font-size: 1.5rem;
+  }
+  
+  .editor-content .ProseMirror h3 {
+    font-size: 1.25rem;
   }
   
   .editor-dialog {
     min-width: 90%;
-    padding: 1rem;
+    padding: 1.5rem;
   }
   
   .gallery-grid {
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+  
+  .bubble-menu-content {
+    flex-wrap: wrap;
+    max-width: 280px;
+  }
+  
+  .editor-footer {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
   }
 }
 
-/* Animaciones */
+/* =============================================
+   ANIMACIONES
+   ============================================= */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -479,8 +715,1014 @@
   }
 }
 
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
 .text-bubble-menu,
 .image-bubble-menu,
 .floating-menu {
   animation: fadeIn 0.2s ease;
+}
+
+/* =============================================
+   MODO LECTURA (Para NewsDetailPage)
+   ============================================= */
+.news-content {
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.8;
+  color: #f3f4f6;
+  font-size: 1.125rem;
+}
+
+.news-content img {
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: 0.75rem;
+  margin: 2rem auto;
+  display: block;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.news-content p {
+  margin: 1.5rem 0;
+  text-align: justify;
+}
+
+.news-content h1,
+.news-content h2,
+.news-content h3 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.news-content blockquote {
+  border-left: 4px solid #fbbf24;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  background: rgba(251, 191, 36, 0.05);
+  border-radius: 0 0.75rem 0.75rem 0;
+  font-style: italic;
+  color: #cbd5e1;
+}
+
+.news-content pre {
+  background: #1e293b;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  overflow-x: auto;
+  margin: 2rem 0;
+  border: 1px solid #334155;
+}
+
+.news-content code {
+  background: #1e293b;
+  color: #fbbf24;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-family: monospace;
+}
+
+.news-content a {
+  color: #3b82f6;
+  text-decoration: underline;
+}
+
+.news-content a:hover {
+  color: #60a5fa;
+}
+
+/* Clearfix para floated images */
+.news-content::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Agregar estas reglas a tu EditorStyles.css existente */
+
+/* =============================================
+   ESTILOS DE IMAGEN PERSONALIZADA - NUEVOS
+   ============================================= */
+
+/* Estilos base para todas las imágenes en el editor */
+.editor-content .ProseMirror img,
+.image-size-small,
+.image-size-medium,
+.image-size-large,
+.image-size-full {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  height: auto !important;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 2px solid transparent;
+  z-index: 1;
+  margin: 1rem 0; /* Margin por defecto, se sobrescribe con alineación */
+}
+
+/* Tamaños específicos */
+.editor-content .ProseMirror .image-size-small,
+.image-size-small {
+  max-width: 300px !important;
+  width: auto !important;
+}
+
+.editor-content .ProseMirror .image-size-medium,
+.image-size-medium {
+  max-width: 500px !important;
+  width: auto !important;
+}
+
+.editor-content .ProseMirror .image-size-large,
+.image-size-large {
+  max-width: 700px !important;
+  width: auto !important;
+}
+
+.editor-content .ProseMirror .image-size-full,
+.image-size-full {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* Alineaciones específicas */
+.editor-content .ProseMirror .image-align-left,
+.image-align-left {
+  float: left !important;
+  margin: 0.5rem 1.5rem 1rem 0 !important;
+  clear: left;
+}
+
+.editor-content .ProseMirror .image-align-center,
+.image-align-center {
+  float: none !important;
+  margin: 1.5rem auto !important;
+  display: block !important;
+  clear: both;
+}
+
+.editor-content .ProseMirror .image-align-right,
+.image-align-right {
+  float: right !important;
+  margin: 0.5rem 0 1rem 1.5rem !important;
+  clear: right;
+}
+
+/* Combinaciones específicas para mejor control */
+.editor-content .ProseMirror .image-size-small.image-align-left,
+.image-size-small.image-align-left {
+  max-width: min(300px, 45%) !important;
+}
+
+.editor-content .ProseMirror .image-size-medium.image-align-left,
+.image-size-medium.image-align-left {
+  max-width: min(500px, 60%) !important;
+}
+
+.editor-content .ProseMirror .image-size-small.image-align-right,
+.image-size-small.image-align-right {
+  max-width: min(300px, 45%) !important;
+}
+
+.editor-content .ProseMirror .image-size-medium.image-align-right,
+.image-size-medium.image-align-right {
+  max-width: min(500px, 60%) !important;
+}
+
+/* Hover effects mejorados */
+.editor-content .ProseMirror img:hover,
+.image-size-small:hover,
+.image-size-medium:hover,
+.image-size-large:hover,
+.image-size-full:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  border-color: rgba(251, 191, 36, 0.5);
+}
+
+/* Imagen seleccionada en el editor */
+.editor-content .ProseMirror img.ProseMirror-selectednode,
+.editor-content .ProseMirror .image-size-small.ProseMirror-selectednode,
+.editor-content .ProseMirror .image-size-medium.ProseMirror-selectednode,
+.editor-content .ProseMirror .image-size-large.ProseMirror-selectednode,
+.editor-content .ProseMirror .image-size-full.ProseMirror-selectednode {
+  outline: 3px solid #fbbf24 !important;
+  outline-offset: 3px;
+  animation: pulse 2s infinite;
+}
+
+/* Clearfix para elementos con imágenes flotantes */
+.editor-content .ProseMirror p:has(.image-align-left),
+.editor-content .ProseMirror p:has(.image-align-right) {
+  overflow: hidden;
+}
+
+/* Asegurar que el texto fluye correctamente alrededor de imágenes flotantes */
+.editor-content .ProseMirror p img.image-align-left ~ *,
+.editor-content .ProseMirror p img.image-align-right ~ * {
+  display: inline;
+}
+
+/* Responsive: en pantallas pequeñas, hacer todas las imágenes centradas */
+@media (max-width: 768px) {
+  .editor-content .ProseMirror .image-align-left,
+  .editor-content .ProseMirror .image-align-right,
+  .image-align-left,
+  .image-align-right {
+    float: none !important;
+    margin: 1.5rem auto !important;
+    display: block !important;
+    text-align: center;
+    max-width: 100% !important;
+  }
+  
+  .editor-content .ProseMirror .image-size-large,
+  .editor-content .ProseMirror .image-size-medium,
+  .image-size-large,
+  .image-size-medium {
+    max-width: 100% !important;
+  }
+}
+
+/* Estilos para el modo de lectura (NewsContentRenderer) */
+.news-content .image-size-small {
+  max-width: 300px !important;
+}
+
+.news-content .image-size-medium {
+  max-width: 500px !important;
+}
+
+.news-content .image-size-large {
+  max-width: 700px !important;
+}
+
+.news-content .image-size-full {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+.news-content .image-align-left {
+  float: left !important;
+  margin: 0.5rem 1.5rem 1rem 0 !important;
+}
+
+.news-content .image-align-center {
+  display: block !important;
+  margin: 1.5rem auto !important;
+  float: none !important;
+}
+
+.news-content .image-align-right {
+  float: right !important;
+  margin: 0.5rem 0 1rem 1.5rem !important;
+}
+
+/* Debug: mostrar atributos data en desarrollo */
+.editor-content .ProseMirror img[data-size]:after {
+  content: attr(data-size) " | " attr(data-align);
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  font-size: 10px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 2px 4px;
+  border-radius: 2px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.editor-content .ProseMirror img[data-size]:hover:after {
+  opacity: 1;
+}
+
+/* Asegurar que las imágenes no se desborden del contenedor */
+.editor-content .ProseMirror {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.editor-content .ProseMirror img {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Agregar estas reglas AL FINAL de tu EditorStyles.css con alta especificidad */
+
+/* =============================================
+   REGLAS CRÍTICAS PARA IMÁGENES - ALTA ESPECIFICIDAD
+   ============================================= */
+
+/* Resetear estilos base para todas las imágenes del editor */
+.editor-content .ProseMirror img {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  height: auto !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  border: 2px solid transparent !important;
+  margin: 1rem auto !important; /* Default: centered */
+  max-width: 100% !important;
+}
+
+/* TAMAÑOS ESPECÍFICOS - Forzar con alta especificidad */
+.editor-content .ProseMirror img[data-size="small"],
+.editor-content .ProseMirror .image-size-small {
+  max-width: 300px !important;
+  width: auto !important;
+}
+
+.editor-content .ProseMirror img[data-size="medium"],
+.editor-content .ProseMirror .image-size-medium {
+  max-width: 500px !important;
+  width: auto !important;
+}
+
+.editor-content .ProseMirror img[data-size="large"],
+.editor-content .ProseMirror .image-size-large {
+  max-width: 700px !important;
+  width: auto !important;
+}
+
+.editor-content .ProseMirror img[data-size="full"],
+.editor-content .ProseMirror .image-size-full {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* ALINEACIONES ESPECÍFICAS - Forzar con alta especificidad */
+.editor-content .ProseMirror img[data-align="left"],
+.editor-content .ProseMirror .image-align-left {
+  float: left !important;
+  margin: 0.5rem 1.5rem 1rem 0 !important;
+  clear: left !important;
+}
+
+.editor-content .ProseMirror img[data-align="center"],
+.editor-content .ProseMirror .image-align-center {
+  float: none !important;
+  margin: 1.5rem auto !important;
+  display: block !important;
+  clear: both !important;
+}
+
+.editor-content .ProseMirror img[data-align="right"],
+.editor-content .ProseMirror .image-align-right {
+  float: right !important;
+  margin: 0.5rem 0 1rem 1.5rem !important;
+  clear: right !important;
+}
+
+/* COMBINACIONES ESPECÍFICAS para mejor control en flotantes */
+.editor-content .ProseMirror img[data-size="small"][data-align="left"],
+.editor-content .ProseMirror img[data-size="small"][data-align="right"] {
+  max-width: min(300px, 45%) !important;
+}
+
+.editor-content .ProseMirror img[data-size="medium"][data-align="left"],
+.editor-content .ProseMirror img[data-size="medium"][data-align="right"] {
+  max-width: min(500px, 60%) !important;
+}
+
+/* Imagen seleccionada - resaltar */
+.editor-content .ProseMirror img.ProseMirror-selectednode {
+  outline: 3px solid #fbbf24 !important;
+  outline-offset: 3px !important;
+  animation: pulse 2s infinite !important;
+}
+
+/* Hover effects */
+.editor-content .ProseMirror img:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2) !important;
+  border-color: rgba(251, 191, 36, 0.5) !important;
+}
+
+/* =============================================
+   BUBBLE MENU STYLES - ASEGURAR VISIBILIDAD
+   ============================================= */
+.image-bubble-menu {
+  background: #1f2937 !important;
+  border: 1px solid #374151 !important;
+  border-radius: 12px !important;
+  padding: 8px !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(10px) !important;
+  z-index: 1000 !important;
+}
+
+.bubble-menu-content {
+  display: flex !important;
+  gap: 8px !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+}
+
+.menu-group {
+  display: flex !important;
+  gap: 4px !important;
+  background: #111827 !important;
+  padding: 4px !important;
+  border-radius: 8px !important;
+  border: 1px solid #374151 !important;
+}
+
+.bubble-button {
+  padding: 8px 12px !important;
+  background: transparent !important;
+  border: none !important;
+  color: #9ca3af !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 14px !important;
+  min-width: 36px !important;
+  min-height: 36px !important;
+}
+
+.bubble-button:hover {
+  background: #374151 !important;
+  color: #f3f4f6 !important;
+  transform: translateY(-1px) !important;
+}
+
+.bubble-button.is-active {
+  background: #fbbf24 !important;
+  color: #000 !important;
+  box-shadow: 0 2px 8px rgba(251, 191, 36, 0.3) !important;
+}
+
+.bubble-button-danger:hover {
+  background: #ef4444 !important;
+  color: white !important;
+}
+
+.menu-divider {
+  width: 1px !important;
+  height: 32px !important;
+  background: #4b5563 !important;
+  margin: 0 4px !important;
+}
+
+.image-info {
+  margin-top: 8px !important;
+  padding-top: 8px !important;
+  border-top: 1px solid #374151 !important;
+  text-align: center !important;
+}
+
+.info-badge {
+  background: #374151 !important;
+  color: #9ca3af !important;
+  padding: 4px 8px !important;
+  border-radius: 6px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+/* =============================================
+   DEBUG - MOSTRAR ATRIBUTOS VISUALMENTE (TEMPORAL)
+   ============================================= */
+.editor-content .ProseMirror img[data-size]::after {
+  content: attr(data-size) " • " attr(data-align) !important;
+  position: absolute !important;
+  bottom: -25px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  font-size: 10px !important;
+  background: rgba(0,0,0,0.8) !important;
+  color: #fbbf24 !important;
+  padding: 3px 6px !important;
+  border-radius: 4px !important;
+  pointer-events: none !important;
+  z-index: 10 !important;
+  opacity: 0 !important;
+  transition: opacity 0.3s !important;
+  font-family: monospace !important;
+}
+
+.editor-content .ProseMirror img[data-size]:hover::after {
+  opacity: 1 !important;
+}
+
+/* =============================================
+   RESPONSIVE - MOBILE FALLBACK
+   ============================================= */
+@media (max-width: 768px) {
+  .editor-content .ProseMirror img[data-align="left"],
+  .editor-content .ProseMirror img[data-align="right"] {
+    float: none !important;
+    margin: 1.5rem auto !important;
+    display: block !important;
+    text-align: center !important;
+    max-width: 100% !important;
+  }
+  
+  .bubble-menu-content {
+    flex-wrap: wrap !important;
+    max-width: 280px !important;
+  }
+  
+  .menu-group {
+    gap: 2px !important;
+  }
+  
+  .bubble-button {
+    min-width: 32px !important;
+    min-height: 32px !important;
+    padding: 6px 8px !important;
+    font-size: 12px !important;
+  }
+}
+
+/* =============================================
+   CLEARFIX - ASEGURAR FLUJO CORRECTO
+   ============================================= */
+.editor-content .ProseMirror::after {
+  content: "" !important;
+  display: table !important;
+  clear: both !important;
+}
+
+.editor-content .ProseMirror p::after {
+  content: "" !important;
+  display: table !important;
+  clear: both !important;
+}
+
+/* src/components/editor/EditorStyles.css - ESTILOS BÁSICOS SIN INTERFERENCIAS */
+
+/* =============================================
+   CONTENEDOR PRINCIPAL
+   ============================================= */
+.tiptap-editor-container {
+  background: #111827;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid #374151;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* =============================================
+   BARRA DE HERRAMIENTAS
+   ============================================= */
+.menu-bar {
+  background: #1f2937;
+  border-bottom: 1px solid #374151;
+  padding: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.menu-group {
+  display: flex;
+  gap: 0.25rem;
+  background: #111827;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid #374151;
+}
+
+.menu-button {
+  padding: 0.5rem 0.75rem;
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+}
+
+.menu-button:hover:not(:disabled) {
+  background: #374151;
+  color: #f3f4f6;
+  transform: translateY(-1px);
+}
+
+.menu-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.menu-button.is-active {
+  background: #fbbf24;
+  color: #000;
+  box-shadow: 0 2px 4px rgba(251, 191, 36, 0.3);
+}
+
+/* =============================================
+   EDITOR PRINCIPAL
+   ============================================= */
+.editor-wrapper {
+  position: relative;
+  min-height: 500px;
+  max-height: 700px;
+  overflow-y: auto;
+  background: #0f172a;
+}
+
+.editor-content .ProseMirror {
+  padding: 2rem;
+  min-height: 500px;
+  outline: none;
+  color: #f3f4f6;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* =============================================
+   PLACEHOLDER
+   ============================================= */
+.editor-content .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: #6b7280;
+  pointer-events: none;
+  height: 0;
+  font-style: italic;
+}
+
+/* =============================================
+   ESTILOS DE CONTENIDO BÁSICOS
+   ============================================= */
+.editor-content .ProseMirror h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 2rem 0 1rem;
+  color: #fbbf24;
+  line-height: 1.2;
+}
+
+.editor-content .ProseMirror h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 1.75rem 0 0.75rem;
+  color: #f59e0b;
+  line-height: 1.3;
+}
+
+.editor-content .ProseMirror h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.5rem;
+  color: #d97706;
+  line-height: 1.4;
+}
+
+.editor-content .ProseMirror p {
+  margin: 1rem 0;
+}
+
+.editor-content .ProseMirror ul,
+.editor-content .ProseMirror ol {
+  margin: 1.5rem 0;
+  padding-left: 2rem;
+}
+
+.editor-content .ProseMirror li {
+  margin: 0.5rem 0;
+}
+
+.editor-content .ProseMirror blockquote {
+  border-left: 4px solid #fbbf24;
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  font-style: italic;
+  color: #cbd5e1;
+  background: rgba(251, 191, 36, 0.05);
+  border-radius: 0 0.5rem 0.5rem 0;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.editor-content .ProseMirror pre {
+  background: #1e293b;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  overflow-x: auto;
+  margin: 2rem 0;
+  border: 1px solid #334155;
+  font-family: 'Fira Code', monospace;
+}
+
+.editor-content .ProseMirror code {
+  background: #1e293b;
+  color: #fbbf24;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9em;
+}
+
+/* =============================================
+   ESTILOS DE IMÁGENES BÁSICOS - SIN FORZAR NADA
+   ============================================= */
+.editor-content .ProseMirror img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.editor-content .ProseMirror img:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  filter: brightness(1.05);
+}
+
+/* Selección de imagen */
+.editor-content .ProseMirror img.ProseMirror-selectednode {
+  outline: 3px solid #fbbf24;
+  outline-offset: 3px;
+}
+
+/* =============================================
+   ENLACES
+   ============================================= */
+.editor-content .ProseMirror a {
+  color: #3b82f6;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.editor-content .ProseMirror a:hover {
+  color: #60a5fa;
+}
+
+/* =============================================
+   YOUTUBE EMBEDS
+   ============================================= */
+.editor-content .ProseMirror div[data-youtube-video] {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  margin: 2rem auto;
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.editor-content .ProseMirror div[data-youtube-video] iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.75rem;
+  border: none;
+}
+
+/* =============================================
+   TABLAS
+   ============================================= */
+.editor-content .ProseMirror table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 2rem auto;
+  background: #1e293b;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.editor-content .ProseMirror th,
+.editor-content .ProseMirror td {
+  border: 1px solid #334155;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.editor-content .ProseMirror th {
+  background: #0f172a;
+  font-weight: 600;
+  color: #fbbf24;
+}
+
+/* =============================================
+   DIÁLOGOS
+   ============================================= */
+.editor-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+}
+
+.editor-dialog {
+  background: #1f2937;
+  border-radius: 1rem;
+  padding: 2rem;
+  min-width: 400px;
+  max-width: 90%;
+  border: 1px solid #374151;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.editor-dialog h3 {
+  color: #f3f4f6;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.editor-dialog input,
+.editor-dialog textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: #111827;
+  border: 1px solid #374151;
+  border-radius: 0.5rem;
+  color: #f3f4f6;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.editor-dialog input:focus,
+.editor-dialog textarea:focus {
+  outline: none;
+  border-color: #fbbf24;
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.1);
+}
+
+.dialog-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+.btn-primary {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(to right, #fbbf24, #f59e0b);
+  color: #000;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+}
+
+.btn-secondary {
+  padding: 0.75rem 1.5rem;
+  background: #374151;
+  color: #f3f4f6;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: #4b5563;
+}
+
+/* =============================================
+   GALERÍA
+   ============================================= */
+.gallery-dialog {
+  max-width: 900px;
+  width: 95%;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #111827;
+  border-radius: 0.75rem;
+  border: 1px solid #374151;
+}
+
+.gallery-item {
+  aspect-ratio: 1;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.gallery-item:hover {
+  border-color: #fbbf24;
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =============================================
+   LOADING
+   ============================================= */
+.editor-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 500px;
+  color: #6b7280;
+  font-size: 1.125rem;
+  font-style: italic;
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 768px) {
+  .menu-bar {
+    padding: 0.5rem;
+    gap: 0.375rem;
+  }
+  
+  .menu-group {
+    padding: 0.125rem;
+    gap: 0.125rem;
+  }
+  
+  .menu-button {
+    padding: 0.375rem;
+    min-width: 2rem;
+    min-height: 2rem;
+  }
+  
+  .editor-content .ProseMirror {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+  
+  .editor-content .ProseMirror h1 {
+    font-size: 2rem;
+  }
+  
+  .editor-content .ProseMirror h2 {
+    font-size: 1.5rem;
+  }
+  
+  .editor-content .ProseMirror h3 {
+    font-size: 1.25rem;
+  }
+  
+  .editor-dialog {
+    min-width: 90%;
+    padding: 1.5rem;
+  }
+  
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
 }

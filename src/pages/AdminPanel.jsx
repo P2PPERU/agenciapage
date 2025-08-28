@@ -1,11 +1,17 @@
-// src/pages/AdminPanel.jsx - VERSIÓN SIMPLIFICADA
+// src/pages/AdminPanel.jsx - VERSIÓN ACTUALIZADA SIN TICKETS
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  FaNewspaper, FaUsers, FaChartLine, FaDollarSign 
+  FaNewspaper, 
+  FaUsers, 
+  FaChartLine, 
+  FaDollarSign,
+  FaBullseye,
+  FaGift,
+  FaEdit
 } from 'react-icons/fa';
 
-// Importar componentes subdivididos
+// Importar componentes subdivididos existentes
 import AdminHeader from '../components/admin/AdminHeader';
 import AdminLogin from '../components/admin/AdminLogin';
 import AdminDashboard from '../components/admin/AdminDashboard';
@@ -14,6 +20,11 @@ import NewsList from '../components/admin/NewsList';
 import UsersManager from '../components/admin/UsersManager';
 import RakeManager from '../components/admin/RakeManager';
 import AdminTabs from '../components/admin/AdminTabs';
+
+// Importar nuevos componentes (sin TicketsManager)
+import GoalsManager from '../components/admin/GoalsManager';
+import GiftsManager from '../components/admin/GiftsManager';
+import UserEditor from '../components/admin/UserEditor';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
@@ -25,12 +36,15 @@ const AdminPanel = () => {
   const [editorMode, setEditorMode] = useState('list');
   const [editingNews, setEditingNews] = useState(null);
   
-  // Estados de datos
+  // Estados de datos expandidos (sin tickets)
   const [stats, setStats] = useState({
     totalNews: 0,
     totalUsers: 0,
     totalRake: 0,
-    totalBonusReleased: 0
+    totalBonusReleased: 0,
+    activeGoals: 0,
+    activeGifts: 0,
+    totalMilestones: 0
   });
   const [news, setNews] = useState([]);
   const [users, setUsers] = useState([]);
@@ -112,6 +126,9 @@ const AdminPanel = () => {
         break;
       case 'users':
       case 'rake':
+      case 'edit-users':
+      case 'gifts':
+      case 'goals':
         fetchUsers();
         break;
       case 'dashboard':
@@ -120,7 +137,7 @@ const AdminPanel = () => {
     }
   }, [activeTab, isAuthenticated]);
 
-  // Handlers
+  // Handlers existentes
   const handleLogin = async (loginData) => {
     setLoading(true);
     try {
@@ -187,6 +204,12 @@ const AdminPanel = () => {
     window.open(`/noticias/${item.slug}`, '_blank');
   };
 
+  // Nuevos handlers para recargar datos
+  const handleReloadUsers = () => {
+    fetchUsers();
+    fetchStats(); // También actualizar estadísticas
+  };
+
   // Login Screen
   if (!isAuthenticated) {
     return <AdminLogin onLogin={handleLogin} loading={loading} />;
@@ -198,7 +221,12 @@ const AdminPanel = () => {
       <AdminHeader onLogout={handleLogout} />
       
       <div className="container mx-auto px-4 py-6">
-        <AdminTabs activeTab={activeTab} onTabChange={setActiveTab} />
+        {/* Actualizar AdminTabs con las nuevas pestañas */}
+        <AdminTabs 
+          activeTab={activeTab} 
+          onTabChange={setActiveTab}
+          stats={stats} // Pasar stats para mostrar notificaciones
+        />
         
         <AnimatePresence mode="wait">
           {/* Dashboard Tab */}
@@ -254,18 +282,64 @@ const AdminPanel = () => {
           {activeTab === 'users' && (
             <UsersManager 
               users={users}
-              onReload={fetchUsers}
+              onReload={handleReloadUsers}
               apiCall={apiCall}
             />
+          )}
+
+          {/* Nuevo: Editor de Usuarios Tab */}
+          {activeTab === 'edit-users' && (
+            <motion.div
+              key="edit-users"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <UserEditor 
+                users={users}
+                apiCall={apiCall}
+                onReload={handleReloadUsers}
+              />
+            </motion.div>
           )}
 
           {/* Rake Tab */}
           {activeTab === 'rake' && (
             <RakeManager
               users={users}
-              onReload={fetchUsers}
+              onReload={handleReloadUsers}
               apiCall={apiCall}
             />
+          )}
+
+          {/* Nuevo: Regalos Tab */}
+          {activeTab === 'gifts' && (
+            <motion.div
+              key="gifts"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <GiftsManager 
+                users={users}
+                apiCall={apiCall}
+              />
+            </motion.div>
+          )}
+
+          {/* Nuevo: Metas Tab */}
+          {activeTab === 'goals' && (
+            <motion.div
+              key="goals"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <GoalsManager 
+                users={users}
+                apiCall={apiCall}
+              />
+            </motion.div>
           )}
         </AnimatePresence>
       </div>
