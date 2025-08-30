@@ -364,19 +364,31 @@ const NewsPage = () => {
               
               {/* Sidebar */}
               <div className="space-y-8">
-                {/* Widget de Publicidad */}
-                <div className="bg-gradient-to-r from-poker-gold to-yellow-500 rounded-2xl p-6 text-center">
-                  <h3 className="text-2xl font-bold text-black mb-2">
-                    🎁 BONO ESPECIAL
-                  </h3>
-                  <p className="text-black/80 mb-4 break-words">
-                    Deposita hoy y recibe 200% extra hasta S/1000
-                  </p>
+                {/* Imagen del Bono 200% */}
+                <div className="rounded-2xl overflow-hidden">
                   <a 
                     href="https://wa.me/51955311839?text=Quiero%20el%20bono%20especial%20del%20200%"
-                    className="inline-block bg-black text-white font-bold px-6 py-3 rounded-full hover:bg-gray-900 transition"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block hover:opacity-90 transition-opacity"
                   >
-                    OBTENER BONO
+                    <img
+                      src="/logos/bono200.png"
+                      alt="Bono 200% extra hasta S/1000"
+                      className="w-full h-auto rounded-2xl"
+                      onError={(e) => {
+                        // Si la imagen .png no existe, prueba con .jpg
+                        e.target.src = "/logos/bono200.jpg";
+                        e.target.onerror = () => {
+                          // Si tampoco existe .jpg, prueba con .jpeg
+                          e.target.src = "/logos/bono200.jpeg";
+                          e.target.onerror = () => {
+                            // Si no existe ninguna, oculta la imagen
+                            e.target.style.display = 'none';
+                          };
+                        };
+                      }}
+                    />
                   </a>
                 </div>
                 
@@ -422,31 +434,18 @@ const NewsPage = () => {
                   </div>
                 </div>
                 
-                {/* Newsletter */}
-                <div className="bg-gray-900 rounded-2xl p-6">
-                  <h3 className="text-xl font-bold text-white mb-4">
-                    📧 Newsletter
-                  </h3>
-                  <p className="text-gray-400 mb-4 break-words">
-                    Recibe las mejores estrategias y promociones directo en tu email
-                  </p>
-                  <input
-                    type="email"
-                    placeholder="Tu email..."
-                    className="w-full bg-gray-800 text-white px-4 py-2 rounded-lg mb-3 focus:outline-none focus:ring-2 focus:ring-poker-gold"
-                  />
-                  <button className="w-full bg-poker-gold text-black font-bold py-2 rounded-lg hover:bg-yellow-500 transition">
-                    SUSCRIBIRME
-                  </button>
-                </div>
-                
                 {/* Redes Sociales */}
                 <div className="bg-gray-900 rounded-2xl p-6">
                   <h3 className="text-xl font-bold text-white mb-4">
                     Síguenos
                   </h3>
                   <div className="grid grid-cols-2 gap-3">
-                    <a href="#" className="bg-gray-800 hover:bg-whatsapp text-white p-3 rounded-lg text-center transition">
+                    <a 
+                      href="https://wa.me/51955311839?text=Hola,%20quiero%20más%20información" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-gray-800 hover:bg-whatsapp text-white p-3 rounded-lg text-center transition"
+                    >
                       <FaWhatsapp className="mx-auto mb-1" />
                       <span className="text-xs">WhatsApp</span>
                     </a>

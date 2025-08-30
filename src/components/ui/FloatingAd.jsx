@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaTimes, FaTrophy, FaDollarSign, FaFire, FaClock } from 'react-icons/fa'
 import { useNextTournamentTimer, formatTournamentName } from "../../utils/tournamentTimer"
+
 const FloatingAd = () => {
   const [isVisible, setIsVisible] = useState(false)
   const [isMinimized, setIsMinimized] = useState(false)
@@ -194,14 +195,14 @@ const FloatingAd = () => {
         )}
       </AnimatePresence>
       
-      {/* Versión Mobile - Bottom */}
+      {/* Versión Mobile - Bottom con mayor separación */}
       <AnimatePresence>
         {isVisible && !isMinimized && (
           <motion.div
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
-            className="md:hidden fixed bottom-20 left-2 right-2 z-40"
+            className="md:hidden fixed bottom-40 left-2 right-2 z-40"
           >
             <div className={`relative rounded-2xl shadow-2xl p-4 ${
               nextTournament?.type === 'super' 

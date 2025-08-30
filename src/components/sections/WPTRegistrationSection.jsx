@@ -280,7 +280,7 @@ const WPTRegistrationSection = ({ registrationSteps, promosPeru }) => {
                               Ciudad:
                             </label>
                             <p className="text-white font-bold text-xl">{step.personalData.ciudad}</p>
-                            <p className="text-green-300 text-sm mt-1">Obligatorio: Lima</p>
+                            <p className="text-green-300 text-sm mt-1">Obligatorio: Lima o donde te ecuentres</p>
                           </div>
                           
                           {/* Código Postal */}

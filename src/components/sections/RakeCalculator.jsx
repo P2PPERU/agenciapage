@@ -446,8 +446,18 @@ const RakeCalculator = () => {
   ]
 
   return (
-    <div className="bg-gradient-to-br from-gray-900 to-gray-800 py-12" id="comparador">
-      <div className="container mx-auto px-4 max-w-2xl">
+    <div className="relative py-12 md:py-20 bg-gradient-to-br from-gray-900 via-black to-gray-900 overflow-hidden" id="comparador">
+      {/* Background abstracto */}
+      <div className="absolute inset-0">
+        <div className="absolute top-1/4 left-0 w-72 h-72 bg-gradient-to-r from-yellow-600/20 to-orange-600/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-0 w-72 h-72 bg-gradient-to-r from-green-600/20 to-teal-600/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-purple-600/10 to-blue-600/10 rounded-full blur-3xl"></div>
+        
+        {/* Patrón de grid */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
+      </div>
+
+      <div className="container mx-auto px-4 max-w-2xl relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -466,7 +476,7 @@ const RakeCalculator = () => {
         {/* Carrusel */}
         <div className="relative">
           {/* Slide Container */}
-          <div className="bg-black rounded-2xl p-6 md:p-8 shadow-2xl min-h-[600px] overflow-hidden">
+          <div className="bg-black/60 backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-2xl min-h-[600px] overflow-hidden border border-gray-800">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentSlide}
@@ -496,13 +506,13 @@ const RakeCalculator = () => {
           {/* Controles de navegación - Flechas */}
           <button
             onClick={prevSlide}
-            className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-full transition-colors shadow-lg"
+            className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-800/80 backdrop-blur hover:bg-gray-700 text-white p-3 rounded-full transition-colors shadow-lg border border-gray-700"
           >
             <FaChevronLeft />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-full transition-colors shadow-lg"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800/80 backdrop-blur hover:bg-gray-700 text-white p-3 rounded-full transition-colors shadow-lg border border-gray-700"
           >
             <FaChevronRight />
           </button>
@@ -528,15 +538,15 @@ const RakeCalculator = () => {
           viewport={{ once: true }}
           className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4"
         >
-          <div className="bg-gray-800/50 p-4 rounded-xl text-center">
+          <div className="bg-gray-800/50 backdrop-blur p-4 rounded-xl text-center border border-gray-700">
             <p className="text-yellow-500 font-bold text-lg mb-2">Pagos Semanales</p>
             <p className="text-gray-400 text-sm">Todos los lunes</p>
           </div>
-          <div className="bg-gray-800/50 p-4 rounded-xl text-center">
+          <div className="bg-gray-800/50 backdrop-blur p-4 rounded-xl text-center border border-gray-700">
             <p className="text-yellow-500 font-bold text-lg mb-2">100% Garantizado</p>
             <p className="text-gray-400 text-sm">Sin letra pequeña</p>
           </div>
-          <div className="bg-gray-800/50 p-4 rounded-xl text-center">
+          <div className="bg-gray-800/50 backdrop-blur p-4 rounded-xl text-center border border-gray-700">
             <p className="text-yellow-500 font-bold text-lg mb-2">Soporte 24/7</p>
             <p className="text-gray-400 text-sm">En español</p>
           </div>

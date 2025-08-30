@@ -274,7 +274,7 @@ export const crazySchedule = [
 
 export const features = [
   { iconName: 'FaUsers', title: '5,000+ Jugadores Activos', desc: 'Mesas llenas 24/7 en todos los stakes' },
-  { iconName: 'FaClock', title: 'Retiros en 24-48hrs', desc: 'Procesamiento rápido y confiable' },
+  { iconName: 'FaClock', title: 'Retiros en 0-1hrs', desc: 'Procesamiento rápido y confiable' },
   { iconName: 'FaShieldAlt', title: '100% Seguro y Licenciado', desc: 'Regulado por autoridades internacionales' },
   { iconName: 'FaGamepad', title: 'Disponible en Todas las Plataformas', desc: 'PC, Mac, iOS, Android - Juega donde quieras' }
 ]

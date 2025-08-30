@@ -38,7 +38,7 @@ const HomePage = () => {
   const [visibleSalas, setVisibleSalas] = useState(10)
   const [selectedFilter, setSelectedFilter] = useState('all')
   const [viewMode, setViewMode] = useState('compact')
-  const [playersOnline] = useState(5847)
+  const [playersOnline] = useState(+10000)
 
   // Filtrado principal considerando nivel + filtros
   const filteredSalas = salas.filter(sala => {

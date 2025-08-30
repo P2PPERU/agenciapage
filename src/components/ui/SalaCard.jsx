@@ -71,7 +71,7 @@ const SalaCard = ({ sala, index, viewMode = 'compact' }) => {
             </div>
             <div className="text-center">
               <FaClock className="text-purple-500 mx-auto mb-1" size={14} />
-              <p className="text-gray-400">{sala.paymentTime || '24h'}</p>
+              <p className="text-gray-400">{sala.paymentTime || '1h'}</p>
             </div>
           </div>
           

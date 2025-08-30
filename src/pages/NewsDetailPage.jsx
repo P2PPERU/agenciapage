@@ -325,45 +325,70 @@ const NewsDetailPage = () => {
             <div className="lg:col-span-1">
               <div className="sticky top-4 space-y-4">
                 
-                {/* Widget compacto */}
+                {/* Imagen del Bono 200% */}
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.4 }}
-                  className="bg-gradient-to-r from-poker-gold to-yellow-500 rounded-lg p-4 text-center"
+                  className="rounded-lg overflow-hidden"
                 >
-                  <h3 className="text-lg font-bold text-black mb-2">
-                    🎁 BONO
-                  </h3>
-                  <p className="text-black/80 mb-3 text-sm">
-                    200% extra hasta S/1000
-                  </p>
                   <a 
                     href="https://wa.me/51955311839?text=Quiero%20el%20bono%20especial%20del%20200%"
-                    className="inline-block bg-black text-white font-bold px-3 py-2 rounded-full hover:bg-gray-900 transition text-sm"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block hover:opacity-90 transition-opacity"
                   >
-                    OBTENER
+                    <img
+                      src="/logos/bono200.png"
+                      alt="Bono 200% extra hasta S/1000"
+                      className="w-full h-auto rounded-lg"
+                      onError={(e) => {
+                        // Si la imagen .png no existe, prueba con .jpg
+                        e.target.src = "/logos/bono200.jpg";
+                        e.target.onerror = () => {
+                          // Si tampoco existe .jpg, prueba con .jpeg
+                          e.target.src = "/logos/bono200.jpeg";
+                          e.target.onerror = () => {
+                            // Si no existe ninguna, oculta la imagen
+                            e.target.style.display = 'none';
+                          };
+                        };
+                      }}
+                    />
                   </a>
                 </motion.div>
 
-                {/* Newsletter compacto */}
+                {/* Imagen Free 10K */}
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.6 }}
-                  className="bg-gray-900 rounded-lg p-4"
+                  className="rounded-lg overflow-hidden"
                 >
-                  <h3 className="text-base font-bold text-white mb-3">
-                    📧 Newsletter
-                  </h3>
-                  <input
-                    type="email"
-                    placeholder="Tu email..."
-                    className="w-full bg-gray-800 text-white px-3 py-2 rounded mb-3 focus:outline-none focus:ring-1 focus:ring-poker-gold text-sm"
-                  />
-                  <button className="w-full bg-poker-gold text-black font-bold py-2 rounded hover:bg-yellow-500 transition text-sm">
-                    SUSCRIBIRME
-                  </button>
+                  <a 
+                    href="https://wa.me/51955311839?text=Quiero%20información%20sobre%20el%20free%2010K"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block hover:opacity-90 transition-opacity"
+                  >
+                    <img
+                      src="/logos/free10k.png"
+                      alt="Free 10K - Promoción especial"
+                      className="w-full h-auto rounded-lg"
+                      onError={(e) => {
+                        // Si la imagen .png no existe, prueba con .jpg
+                        e.target.src = "/logos/free10k.jpg";
+                        e.target.onerror = () => {
+                          // Si tampoco existe .jpg, prueba con .jpeg
+                          e.target.src = "/logos/free10k.jpeg";
+                          e.target.onerror = () => {
+                            // Si no existe ninguna, oculta la imagen
+                            e.target.style.display = 'none';
+                          };
+                        };
+                      }}
+                    />
+                  </a>
                 </motion.div>
 
                 {/* Redes sociales minimalistas */}
@@ -377,7 +402,12 @@ const NewsDetailPage = () => {
                     Síguenos
                   </h3>
                   <div className="flex gap-2">
-                    <a href="#" className="flex-1 bg-green-600 text-white p-2 rounded text-center hover:bg-green-700 transition">
+                    <a 
+                      href="https://wa.me/51955311839?text=Hola,%20quiero%20más%20información" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 bg-green-600 text-white p-2 rounded text-center hover:bg-green-700 transition"
+                    >
                       <FaWhatsapp />
                     </a>
                     <a href="#" className="flex-1 bg-blue-400 text-white p-2 rounded text-center hover:bg-blue-500 transition">

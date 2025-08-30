@@ -149,7 +149,7 @@ const BonusFloatingAd = () => {
         )}
       </AnimatePresence>
 
-      {/* --- Mobile Version --- */}
+      {/* --- Mobile Version - Botón movido a la izquierda --- */}
       <AnimatePresence>
         {isVisible && !isMinimized && (
           <motion.div
@@ -189,7 +189,7 @@ const BonusFloatingAd = () => {
                   <p className="text-yellow-300 text-xs font-medium">Cada S/5 → S/3 bono</p>
                 </div>
 
-                {/* CTA */}
+                {/* CTA al lado derecho del 200% */}
                 <div className="text-center">
                   <motion.a
                     href={whatsappUrl}
@@ -199,7 +199,7 @@ const BonusFloatingAd = () => {
                     transition={{ duration: 2, repeat: Infinity }}
                     className="block bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-black font-bold py-2 px-3 rounded-lg border border-yellow-300 text-sm"
                   >
-                    <FaGift className="animate-bounce mb-1" />
+                    <FaGift className="animate-bounce mb-2" />
                     Activar ahora
                   </motion.a>
                   

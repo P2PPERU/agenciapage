@@ -1,4 +1,4 @@
-// src/App.jsx - VERSIÓN COMPLETA ACTUALIZADA
+// src/App.jsx - VERSIÓN SIN ROTATING BANNER
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -16,7 +16,6 @@ import NewsDetailPage from './pages/NewsDetailPage'
 import WhatsAppButton from './components/ui/WhatsAppButton'
 import FloatingAd from './components/ui/FloatingAd'
 import BonusFloatingAd from './components/ui/BonusFloatingAd'
-import RotatingBanner from './components/ui/RotatingBanner'
 import UrgencyBanner from './components/ui/UrgencyBanner'
 import Footer from './components/layout/Footer'
 
@@ -57,7 +56,7 @@ const Navigation = () => {
         setTimeout(() => {
           const element = document.getElementById(hash)
           if (element) {
-            const offset = 140
+            const offset = 100
             const elementPosition = element.getBoundingClientRect().top
             const offsetPosition = elementPosition + window.pageYOffset - offset
             window.scrollTo({ top: offsetPosition, behavior: 'smooth' })
@@ -66,7 +65,7 @@ const Navigation = () => {
       } else {
         const element = document.getElementById(hash)
         if (element) {
-          const offset = 140
+          const offset = 100
           const elementPosition = element.getBoundingClientRect().top
           const offsetPosition = elementPosition + window.pageYOffset - offset
           window.scrollTo({ top: offsetPosition, behavior: 'smooth' })
@@ -235,11 +234,8 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-poker-black text-white">
-        {/* HEADER PRINCIPAL - SIEMPRE ARRIBA */}
+        {/* HEADER PRINCIPAL - SOLO NAVIGATION */}
         <Navigation />
-        
-        {/* BANNER ROTATIVO - DEBAJO DEL HEADER */}
-        <RotatingBanner />
         
         <WhatsAppButton />
         
@@ -247,7 +243,7 @@ function App() {
         <BonusFloatingAd />
         <FloatingAd />
         
-        <main className="pt-28">
+        <main className="pt-20">
           <Routes>
             <Route path="/" element={<HomePage />} />
             

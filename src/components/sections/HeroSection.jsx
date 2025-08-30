@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
-import { FaTrophy, FaMoneyBillWave, FaHeadphones, FaUsers, FaChartLine, FaClock, FaSearch, FaBalanceScale } from 'react-icons/fa'
+import { FaTrophy, FaMoneyBillWave, FaHeadphones, FaUsers, FaChartLine, FaClock, FaSearch, FaBalanceScale, FaWhatsapp, FaGift } from 'react-icons/fa'
 import { motion } from 'framer-motion'
 import { getMessagesByLevel } from '../../utils/storage'
 
 const HeroSection = ({ userLevel }) => {
-  const [activePlayerCount, setActivePlayerCount] = useState(10453)
+  const [activePlayerCount, setActivePlayerCount] = useState(18)
   const messages = getMessagesByLevel(userLevel)
   
   useEffect(() => {
@@ -93,7 +93,6 @@ const HeroSection = ({ userLevel }) => {
               {activePlayerCount.toLocaleString()} jugadores {userLevel ? `nivel ${userLevel}` : 'comparando salas'} ahora
             </span>
           </motion.div>
-          
           {/* Badge de nivel si existe */}
           {userLevel && (
             <motion.div
@@ -117,7 +116,7 @@ const HeroSection = ({ userLevel }) => {
             <motion.span 
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
+              transition={{ delay: 0.4 }}
               className="block text-white mb-2"
             >
               {userLevel ? messages.hero.split(' ').slice(0, -2).join(' ') : 'ENCUENTRA LA SALA'}
@@ -125,17 +124,25 @@ const HeroSection = ({ userLevel }) => {
             <motion.span 
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5 }}
-              className="block bg-gradient-to-r from-poker-gold via-yellow-400 to-poker-gold bg-clip-text text-transparent"
+              transition={{ delay: 0.6 }}
+              className="block bg-gradient-to-r from-poker-gold via-yellow-400 to-poker-gold bg-clip-text text-transparent mb-4"
             >
               {userLevel ? messages.hero.split(' ').slice(-2).join(' ') : 'MÁS RENTABLE'}
+            </motion.span>
+            <motion.span 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="block text-2xl md:text-3xl font-bold text-gray-300"
+            >
+              Y LOS MEJORES BONOS
             </motion.span>
           </h1>
           
           <motion.p 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.7 }}
+            transition={{ delay: 1.1 }}
             className="text-xl md:text-2xl mb-12 text-gray-300 max-w-3xl mx-auto"
           >
             {userLevel ? messages.subtitle : 'Compara rakeback hasta 60%, bonos y promociones de +10 salas verificadas'}
@@ -145,7 +152,7 @@ const HeroSection = ({ userLevel }) => {
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9 }}
+            transition={{ delay: 1.3 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-4xl mx-auto"
           >
             <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl p-4 hover:border-poker-gold transition-all">
@@ -170,13 +177,26 @@ const HeroSection = ({ userLevel }) => {
             </div>
           </motion.div>
           
-          {/* CTAs Personalizados */}
+          {/* CTAs Mejorados */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1 }}
+            transition={{ delay: 1.5 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
+            <a 
+              href="https://wa.me/51955311839?text=Quiero%20el%20bono%20del%20200%25%20en%20mi%20primer%20depósito"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-200 bg-gradient-to-r from-red-600 to-red-500 rounded-full hover:scale-105 hover:shadow-2xl hover:shadow-red-500/25"
+            >
+              <span className="absolute inset-0 w-full h-full rounded-full bg-gradient-to-r from-red-600 to-red-500 blur-lg opacity-50 group-hover:opacity-75 transition-opacity"></span>
+              <span className="relative flex items-center">
+                <FaWhatsapp className="mr-2" />
+                OBTENER BONO 200%
+              </span>
+            </a>
+            
             <a 
               href={userLevel ? 
                 `https://wa.me/51955311839?text=${encodeURIComponent(messages.whatsapp)}` :
@@ -189,7 +209,7 @@ const HeroSection = ({ userLevel }) => {
               <span className="absolute inset-0 w-full h-full rounded-full bg-gradient-to-r from-poker-gold to-yellow-500 blur-lg opacity-50 group-hover:opacity-75 transition-opacity"></span>
               <span className="relative flex items-center">
                 <FaSearch className="mr-2" />
-                {userLevel ? messages.cta : 'COMPARAR TODAS LAS SALAS'}
+                {userLevel ? messages.cta : 'COMPARAR SALAS'}
               </span>
             </a>
             
@@ -198,7 +218,7 @@ const HeroSection = ({ userLevel }) => {
               className="group inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-200 bg-gray-900 border-2 border-gray-700 rounded-full hover:bg-gray-800 hover:border-poker-gold hover:scale-105"
             >
               <FaChartLine className="mr-2" />
-              {userLevel ? 'CALCULAR MI RAKEBACK' : 'CALCULAR MI RENTABILIDAD'}
+              {userLevel ? 'CALCULAR MI RAKEBACK' : 'CALCULAR RENTABILIDAD'}
             </a>
           </motion.div>
           
@@ -206,7 +226,7 @@ const HeroSection = ({ userLevel }) => {
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.3 }}
+            transition={{ delay: 1.7 }}
             className="mt-12 flex flex-wrap justify-center gap-6"
           >
             <div className="flex items-center text-gray-400">
@@ -238,7 +258,7 @@ const HeroSection = ({ userLevel }) => {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1.5 }}
+              transition={{ delay: 1.9 }}
               className="mt-8"
             >
               <p className="text-gray-500 text-sm">
@@ -259,7 +279,7 @@ const HeroSection = ({ userLevel }) => {
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
+        transition={{ delay: 1.9 }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
       >
         <div className="animate-bounce">

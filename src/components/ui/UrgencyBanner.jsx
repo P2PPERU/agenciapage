@@ -5,7 +5,7 @@ import { FaFire, FaTimes } from 'react-icons/fa'
 const UrgencyBanner = () => {
   const [currentOffer, setCurrentOffer] = useState(0)
   const [playersToday, setPlayersToday] = useState(17)
-  const [playersOnline, setPlayersOnline] = useState(5847)
+  const [playersOnline, setPlayersOnline] = useState(+1000)
   const [isVisible, setIsVisible] = useState(true)
 
   const specialOffers = [

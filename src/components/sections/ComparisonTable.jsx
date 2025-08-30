@@ -37,7 +37,7 @@ const ComparisonTable = () => {
       destacado: 'BAD BEAT JACKPOT GIGANTE',
       whatsapp: 'Quiero jugar en X-POKER con el Bad Beat Jackpot',
       color: 'from-cyan-500 to-cyan-700',
-      pros: ['Jackpot millonario', 'Mesas muy activas', 'Pagos 24h'],
+      pros: ['Jackpot millonario', 'Mesas muy activas', 'Pagos 1h'],
       tipoJugador: 'Cazadores de Jackpot'
     },
     { 
