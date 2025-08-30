@@ -1,4 +1,3 @@
-// src/components/admin/AdminLogin.jsx
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaUser, FaLock, FaSignInAlt } from 'react-icons/fa';
@@ -38,11 +37,12 @@ const AdminLogin = ({ onLogin, loading }) => {
               <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
               <input
                 type="email"
-                placeholder="admin@pokerprotrack.com"
+                placeholder="Ingresa tu email"
                 className="w-full pl-10 pr-4 py-3 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-poker-gold focus:outline-none"
                 value={loginData.email}
                 onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
                 required
+                autoComplete="username"
               />
             </div>
           </div>
@@ -58,6 +58,7 @@ const AdminLogin = ({ onLogin, loading }) => {
                 value={loginData.password}
                 onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
                 required
+                autoComplete="current-password"
               />
             </div>
           </div>
