@@ -99,7 +99,7 @@ const NewsList = ({ news, onEdit, onDelete, onView }) => {
                 {/* Imagen */}
                 {item.image && (
                   <img 
-                    src={`http://localhost:5000${item.image}`} 
+                    src={`https://pokerprotrack.com${item.image}`}
                     alt={item.title} 
                     className="w-32 h-24 object-cover rounded-lg flex-shrink-0"
                     onError={(e) => {

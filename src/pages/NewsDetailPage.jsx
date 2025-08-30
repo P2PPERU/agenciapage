@@ -9,7 +9,7 @@ import {
 } from 'react-icons/fa';
 import NewsContentRenderer from '../components/news/NewsContentRenderer';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'https://pokerprotrack.com/api'
 
 const NewsDetailPage = () => {
   const { slug } = useParams();
@@ -280,7 +280,7 @@ const NewsDetailPage = () => {
                   {news.image && (
                     <div className="mb-6 rounded-lg overflow-hidden">
                       <img
-                        src={`http://localhost:5000${news.image}`}
+                        src={`https://pokerprotrack.com${news.image}`}
                         alt={news.title}
                         className="w-full h-auto max-h-96 object-cover"
                         onError={(e) => {
@@ -446,7 +446,7 @@ const NewsDetailPage = () => {
                       {item.image && (
                         <div className="h-40 overflow-hidden">
                           <img
-                            src={`http://localhost:5000${item.image}`}
+                            src={`https://pokerprotrack.com${news.image}`}
                             alt={item.title}
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                             onError={(e) => {
